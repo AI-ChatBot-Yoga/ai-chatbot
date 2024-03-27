@@ -1,34 +1,45 @@
-import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
 import "./App.css"
+import "@mantine/core/styles.css"
+import { MantineProvider, createTheme } from "@mantine/core"
+import { Button } from "@mantine/core"
+
+const theme = createTheme({
+  /** Your theme override here */
+  fontFamily: "Open Sans, sans-serif",
+  colors: {
+    "sky-blue": [
+      "#e1f9ff",
+      "#ccedff",
+      "#9ad7ff",
+      "#64c1ff",
+      "#3baefe",
+      "#20a2fe",
+      "#099cff",
+      "#0088e4",
+      "#0078cd",
+      "#0069b6",
+    ],
+    yellow: [
+      "#fdfce5",
+      "#f8f6d3",
+      "#f0ecaa",
+      "#e7e17c",
+      "#e0d957",
+      "#dbd33e",
+      "#d9d02f",
+      "#c0b820",
+      "#aaa316",
+      "#938c03",
+    ],
+  },
+})
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <MantineProvider theme={theme}>
+      <Button color="sky-blue">Ocean blue button</Button>
+      <Button color="yellow">Bright pink button</Button>
+    </MantineProvider>
   )
 }
 
