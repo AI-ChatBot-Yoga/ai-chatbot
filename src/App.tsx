@@ -1,50 +1,15 @@
 import "./App.css"
 import "@mantine/core/styles.css"
-import {
-  MantineProvider,
-  createTheme,
-  Button,
-  TextInput,
-  Modal,
-} from "@mantine/core"
+import { useMantineTheme, Button, TextInput, Modal } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 
-const theme = createTheme({
-  /** Your theme override here */
-  fontFamily: "Open Sans, sans-serif",
-  colors: {
-    "sky-blue": [
-      "#e1f9ff",
-      "#ccedff",
-      "#9ad7ff",
-      "#64c1ff",
-      "#3baefe",
-      "#20a2fe",
-      "#099cff",
-      "#0088e4",
-      "#0078cd",
-      "#0069b6",
-    ],
-    yellow: [
-      "#fdfce5",
-      "#f8f6d3",
-      "#f0ecaa",
-      "#e7e17c",
-      "#e0d957",
-      "#dbd33e",
-      "#d9d02f",
-      "#c0b820",
-      "#aaa316",
-      "#938c03",
-    ],
-  },
-})
-
 function App() {
+  const theme = useMantineTheme()
+
   const [opened, { open, close }] = useDisclosure(false)
 
   return (
-    <MantineProvider theme={theme}>
+    <>
       <p>UI Components:</p>
       <ol>
         <li>
@@ -80,7 +45,7 @@ function App() {
           </div>
         </li>
       </ol>
-    </MantineProvider>
+    </>
   )
 }
 
