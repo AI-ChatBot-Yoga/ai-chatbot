@@ -1,0 +1,19 @@
+.chatWindow {
+  width: 300px;
+}
+
+.scrollArea {
+  border: 1px solid #ccc;
+}
+
+.msgBubble {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+}
+
+.sendMessageButton {
+  margin-block: 10px;
+  background-color: #4caf50;
+}
