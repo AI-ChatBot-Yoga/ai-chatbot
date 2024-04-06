@@ -24,24 +24,26 @@ const ChatWindow = () => {
   }
 
   return (
-    <Paper shadow="sm" withBorder className={styles.chatWindow}>
-      <ScrollArea style={{ height: 200 }} scrollbarSize={2}>
-        {chatHistory.map((msg, index) => (
-          <Text key={index} className={styles.msgBubble}>
-            {msg}
-          </Text>
-        ))}
-      </ScrollArea>
-      <TextInput
-        placeholder="Type your message"
-        value={message}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-      />
-      <Button onClick={handleSendClick} className={styles.sendMessageButton}>
-        Send
-      </Button>
-    </Paper>
+    <div className="chatWindow">
+      <Paper shadow="sm" withBorder className={styles.chatWindow}>
+        <ScrollArea style={{ height: 200 }} scrollbarSize={2}>
+          {chatHistory.map((msg, index) => (
+            <Text key={index} className={styles.msgBubble}>
+              {msg}
+            </Text>
+          ))}
+        </ScrollArea>
+        <TextInput
+          placeholder="Type your message"
+          value={message}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+        />
+        <Button onClick={handleSendClick} className={styles.sendMessageButton}>
+          Send
+        </Button>
+      </Paper>
+    </div>
   )
 }
 

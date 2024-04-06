@@ -3,3 +3,21 @@
     background-color: red;
   }
 }
+
+.chatIcon svg:hover {
+  fill: yellowgreen;
+  fill-opacity: 1;
+}
+
+.chatIcon {
+  cursor: pointer;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
+.chatWindow {
+  position: fixed;
+  bottom: 120px;
+  right: 40px;
+}
