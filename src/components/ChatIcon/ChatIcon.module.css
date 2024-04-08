@@ -1,0 +1,14 @@
+.chatIcon svg:hover {
+  fill: yellowgreen;
+  fill-opacity: 1;
+}
+
+.chatIcon {
+  cursor: pointer;
+  border: unset;
+  background: none;
+
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}

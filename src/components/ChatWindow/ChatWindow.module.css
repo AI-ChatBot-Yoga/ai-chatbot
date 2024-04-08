@@ -1,5 +1,15 @@
 .chatWindow {
   width: 300px;
+
+  position: fixed;
+  bottom: 120px;
+  right: 40px;
+}
+
+.chatWindowHeader {
+  background-color: aqua;
+  text-align: left;
+  padding: 10px;
 }
 
 .scrollArea {
@@ -13,7 +23,15 @@
   background-color: #f1f1f1;
 }
 
+.flexContainer {
+  display: flex;
+  align-items: center;
+}
+
+.textInput {
+  flex-grow: 1;
+}
+
 .sendMessageButton {
-  margin-block: 10px;
   background-color: #4caf50;
 }

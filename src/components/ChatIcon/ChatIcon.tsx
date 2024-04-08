@@ -1,6 +1,11 @@
+import styles from "./ChatIcon.module.css"
+
 const ChatIcon = ({ onChatActivation }) => {
   return (
-    <div onClick={onChatActivation} className="chatIcon">
+    <button
+      onClick={onChatActivation}
+      className={`chatIcon ${styles.chatIcon}`}
+    >
       <svg
         fill="#000000"
         fillOpacity="0.2"
@@ -23,7 +28,7 @@ const ChatIcon = ({ onChatActivation }) => {
           />
         </g>
       </svg>
-    </div>
+    </button>
   )
 }
 
