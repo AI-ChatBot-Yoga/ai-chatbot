@@ -1,6 +1,10 @@
 import styles from "./ChatIcon.module.css"
 
-const ChatIcon = ({ onChatActivation }) => {
+type Props = {
+  onChatActivation: () => void
+}
+
+const ChatIcon = ({ onChatActivation }: Props) => {
   return (
     <button
       onClick={onChatActivation}
