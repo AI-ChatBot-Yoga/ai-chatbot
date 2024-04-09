@@ -1,6 +1,6 @@
 .chatIcon svg:hover {
   fill: yellowgreen;
-  fill-opacity: 1;
+  opacity: 1;
 }
 
 .chatIcon {
