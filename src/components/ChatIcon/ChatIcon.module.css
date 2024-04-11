@@ -4,8 +4,8 @@
 }
 
 .chatIcon svg {
-  width: 75px;
-  height: 75px;
+  width: rem(75px);
+  height: rem(75px);
 }
 
 .chatIcon {
