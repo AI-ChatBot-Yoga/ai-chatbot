@@ -24,7 +24,7 @@ const ChatWindow = () => {
   }
 
   return (
-    <div className="chatWindow">
+    <div>
       <Paper shadow="sm" withBorder className={styles.chatWindow}>
         <Box className={styles.chatWindowHeader}>
           Conversation with AI Chatbot

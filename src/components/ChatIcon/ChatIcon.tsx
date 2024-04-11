@@ -7,10 +7,7 @@ type Props = {
 
 const ChatIcon = ({ onChatActivation }: Props) => {
   return (
-    <button
-      onClick={onChatActivation}
-      className={`chatIcon ${styles.chatIcon}`}
-    >
+    <button onClick={onChatActivation} className={styles.chatIcon}>
       <IconMessageChatbot
         stroke={2}
         style={{ width: "75px", height: "75px" }}
