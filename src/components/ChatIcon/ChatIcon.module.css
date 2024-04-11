@@ -3,6 +3,11 @@
   opacity: 1;
 }
 
+.chatIcon svg {
+  width: 75px;
+  height: 75px;
+}
+
 .chatIcon {
   cursor: pointer;
   border: unset;
