@@ -29,7 +29,7 @@ const ChatWindow = () => {
         <Box className={styles.chatWindowHeader}>
           Conversation with AI Chatbot
         </Box>
-        <ScrollArea style={{ height: 350 }} scrollbarSize={2}>
+        <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
           {chatHistory.map((msg, index) => (
             <Text key={index} className={styles.msgBubble} ta="right">
               {msg}

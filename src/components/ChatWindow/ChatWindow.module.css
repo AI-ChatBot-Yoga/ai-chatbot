@@ -1,5 +1,5 @@
 .chatWindow {
-  width: 300px;
+  width: rem(300px);
 
   position: fixed;
   bottom: 120px;
@@ -13,7 +13,7 @@
 }
 
 .scrollArea {
-  border: 1px solid #ccc;
+  height: rem(350px);
 }
 
 .msgBubble {
