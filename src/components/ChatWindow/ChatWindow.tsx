@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import { ChangeEvent, useState, KeyboardEvent } from "react"
+import { Box, Paper, TextInput, Button, Text, ScrollArea } from "@mantine/core"
+>>>>>>> 7eb5fb4 (Feat: Implement Chatbot Activation Button (#7))
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
 import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
@@ -104,6 +109,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
+<<<<<<< HEAD
       <ConfirmationModal
         openedModal={openedModal}
         close={close}
@@ -172,16 +178,38 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         <TextInput
           placeholder="Type a message..."
           value={messageInput}
+=======
+      <Box className={styles.chatWindowHeader}>
+        Conversation with AI Chatbot
+      </Box>
+      <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
+        {chatHistory.map((msg, index) => (
+          <Text key={index} className={styles.msgBubble} ta="right">
+            {msg}
+          </Text>
+        ))}
+      </ScrollArea>
+      <div className={styles.flexContainer}>
+        <TextInput
+          placeholder="Type your message"
+          value={message}
+>>>>>>> 7eb5fb4 (Feat: Implement Chatbot Activation Button (#7))
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           className={styles.textInput}
         />
 
+<<<<<<< HEAD
         <IconSend2
           stroke={1.5}
           onClick={handleSendClick}
           className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
         />
+=======
+        <Button onClick={handleSendClick} className={styles.sendMessageButton}>
+          Send
+        </Button>
+>>>>>>> 7eb5fb4 (Feat: Implement Chatbot Activation Button (#7))
       </div>
     </Paper>
   )
