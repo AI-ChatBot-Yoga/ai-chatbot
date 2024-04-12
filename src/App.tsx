@@ -1,13 +1,9 @@
 import "./App.css"
 import "@mantine/core/styles.css"
-import ChatWindow from "./components/ChatWindow"
+import ChatBot from "./components/ChatBot"
 
 function App() {
-  return (
-    <>
-      <ChatWindow />
-    </>
-  )
+  return <ChatBot />
 }
 
 export default App
