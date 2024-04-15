@@ -3,11 +3,11 @@ import {
   Box,
   Paper,
   TextInput,
-  Button,
   Text,
   ScrollArea,
   CloseButton,
 } from "@mantine/core"
+import { IconSend2 } from "@tabler/icons-react"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 
 type Props = {
@@ -39,12 +39,14 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <Box className={styles.chatWindowHeader}>
         <p>Conversation with AI Chatbot</p>
+
         <CloseButton
           aria-label="Close modal"
           iconSize={50}
           onClick={onChatActivation}
         />
       </Box>
+
       <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
         {chatHistory.map((msg, index) => (
           <Text key={index} className={styles.msgBubble} ta="right">
@@ -52,18 +54,16 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           </Text>
         ))}
       </ScrollArea>
-      <div className={styles.flexContainer}>
+
+      <div className={styles.textInput}>
         <TextInput
           placeholder="Type your message"
           value={message}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className={styles.textInput}
         />
 
-        <Button onClick={handleSendClick} className={styles.sendMessageButton}>
-          Send
-        </Button>
+        <IconSend2 stroke={1.5} size={30} onClick={handleSendClick} />
       </div>
     </Paper>
   )
