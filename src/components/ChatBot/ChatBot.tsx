@@ -11,7 +11,7 @@ const ChatBot = () => {
 
   return (
     <>
-      {isOpen && <ChatWindow />}
+      {isOpen && <ChatWindow onChatActivation={handleChatActivation} />}
       <ChatIcon onChatActivation={handleChatActivation} />
     </>
   )

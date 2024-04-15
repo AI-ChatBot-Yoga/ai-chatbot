@@ -1,8 +1,20 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react"
-import { Box, Paper, TextInput, Button, Text, ScrollArea } from "@mantine/core"
 import styles from "./ChatWindow.module.css"
+import {
+  Box,
+  Paper,
+  TextInput,
+  Button,
+  Text,
+  ScrollArea,
+  CloseButton,
+} from "@mantine/core"
+import { ChangeEvent, useState, KeyboardEvent } from "react"
 
-const ChatWindow = () => {
+type Props = {
+  onChatActivation: () => void
+}
+
+const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
   const [chatHistory, setChatHistory] = useState<string[]>([])
 
@@ -26,7 +38,12 @@ const ChatWindow = () => {
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <Box className={styles.chatWindowHeader}>
-        Conversation with AI Chatbot
+        <p>Conversation with AI Chatbot</p>
+        <CloseButton
+          aria-label="Close modal"
+          iconSize={50}
+          onClick={onChatActivation}
+        />
       </Box>
       <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
         {chatHistory.map((msg, index) => (

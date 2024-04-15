@@ -10,6 +10,17 @@
   background-color: aqua;
   text-align: left;
   padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatWindowHeader p {
+  margin: 0;
+}
+
+.chatWindowHeader button:hover {
+  color: var(--mantine-color-gray-7);
 }
 
 .scrollArea {
