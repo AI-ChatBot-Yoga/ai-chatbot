@@ -47,7 +47,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         />
       </Box>
 
-      <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
+      <ScrollArea className={styles.scrollArea}>
         {chatHistory.map((msg, index) => (
           <Text key={index} className={styles.msgBubble} ta="right">
             {msg}
