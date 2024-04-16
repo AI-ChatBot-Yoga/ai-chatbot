@@ -2,12 +2,12 @@
   width: rem(300px);
 
   position: fixed;
-  bottom: 120px;
-  right: 40px;
+  bottom: 105px;
+  right: 30px;
 }
 
 .chatWindowHeader {
-  background-color: aqua;
+  background-color: var(--mantine-color-sky-blue-3);
   text-align: left;
   padding: 10px;
 
@@ -47,7 +47,7 @@
 }
 
 .textInput svg:hover {
-  fill: aqua;
+  fill: rgb(254, 248, 165);
 }
 
 .textInput svg:active {
