@@ -8,7 +8,7 @@ import {
   CloseButton,
 } from "@mantine/core"
 import { IconSend2 } from "@tabler/icons-react"
-import { ChangeEvent, useState, KeyboardEvent } from "react"
+import { ChangeEvent, useState, KeyboardEvent, useRef, useEffect } from "react"
 
 type Message = {
   message: string
@@ -45,7 +45,7 @@ Learn more about us 💛`,
         sender: "user",
       }
 
-      setChatHistory([...chatHistory, newMessage])
+      setChatHistory((chatHistory) => [...chatHistory, newMessage])
       setMessage("")
     }
   }
@@ -60,6 +60,15 @@ Learn more about us 💛`,
     }
   }
 
+  // Auto scroll to bottom when there is new message
+  const viewport = useRef<HTMLDivElement>(null)
+  const scrollToBottom = () =>
+    viewport.current!.scrollTo({
+      top: viewport.current!.scrollHeight,
+      behavior: "smooth",
+    })
+  useEffect(() => scrollToBottom(), [chatHistory])
+
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <Box className={styles.chatWindowHeader}>
@@ -72,7 +81,7 @@ Learn more about us 💛`,
         />
       </Box>
 
-      <ScrollArea className={styles.scrollArea}>
+      <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         {chatHistory.map((msg, index) => (
           <Text
             key={index}
