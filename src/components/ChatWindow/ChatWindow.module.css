@@ -1,10 +1,12 @@
 .chatWindow {
-  width: rem(300px);
+  width: rem(300px); /* Adjust height in .scrollArea */
 
   position: fixed;
   bottom: 105px;
   right: 30px;
 }
+
+/* ====== CHAT HEADER ======= */
 
 .chatWindowHeader {
   background-color: var(--mantine-color-sky-blue-3);
@@ -23,6 +25,8 @@
   color: var(--mantine-color-gray-7);
 }
 
+/* ====== CHAT BODY ======= */
+
 .scrollArea {
   height: rem(350px);
 }
@@ -32,7 +36,17 @@
   margin: 10px;
   border-radius: 5px;
   background-color: #f1f1f1;
+  width: fit-content;
+  max-width: 85%;
+  text-align: left;
+  white-space: pre-wrap;
 }
+
+.rightSide {
+  margin-left: auto;
+}
+
+/* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
 .textInput {
   position: relative;
