@@ -1,0 +1,6 @@
+@AuthHeader=Testing Bob
+
+### get 
+
+GET https://jndqonikai7v45mkeohsogcvqe0tzdue.lambda-url.ap-southeast-2.on.aws
+Authorization: {{AuthHeader}}

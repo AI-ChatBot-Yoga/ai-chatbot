@@ -149,3 +149,4 @@ Example: `feat: Install and setup new library`
 - `perf`: a code change that improves performance
 - `format`: formatting code, adding missing semi-colons, etc; no production code change
 - `chore`: for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.) no production code change
+
