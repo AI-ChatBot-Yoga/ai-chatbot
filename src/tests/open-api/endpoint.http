@@ -1,0 +1,22 @@
+@AuthHeader=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+# This is a sample request
+
+GET https://jndqonikai7v45mkeohsogcvqe0tzdue.lambda-url.ap-southeast-2.on.aws
+Authorization: {{AuthHeader}}
+Content-Type: application/json
+{
+  "botId" : "1",
+  "sessionId": "1",
+  "question" : "How much does it cost for cleaning a pair of shoes?"
+}
+
+### Get answer from the sample lambda function api
+
+GET https://jndqonikai7v45mkeohsogcvqe0tzdue.lambda-url.ap-southeast-2.on.aws
+Content-Type: application/json
+{
+  "botId" : "1",
+  "sessionId": "1",
+  "question" : "How much does it cost for cleaning a pair of shoes?"
+}
