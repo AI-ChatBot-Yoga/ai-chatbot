@@ -72,6 +72,11 @@ pnpm test
 pnpm build
 ```
 
+### Run open API
+
+In VSCode, install extension named "REST Client Huachao Mao"
+Then you can run the open API in the file `api.http`
+
 ## \* Branch Name Convention
 
 ### For working branches
@@ -144,3 +149,4 @@ Example: `feat: Install and setup new library`
 - `perf`: a code change that improves performance
 - `format`: formatting code, adding missing semi-colons, etc; no production code change
 - `chore`: for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.) no production code change
+
