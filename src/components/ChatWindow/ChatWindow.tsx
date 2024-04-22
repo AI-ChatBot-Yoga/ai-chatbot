@@ -1,4 +1,5 @@
 import styles from "./ChatWindow.module.css"
+import { IconSend2 } from "@tabler/icons-react"
 import {
   Box,
   Paper,
@@ -7,13 +8,9 @@ import {
   ScrollArea,
   CloseButton,
 } from "@mantine/core"
-import { IconSend2 } from "@tabler/icons-react"
-import { ChangeEvent, useState, KeyboardEvent, useRef, useEffect } from "react"
-
-type Message = {
-  message: string
-  sender: string
-}
+import { ChangeEvent, useState, KeyboardEvent } from "react"
+import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
+import { Message } from "../../types/message.ts"
 
 type Props = {
   onChatActivation: () => void
@@ -38,6 +35,9 @@ Learn more about us 💛`,
     },
   ])
 
+  // Auto scroll to bottom when there is new message
+  const viewport = useAutoScrollToBottom(chatHistory)
+
   const handleSendClick = () => {
     if (message.trim() !== "") {
       const newMessage = {
@@ -59,15 +59,6 @@ Learn more about us 💛`,
       handleSendClick()
     }
   }
-
-  // Auto scroll to bottom when there is new message
-  const viewport = useRef<HTMLDivElement>(null)
-  const scrollToBottom = () =>
-    viewport.current!.scrollTo({
-      top: viewport.current!.scrollHeight,
-      behavior: "smooth",
-    })
-  useEffect(() => scrollToBottom(), [chatHistory])
 
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
