@@ -1,16 +1,31 @@
 .chatWindow {
-  width: rem(300px);
+  width: rem(300px); /* Adjust height in .scrollArea */
 
   position: fixed;
-  bottom: 120px;
-  right: 40px;
+  bottom: 105px;
+  right: 30px;
 }
 
+/* ====== CHAT HEADER ======= */
+
 .chatWindowHeader {
-  background-color: aqua;
+  background-color: var(--mantine-color-sky-blue-3);
   text-align: left;
   padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
 }
+
+.chatWindowHeader p {
+  margin: 0;
+}
+
+.chatWindowHeader button:hover {
+  color: var(--mantine-color-gray-7);
+}
+
+/* ====== CHAT BODY ======= */
 
 .scrollArea {
   height: rem(350px);
@@ -21,17 +36,34 @@
   margin: 10px;
   border-radius: 5px;
   background-color: #f1f1f1;
+  width: fit-content;
+  max-width: 85%;
+  text-align: left;
+  white-space: pre-wrap;
 }
 
-.flexContainer {
-  display: flex;
-  align-items: center;
+.rightSide {
+  margin-left: auto;
 }
+
+/* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
 .textInput {
-  flex-grow: 1;
+  position: relative;
 }
 
-.sendMessageButton {
-  background-color: #4caf50;
+.textInput svg {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.textInput svg:hover {
+  fill: rgb(254, 248, 165);
+}
+
+.textInput svg:active {
+  transform: scale(0.9);
 }

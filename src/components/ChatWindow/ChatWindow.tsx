@@ -1,14 +1,37 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react"
-import { Box, Paper, TextInput, Button, Text, ScrollArea } from "@mantine/core"
 import styles from "./ChatWindow.module.css"
+import { IconSend2 } from "@tabler/icons-react"
+import {
+  Box,
+  Paper,
+  TextInput,
+  Text,
+  ScrollArea,
+  CloseButton,
+} from "@mantine/core"
+import { ChangeEvent, useState, KeyboardEvent } from "react"
+import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
+import { Message } from "../../types/message.ts"
+import { DEFAULT_MSG } from "../../constant/message.ts"
 
-const ChatWindow = () => {
+type Props = {
+  onChatActivation: () => void
+}
+
+const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
-  const [chatHistory, setChatHistory] = useState<string[]>([])
+  const [chatHistory, setChatHistory] = useState<Message[]>(DEFAULT_MSG)
+
+  // Auto scroll to bottom when there is new message
+  const viewport = useAutoScrollToBottom(chatHistory)
 
   const handleSendClick = () => {
     if (message.trim() !== "") {
-      setChatHistory([...chatHistory, message])
+      const newMessage = {
+        message,
+        sender: "user",
+      }
+
+      setChatHistory((chatHistory) => [...chatHistory, newMessage])
       setMessage("")
     }
   }
@@ -26,27 +49,35 @@ const ChatWindow = () => {
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <Box className={styles.chatWindowHeader}>
-        Conversation with AI Chatbot
+        <p>Conversation with AI Chatbot</p>
+
+        <CloseButton
+          aria-label="Close modal"
+          iconSize={50}
+          onClick={onChatActivation}
+        />
       </Box>
-      <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
+
+      <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         {chatHistory.map((msg, index) => (
-          <Text key={index} className={styles.msgBubble} ta="right">
-            {msg}
+          <Text
+            key={index}
+            className={`${styles.msgBubble} ${msg.sender === "user" ? styles.rightSide : ""}`}
+          >
+            {msg.message}
           </Text>
         ))}
       </ScrollArea>
-      <div className={styles.flexContainer}>
+
+      <div className={styles.textInput}>
         <TextInput
           placeholder="Type your message"
           value={message}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className={styles.textInput}
         />
 
-        <Button onClick={handleSendClick} className={styles.sendMessageButton}>
-          Send
-        </Button>
+        <IconSend2 stroke={1.5} size={30} onClick={handleSendClick} />
       </div>
     </Paper>
   )

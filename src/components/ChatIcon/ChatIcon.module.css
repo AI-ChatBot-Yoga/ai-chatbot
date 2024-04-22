@@ -1,13 +1,3 @@
-.chatIcon svg:hover {
-  fill: yellowgreen;
-  opacity: 1;
-}
-
-.chatIcon svg {
-  width: rem(75px);
-  height: rem(75px);
-}
-
 .chatIcon {
   cursor: pointer;
   border: unset;
@@ -15,5 +5,23 @@
 
   position: fixed;
   bottom: 40px;
-  right: 40px;
+  right: 30px;
+
+  background-color: var(--mantine-color-sky-blue-3);
+  width: rem(50px);
+  height: rem(50px);
+  border-radius: 50%;
+  padding-top: 8px;
+  box-shadow: 0 0 10px 3px rgb(254, 248, 165);
+}
+
+.chatIcon:hover {
+  box-shadow: 0 0 15px 10px rgb(254, 248, 165);
+}
+
+.chatIcon svg {
+  width: rem(35px);
+  height: rem(35px);
+  fill: rgb(254, 248, 165);
+  stroke: rgb(212, 169, 40);
 }
