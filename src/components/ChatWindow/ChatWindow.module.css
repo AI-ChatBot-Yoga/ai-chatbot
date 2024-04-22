@@ -128,8 +128,22 @@
   height: rem(50px);
 }
 
+/* ====== CHAT FOOTER (TEXT INPUT) ======= */
+
 .textInput {
-  flex-grow: 1;
+  position: relative;
+}
+
+.textInput svg {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.textInput svg:hover {
+  fill: rgb(254, 248, 165);
 }
 
 .textInput input::placeholder {

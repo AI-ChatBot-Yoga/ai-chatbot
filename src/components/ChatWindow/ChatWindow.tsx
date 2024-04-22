@@ -180,23 +180,33 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           value={messageInput}
 =======
       <Box className={styles.chatWindowHeader}>
-        Conversation with AI Chatbot
+        <p>Conversation with AI Chatbot</p>
+
+        <CloseButton
+          aria-label="Close modal"
+          iconSize={50}
+          onClick={onChatActivation}
+        />
       </Box>
-      <ScrollArea scrollbarSize={2} className={styles.scrollArea}>
+
+      <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         {chatHistory.map((msg, index) => (
-          <Text key={index} className={styles.msgBubble} ta="right">
-            {msg}
+          <Text
+            key={index}
+            className={`${styles.msgBubble} ${msg.sender === "user" ? styles.rightSide : ""}`}
+          >
+            {msg.message}
           </Text>
         ))}
       </ScrollArea>
-      <div className={styles.flexContainer}>
+
+      <div className={styles.textInput}>
         <TextInput
           placeholder="Type your message"
           value={message}
 >>>>>>> 7eb5fb4 (Feat: Implement Chatbot Activation Button (#7))
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className={styles.textInput}
         />
 
 <<<<<<< HEAD
