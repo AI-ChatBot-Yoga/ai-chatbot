@@ -11,6 +11,7 @@ import {
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
+import { DEFAULT_MSG } from "../../constant/message.ts"
 
 type Props = {
   onChatActivation: () => void
@@ -18,22 +19,7 @@ type Props = {
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
-  const [chatHistory, setChatHistory] = useState<Message[]>([
-    {
-      message: `Hello ☀️ Welcome to XXX Dry Cleaning service. Let us care for your clothes by choosing one of the following services 👇`,
-      sender: "bot",
-    },
-    {
-      message: `- Wash & Fold
-- Dry Cleaning
-- Stain Removal
-- Special Care Fabric Cleaning
-- Sewing & Alternations
-- Others
-Learn more about us 💛`,
-      sender: "bot",
-    },
-  ])
+  const [chatHistory, setChatHistory] = useState<Message[]>(DEFAULT_MSG)
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
