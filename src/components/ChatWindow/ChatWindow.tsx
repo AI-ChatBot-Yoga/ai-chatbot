@@ -12,6 +12,7 @@ import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
 import { DEFAULT_MSG } from "../../constant/message.ts"
+import { useSessionStorage } from "../../utils/useSessionStorage.ts"
 
 type Props = {
   onChatActivation: () => void
@@ -19,7 +20,12 @@ type Props = {
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
-  const [chatHistory, setChatHistory] = useState<Message[]>(DEFAULT_MSG)
+
+  // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
+  const [chatHistory, setChatHistory] = useSessionStorage<Message[]>(
+    DEFAULT_MSG,
+    "chatHistory"
+  )
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
