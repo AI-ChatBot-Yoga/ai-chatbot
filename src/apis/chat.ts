@@ -3,6 +3,6 @@ import { Dict } from "@/types"
 
 export const ChatAPI = {
   send: (data: Dict) => {
-    return API.post("/chat", data)
+    return API.post(data)
   },
 }
