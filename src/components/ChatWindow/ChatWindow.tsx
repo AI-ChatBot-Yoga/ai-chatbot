@@ -13,6 +13,7 @@ import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
 import { DEFAULT_MSG } from "../../constant/message.ts"
 import { useSessionStorage } from "../../utils/useSessionStorage.ts"
+import { ChatAPI } from "@/apis/chat"
 
 type Props = {
   onChatActivation: () => void
@@ -30,17 +31,36 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
 
-  const handleSendClick = () => {
-    if (message.trim() !== "") {
-      const newMessage = {
-        message,
-        sender: "user",
-      }
+  // test:
 
-      setChatHistory((chatHistory) => [...chatHistory, newMessage])
-      setMessage("")
+  const handleSend = async () => {
+    const newMessage = {
+      message,
+      sender: "user",
     }
+
+    const payload = {
+      botId: "1",
+      sessionId: "1",
+      question: newMessage.message,
+    }
+
+    ChatAPI.send(payload).then((response) => {
+      console.log(response)
+    })
   }
+
+  // const handleSendClick = () => {
+  //   if (message.trim() !== "") {
+  //     const newMessage = {
+  //       message,
+  //       sender: "user",
+  //     }
+
+  //     setChatHistory((chatHistory) => [...chatHistory, newMessage])
+  //     setMessage("")
+  //   }
+  // }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setMessage(event.target.value)
@@ -83,7 +103,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           onKeyDown={handleKeyDown}
         />
 
-        <IconSend2 stroke={1.5} size={30} onClick={handleSendClick} />
+        <IconSend2 stroke={1.5} size={30} onClick={handleSend} />
       </div>
     </Paper>
   )
