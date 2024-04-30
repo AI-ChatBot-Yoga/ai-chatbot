@@ -15,7 +15,7 @@
 
 ### Get answer from the sample lambda function api
 
-GET https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/default/test-func
+POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/default/test-func
 X-API-KEY: {{X-API-KEY}}
 
 Content-Type: application/json
