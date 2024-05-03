@@ -1,5 +1,5 @@
 import styles from "./ChatIcon.module.css"
-import { IconMessageChatbot } from "@tabler/icons-react"
+import ConversationIcon from "../../assets/ConversationIcon.tsx"
 
 type Props = {
   onChatActivation: () => void
@@ -8,7 +8,7 @@ type Props = {
 const ChatIcon = ({ onChatActivation }: Props) => {
   return (
     <button onClick={onChatActivation} className={styles.chatIcon}>
-      <IconMessageChatbot stroke={2} />
+      <ConversationIcon />
     </button>
   )
 }
