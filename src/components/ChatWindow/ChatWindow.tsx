@@ -71,12 +71,13 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         ))}
       </ScrollArea>
 
-      <div className={styles.textInput}>
+      <div className={styles.textInputContainer}>
         <TextInput
           placeholder="Type your message"
           value={message}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
+          className={styles.textInput}
         />
 
         <IconSend2

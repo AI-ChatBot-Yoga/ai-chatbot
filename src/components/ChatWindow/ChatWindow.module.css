@@ -2,16 +2,20 @@
   width: rem(387px); /* Adjust height in .scrollArea */
 
   position: fixed;
-  bottom: 105px;
-  right: 30px;
+  bottom: rem(105px);
+  right: rem(30px);
+  border: unset;
+  outline: 2px solid var(--strong-blue);
+  border-radius: rem(2px);
 }
 
 /* ====== CHAT HEADER ======= */
 
 .chatWindowHeader {
-  background-color: var(--mantine-color-sky-blue-3);
+  background-color: var(--header);
   text-align: left;
-  padding: 10px;
+  padding: rem(10px);
+  border-bottom: 2px solid var(--strong-blue);
 
   display: flex;
   justify-content: space-between;
@@ -50,10 +54,10 @@
 }
 
 .msgBubble {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+  padding: rem(10px);
+  margin: rem(10px);
+  border-radius: rem(5px);
+  background-color: var(--header);
   width: fit-content;
   max-width: 85%;
   text-align: left;
@@ -62,18 +66,31 @@
 
 .rightSide {
   margin-left: auto;
+  background-color: var(--light-yellow);
 }
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
+.textInputContainer {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid var(--light-blue);
+}
+
 .textInput {
-  position: relative;
+  flex-grow: 1;
+}
+
+/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
+:global(
+    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
+  ) {
+  --input-bd: unset;
+  --input-bd-focus: unset;
 }
 
 .sendBtn {
-  position: absolute;
-  top: 2px;
-  right: 5px;
+  margin-right: rem(5px);
   cursor: pointer;
   transition: transform 0.1s ease;
   stroke: var(--send-button);

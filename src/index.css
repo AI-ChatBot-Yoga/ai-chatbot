@@ -1,6 +1,8 @@
 :root {
-  --strong-blue: rgba(102, 191, 255, 0.83);
+  --strong-blue: rgba(7, 151, 255, 1);
   --light-blue: rgba(102, 191, 255, 0.51);
+  --chat-icon: rgba(102, 191, 255, 0.83);
+  --header: rgba(182, 224, 255, 1);
   --button: rgba(7, 151, 255, 1);
   --send-button: rgba(75, 180, 255, 1);
   --light-yellow: rgba(246, 218, 94, 0.51);
