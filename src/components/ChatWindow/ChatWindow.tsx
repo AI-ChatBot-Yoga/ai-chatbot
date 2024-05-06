@@ -79,7 +79,12 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           onKeyDown={handleKeyDown}
         />
 
-        <IconSend2 stroke={1.5} size={30} onClick={handleSendClick} />
+        <IconSend2
+          stroke={1.5}
+          size={30}
+          onClick={handleSendClick}
+          className={styles.sendBtn}
+        />
       </div>
     </Paper>
   )

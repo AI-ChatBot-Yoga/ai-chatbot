@@ -70,18 +70,21 @@
   position: relative;
 }
 
-.textInput svg {
+.sendBtn {
   position: absolute;
   top: 2px;
   right: 5px;
   cursor: pointer;
   transition: transform 0.1s ease;
+  stroke: var(--send-button);
 }
 
-.textInput svg:hover {
-  fill: rgb(254, 248, 165);
+.sendBtn:hover {
+  fill: var(--send-button);
+  stroke: white;
+  transform: scale(1.2);
 }
 
-.textInput svg:active {
+.sendBtn:active {
   transform: scale(0.9);
 }
