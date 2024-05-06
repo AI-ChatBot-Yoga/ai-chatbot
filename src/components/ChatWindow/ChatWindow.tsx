@@ -1,13 +1,6 @@
 import styles from "./ChatWindow.module.css"
-import { IconSend2 } from "@tabler/icons-react"
-import {
-  Box,
-  Paper,
-  TextInput,
-  Text,
-  ScrollArea,
-  CloseButton,
-} from "@mantine/core"
+import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
+import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
@@ -57,11 +50,14 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       <Box className={styles.chatWindowHeader}>
         <p>Conversation with AI Chatbot</p>
 
-        <CloseButton
-          aria-label="Close modal"
-          iconSize={50}
-          onClick={onChatActivation}
-        />
+        <div className={styles.buttons}>
+          <IconReload aria-label="Reload button" className={styles.reloadBtn} />
+          <IconX
+            aria-label="Close button"
+            onClick={onChatActivation}
+            className={styles.closeBtn}
+          />
+        </div>
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
