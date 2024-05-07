@@ -7,12 +7,12 @@
   bottom: 40px;
   right: 30px;
 
-  background-color: var(--chat-icon);
+  background-color: var(--mantine-blue-medium);
   width: rem(60px);
   height: rem(60px);
   border-radius: 50%;
   padding-top: 8px;
-  border: 3px solid var(--strong-yellow);
+  border: 3px solid var(--mantine-yellow-vivid);
 }
 
 .chatIcon svg {
@@ -22,11 +22,11 @@
 
 .chatIcon svg :global(.chat-icon-bg) {
   fill-rule: evenodd;
-  fill: var(--white);
+  fill: var(--mantine-color-white);
 }
 
 .chatIcon svg :global(.dot) {
-  fill: var(--white);
+  fill: var(--mantine-color-white);
 }
 
 .chatIcon:hover svg :global(.chat-icon-bg) {
@@ -34,5 +34,5 @@
 }
 
 .chatIcon:hover svg :global(.dot) {
-  fill: var(--chat-icon);
+  fill: var(--mantine-blue-medium);
 }
