@@ -1,5 +1,5 @@
+import Icon from "../Icon"
 import styles from "./ChatIcon.module.css"
-import ConversationIcon from "../../assets/ConversationIcon.tsx"
 
 type Props = {
   onChatActivation: () => void
@@ -8,7 +8,7 @@ type Props = {
 const ChatIcon = ({ onChatActivation }: Props) => {
   return (
     <button onClick={onChatActivation} className={styles.chatIcon}>
-      <ConversationIcon />
+      <Icon name="chat-icon" />
     </button>
   )
 }
