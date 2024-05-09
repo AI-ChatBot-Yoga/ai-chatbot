@@ -1,0 +1,35 @@
+name: github page
+
+on:
+  push:
+    branches:
+      - experimental-githubpage
+
+jobs:
+
+  build:
+    runs-on: ubuntu-22.04
+    
+    strategy:
+      matrix:
+        node-version: [20]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9
+        
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+        
+    - name: Install dependencies
+      run: pnpm install
+      
+    - name: Run test
+      run: pnpm dev
