@@ -130,20 +130,35 @@
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
-.textInput {
-  position: relative;
+.textInputContainer {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid var(--mantine-blue-light);
 }
 
-.textInput svg {
-  position: absolute;
-  top: 2px;
-  right: 5px;
+.textInput {
+  flex-grow: 1;
+}
+
+/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
+:global(
+    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
+  ) {
+  --input-bd: unset;
+  --input-bd-focus: unset;
+}
+
+.sendBtn {
+  margin-right: rem(5px);
   cursor: pointer;
   transition: transform 0.1s ease;
+  stroke: var(--mantine-blue-active);
 }
 
-.textInput svg:hover {
-  fill: rgb(254, 248, 165);
+.sendBtn:hover {
+  fill: var(--mantine-blue-active);
+  stroke: white;
+  transform: scale(1.2);
 }
 
 .textInput input::placeholder {
