@@ -1,41 +1,63 @@
 .chatWindow {
-  width: rem(300px); /* Adjust height in .scrollArea */
+  width: rem(387px); /* Adjust height in .scrollArea */
 
   position: fixed;
-  bottom: 105px;
-  right: 30px;
+  bottom: rem(105px);
+  right: rem(30px);
+  border: unset;
+  outline: 2px solid var(--mantine-blue-vivid);
+  border-radius: rem(2px);
 }
 
 /* ====== CHAT HEADER ======= */
 
 .chatWindowHeader {
-  background-color: var(--mantine-color-sky-blue-3);
+  background-color: var(--mantine-blue-soft);
   text-align: left;
-  padding: 10px;
+  padding: rem(10px);
+  border-bottom: 2px solid var(--mantine-blue-vivid);
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .chatWindowHeader p {
   margin: 0;
 }
 
-.chatWindowHeader button:hover {
-  color: var(--mantine-color-gray-7);
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: rem(3px);
+}
+
+.reloadBtn,
+.closeBtn {
+  width: rem(25px);
+  height: rem(25px);
+}
+
+.reloadBtn:hover,
+.closeBtn:hover {
+  cursor: pointer;
+  transform: scale(80%);
+  filter: drop-shadow(
+    0px 4px 4px rgba(0, 0, 0, 0.5)
+  ); /* can't use box-shadow because it is applied to square box around svg */
 }
 
 /* ====== CHAT BODY ======= */
 
 .scrollArea {
-  height: rem(350px);
+  height: rem(520px);
 }
 
 .msgBubble {
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+  padding: rem(10px);
+  margin: rem(10px);
+  border-radius: rem(5px);
+  background-color: var(--mantine-blue-soft);
   width: fit-content;
   max-width: 85%;
   text-align: left;
@@ -44,26 +66,42 @@
 
 .rightSide {
   margin-left: auto;
+  background-color: var(--mantine-yellow-soft);
 }
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
-.textInput {
-  position: relative;
+.textInputContainer {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid var(--mantine-blue-light);
 }
 
-.textInput svg {
-  position: absolute;
-  top: 2px;
-  right: 5px;
+.textInput {
+  flex-grow: 1;
+}
+
+/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
+:global(
+    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
+  ) {
+  --input-bd: unset;
+  --input-bd-focus: unset;
+}
+
+.sendBtn {
+  margin-right: rem(5px);
   cursor: pointer;
   transition: transform 0.1s ease;
+  stroke: var(--mantine-blue-active);
 }
 
-.textInput svg:hover {
-  fill: rgb(254, 248, 165);
+.sendBtn:hover {
+  fill: var(--mantine-blue-active);
+  stroke: white;
+  transform: scale(1.2);
 }
 
-.textInput svg:active {
+.sendBtn:active {
   transform: scale(0.9);
 }
