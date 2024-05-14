@@ -24,6 +24,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const viewport = useAutoScrollToBottom(chatHistory)
 
   const handleSendClick = () => {
+    // prevent function from running when there is no chat
+    if (!message) return
+
     if (message.trim() !== "") {
       const newMessage = {
         message,
@@ -45,13 +48,24 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     }
   }
 
+  const handleClearChat = () => {
+    // prevent function from running when there is no chat
+    if (!chatHistory.find((chat) => chat.sender === "user")) return
+
+    setChatHistory(DEFAULT_MSG)
+  }
+
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <Box className={styles.chatWindowHeader}>
         <p>Conversation with AI Chatbot</p>
 
         <div className={styles.buttons}>
-          <IconReload aria-label="Reload button" className={styles.reloadBtn} />
+          <IconReload
+            aria-label="Reload button"
+            onClick={handleClearChat}
+            className={styles.reloadBtn}
+          />
           <IconX
             aria-label="Close button"
             onClick={onChatActivation}
