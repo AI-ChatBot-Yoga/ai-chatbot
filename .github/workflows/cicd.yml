@@ -28,11 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
+        
       - name: Run test
         run: |
           pnpm dev &
-          timeout-minutes=2
+          pid=$!
+          timeout 2m /bin/sh -c "wait $pid || true"
 
   deploy:
     needs: build
