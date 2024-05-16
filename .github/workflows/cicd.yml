@@ -30,7 +30,9 @@ jobs:
         run: pnpm install
 
       - name: Run test
-        run: pnpm dev
+        run: |
+          pnpm dev &
+          timeout-minutes=2
 
   deploy:
     needs: build
