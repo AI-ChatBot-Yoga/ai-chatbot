@@ -22,7 +22,7 @@ type Props = {
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
-  const [opened, { open, close }] = useDisclosure(false)
+  const [openedModal, { open, close }] = useDisclosure(false)
 
   // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
   const [chatHistory, setChatHistory] = useSessionStorage<Message[]>(
@@ -60,13 +60,31 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
   const handleClearChat = () => {
     // prevent function from running when there is no chat
-    if (!chatHistory.find((chat) => chat.sender === "user")) return
+    if (!chatHistory.find((chat) => chat.sender === "user")) {
+      close()
+      return
+    }
 
     setChatHistory(DEFAULT_MSG)
+    close()
   }
 
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
+      <Modal
+        opened={openedModal}
+        onClose={close}
+        className={styles.modalContainer}
+        withinPortal={false}
+      >
+        <p>Do you want to clear the previous chat?</p>
+        <div className={styles.modalButtons}>
+          <Button color="red" onClick={close}>
+            No
+          </Button>
+          <Button onClick={handleClearChat}>Yes</Button>
+        </div>
+      </Modal>
       <Box className={styles.chatWindowHeader}>
         <p>Conversation with AI Chatbot</p>
 
@@ -81,9 +99,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
             onClick={onChatActivation}
             className={styles.closeBtn}
           />
-          <Modal opened={opened} onClose={close} title="Authentication">
-            {/* Modal content */}
-          </Modal>
         </div>
       </Box>
 

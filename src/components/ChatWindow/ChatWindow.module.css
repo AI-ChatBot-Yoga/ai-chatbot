@@ -105,3 +105,21 @@
 .sendBtn:active {
   transform: scale(0.9);
 }
+
+/* ====== MODAL (reload button) ======= */
+
+/* In div with class mantine-Modal-overlay, default rule of class ".m-9814e45f:where([data-fixed])" is position:fixed, when turn off this property, the dark background behind the modal is focus only on chat window */
+.modalContainer :global(.mantine-Modal-overlay) {
+  position: absolute;
+}
+
+/* In div with class mantine-Modal-inner, it has another class ".m-60c222c7" with fixed position, override this with absolute position will result in the modal placed inside chat window */
+.modalContainer :global(.mantine-Modal-inner) {
+  position: absolute;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
