@@ -1,6 +1,15 @@
 import styles from "./ChatWindow.module.css"
+import { useDisclosure } from "@mantine/hooks"
 import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
-import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
+import {
+  Box,
+  Paper,
+  TextInput,
+  Text,
+  ScrollArea,
+  Modal,
+  Button,
+} from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
@@ -13,6 +22,7 @@ type Props = {
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
+  const [opened, { open, close }] = useDisclosure(false)
 
   // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
   const [chatHistory, setChatHistory] = useSessionStorage<Message[]>(
@@ -63,7 +73,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
-            onClick={handleClearChat}
+            onClick={open}
             className={styles.reloadBtn}
           />
           <IconX
@@ -71,6 +81,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
             onClick={onChatActivation}
             className={styles.closeBtn}
           />
+          <Modal opened={opened} onClose={close} title="Authentication">
+            {/* Modal content */}
+          </Modal>
         </div>
       </Box>
 
