@@ -8,7 +8,7 @@ interface ConfirmationModalProps {
   modalMessage: string
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
+const ConfirmationModal: ConfirmationModalProps = ({
   openedModal,
   close,
   onClearChat,
