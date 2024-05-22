@@ -134,10 +134,16 @@
   display: flex;
   align-items: center;
   border-top: 2px solid var(--mantine-blue-light);
+  height: rem(50px);
 }
 
 .textInput {
   flex-grow: 1;
+}
+
+.textInput input::placeholder {
+  font-size: rem(15px);
+  color: #3b3b3b;
 }
 
 /* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
