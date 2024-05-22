@@ -74,7 +74,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <p>Conversation with AI Chatbot</p>
+        <h4>Conversation with AI Chatbot</h4>
 
         <div className={styles.buttons}>
           <IconReload
@@ -103,7 +103,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       <div className={styles.textInputContainer}>
         <TextInput
-          placeholder="Type your message"
+          placeholder="Type a message..."
           value={message}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -112,7 +112,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
         <IconSend2
           stroke={1.5}
-          size={30}
+          size={35}
           onClick={handleSendClick}
           className={styles.sendBtn}
         />
