@@ -1,16 +1,16 @@
-import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
-import path from "path"
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  base: '/ai-chatbot/',  // Set this to your repository name with leading and trailing slashes
   plugins: [react()],
   server: {
     port: 3000,
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // Ensuring it points to the src directory
+      '@': path.resolve(__dirname, './src'),
     },
   },
-})
+});
