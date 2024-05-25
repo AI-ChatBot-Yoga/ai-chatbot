@@ -11,38 +11,34 @@
 #   "botId" : "1",
 #   "sessionId": "1",
 #   "question" : "How much does it cost for cleaning a pair of shoes?"
-# }
-
-### Get answer from the sample lambda function api
-POST http://vlno1.asuscomm.com:8000/api/v1/completions
-X-API-KEY: {{X-API-KEY}}
-Authorization: Bearer jwt
-
-Content-Type: application/json
-{
-  "botId" : "1",
-  "sessionId": "a51b11d5-3da4-4b77-82d2-25e5d3bc4e08",
-  "question" : "How much does it cost for cleaning a pair of shoes?"
-}
-
 
 ### Get answer from dev machine
 POST http://vlno1.asuscomm.com:8000/api/v1/completions
-
-Content-Type: application/json
-{
-  "botId" : "1",
-  "sessionId": "a51b11d5-3da4-4b77-82d2-25e5d3bc4e08",
-  "question" : "How much does it cost for cleaning a pair of shoes?"
-}
-
-
-### getAnswer from aws api gateway
-POST https://4jr63zl7gj.execute-api.ap-southeast-2.amazonaws.com/v1/getAnswer
 Content-Type: application/json
 
 {
   "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
   "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
-  "command": "Do you work on Sunday?"
+  "command": "Do you work on Saturday?"
+}
+
+### Get completions from aws gateway
+POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/v1/completions
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Do you work on Saturday?"
+}
+
+### Get completions from aws gateway
+# Obsolete: use /completions instead
+POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/v1/getAnswer
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Do you work on Saturday?"
 }
