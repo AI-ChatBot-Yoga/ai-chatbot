@@ -22,7 +22,7 @@ Content-Type: application/json
   "command": "Do you work on Saturday?"
 }
 
-### Get completions from aws gateway, the same as /getAsnwers
+### Get completions from aws gateway
 POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/v1/completions
 Content-Type: application/json
 
