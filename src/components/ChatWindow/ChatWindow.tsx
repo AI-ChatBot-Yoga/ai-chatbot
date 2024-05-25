@@ -1,18 +1,13 @@
 import styles from "./ChatWindow.module.css"
-import { IconSend2 } from "@tabler/icons-react"
-import {
-  Box,
-  Paper,
-  TextInput,
-  Text,
-  ScrollArea,
-  CloseButton,
-} from "@mantine/core"
+import { useDisclosure } from "@mantine/hooks"
+import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
+import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
 import { Message } from "../../types/message.ts"
 import { DEFAULT_MSG } from "../../constant/message.ts"
 import { useSessionStorage } from "../../utils/useSessionStorage.ts"
+import ConfirmationModal from "../Confirmation Modal/ConfirmationModal.tsx"
 
 type Props = {
   onChatActivation: () => void
@@ -20,6 +15,9 @@ type Props = {
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
+
+  // this hook is used for Modal component (ConfirmationModal)
+  const [openedModal, { open, close }] = useDisclosure(false)
 
   // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
   const [chatHistory, setChatHistory] = useSessionStorage<Message[]>(
@@ -31,6 +29,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const viewport = useAutoScrollToBottom(chatHistory)
 
   const handleSendClick = () => {
+    // prevent function from running when there is no chat
+    if (!message) return
+
     if (message.trim() !== "") {
       const newMessage = {
         message,
@@ -52,16 +53,41 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     }
   }
 
+  const handleClearChat = () => {
+    // prevent function from running when there is no chat
+    if (!chatHistory.find((chat) => chat.sender === "user")) {
+      close()
+      return
+    }
+
+    setChatHistory(DEFAULT_MSG)
+    close()
+  }
+
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
-      <Box className={styles.chatWindowHeader}>
-        <p>Conversation with AI Chatbot</p>
+      <ConfirmationModal
+        openedModal={openedModal}
+        close={close}
+        onClearChat={handleClearChat}
+        modalMessage="Do you want to clear the previous chat?"
+      />
 
-        <CloseButton
-          aria-label="Close modal"
-          iconSize={50}
-          onClick={onChatActivation}
-        />
+      <Box className={styles.chatWindowHeader}>
+        <h4>Conversation with AI Chatbot</h4>
+
+        <div className={styles.buttons}>
+          <IconReload
+            aria-label="Reload button"
+            onClick={open}
+            className={styles.reloadBtn}
+          />
+          <IconX
+            aria-label="Close button"
+            onClick={onChatActivation}
+            className={styles.closeBtn}
+          />
+        </div>
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
@@ -75,15 +101,21 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         ))}
       </ScrollArea>
 
-      <div className={styles.textInput}>
+      <div className={styles.textInputContainer}>
         <TextInput
-          placeholder="Type your message"
+          placeholder="Type a message..."
           value={message}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
+          className={styles.textInput}
         />
 
-        <IconSend2 stroke={1.5} size={30} onClick={handleSendClick} />
+        <IconSend2
+          stroke={1.5}
+          size={35}
+          onClick={handleSendClick}
+          className={styles.sendBtn}
+        />
       </div>
     </Paper>
   )
