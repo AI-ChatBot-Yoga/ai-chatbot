@@ -3,11 +3,11 @@ import { useDisclosure } from "@mantine/hooks"
 import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
 import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
-import { useAutoScrollToBottom } from "../../utils/useAutoScrollToBottom.ts"
-import { Message } from "../../types/message.ts"
-import { DEFAULT_MSG } from "../../constant/message.ts"
-import { useSessionStorage } from "../../utils/useSessionStorage.ts"
-import ConfirmationModal from "../Confirmation Modal/ConfirmationModal.tsx"
+import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
+import { Message } from "@/types/message"
+import { DEFAULT_MSG } from "@/constant/message"
+import { useSessionStorage } from "@/utils/useSessionStorage"
+import ConfirmationModal from "@/components/ConfirmationModal"
 
 type Props = {
   onChatActivation: () => void

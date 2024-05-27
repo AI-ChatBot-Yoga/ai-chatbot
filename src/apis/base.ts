@@ -1,8 +1,9 @@
+import { Dict } from "@/types"
 import axios from "axios"
-import { MOCK_API_BASE_URL } from "../config"
+import { CORE_API_BASE_URL, API_VERSION } from "../config"
 
 const axiosInstance = axios.create({
-  baseURL: `${MOCK_API_BASE_URL}`,
+  baseURL: `${CORE_API_BASE_URL}/${API_VERSION}`,
   headers: {
     "Content-Type": "application/json",
     // ... other default headers
@@ -13,13 +14,13 @@ const axiosInstance = axios.create({
 
 const API = {
   get: (url: string, params?: any) =>
-    axiosInstance.get(url, { params }).then((response) => response.data),
+    axiosInstance.get(url, { params }).then((response: Dict) => response.data),
   post: (data: any) =>
-    axiosInstance.post(data).then((response) => response.data),
+    axiosInstance.post(data).then((response: Dict) => response.data),
   put: (url: string, data?: any) =>
-    axiosInstance.put(url, data).then((response) => response.data),
+    axiosInstance.put(url, data).then((response: Dict) => response.data),
   delete: (url: string) =>
-    axiosInstance.delete(url).then((response) => response.data),
+    axiosInstance.delete(url).then((response: Dict) => response.data),
   // ... other methods if needed
 }
 
