@@ -29,6 +29,9 @@ type Props = {
   onChatActivation: () => void
 }
 
+const BOT_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
+const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
+
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
   const { uuid, generateUuid, clearUuid } = useUuid()
