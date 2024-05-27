@@ -8,10 +8,14 @@ import { Message } from "@/types/message"
 import { DEFAULT_MSG } from "@/constant/message"
 import { useSessionStorage } from "@/utils/useSessionStorage"
 import ConfirmationModal from "@/components/ConfirmationModal"
+import { ChatAPI } from "@/apis/chat"
 
 type Props = {
   onChatActivation: () => void
 }
+
+const BOT_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
+const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [message, setMessage] = useState<string>("")
@@ -28,7 +32,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
 
-  const handleSendClick = () => {
+  const handleSendClick = async () => {
     // prevent function from running when there is no chat
     if (!message) return
 
@@ -40,6 +44,20 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       setChatHistory((chatHistory) => [...chatHistory, newMessage])
       setMessage("")
+    }
+
+    // Send the message to the server
+    try {
+      const response = await ChatAPI.send({
+        BOT_ID,
+        CHAT_SESSION_ID,
+        command: message,
+      })
+
+      // TODO: Vu - Please handle the response answer from the LLM and return it to the UI
+      console.log("response", response)
+    } catch (error) {
+      console.error("Error sending message:", error)
     }
   }
 
