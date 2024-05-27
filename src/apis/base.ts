@@ -6,7 +6,9 @@ const axiosInstance = axios.create({
   baseURL: `${CORE_API_BASE_URL}/${API_VERSION}`,
   headers: {
     "Content-Type": "application/json",
-    // ... other default headers
+    "X-API-KEY": "MTvYtwPRaI8kBfbnJZ7sg1nooqMpqteg5S2Xcic6",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
   },
 })
 

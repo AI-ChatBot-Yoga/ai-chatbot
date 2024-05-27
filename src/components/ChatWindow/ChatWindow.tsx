@@ -49,8 +49,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     // Send the message to the server
     try {
       const response = await ChatAPI.send({
-        BOT_ID,
-        CHAT_SESSION_ID,
+        botId: BOT_ID,
+        chatSessionId: CHAT_SESSION_ID,
         command: message,
       })
 
