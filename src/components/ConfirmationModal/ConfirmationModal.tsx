@@ -8,12 +8,12 @@ interface ConfirmationModalProps {
   modalMessage: string
 }
 
-const ConfirmationModal: ConfirmationModalProps = ({
+const ConfirmationModal = ({
   openedModal,
   close,
   onClearChat,
   modalMessage,
-}) => {
+}: ConfirmationModalProps) => {
   return (
     <Modal
       opened={openedModal}

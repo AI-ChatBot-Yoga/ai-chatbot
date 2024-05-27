@@ -31,14 +31,3 @@ Content-Type: application/json
   "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
   "command": "Do you work on Saturday?"
 }
-
-### Get completions from aws gateway
-# Obsolete: use /completions instead
-POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/v1/getAnswer
-Content-Type: application/json
-
-{
-  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
-  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
-  "command": "Do you work on Saturday?"
-}
