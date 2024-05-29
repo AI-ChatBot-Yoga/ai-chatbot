@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react"
 import path from "path"
 import svgr from "vite-plugin-svgr"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
@@ -12,7 +11,7 @@ export default defineConfig({
   base: "/ai-chatbot/", // For deploying to Github Pages
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // Ensuring it points to the src directory
+      '@': path.resolve(__dirname, './src'),
     },
   },
-})
+});
