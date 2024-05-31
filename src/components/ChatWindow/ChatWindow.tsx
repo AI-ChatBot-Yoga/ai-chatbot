@@ -4,11 +4,9 @@ import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
 import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
-import { Message } from "@/types/message"
-import { DEFAULT_MSG } from "@/constant/message"
-import { useSessionStorage } from "@/utils/useSessionStorage"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import { ChatAPI } from "@/apis/chat"
+import { useChatHistory } from "@/utils/useChatHistory"
 
 type Props = {
   onChatActivation: () => void
@@ -23,11 +21,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   // this hook is used for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
 
-  // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
-  const [chatHistory, setChatHistory] = useSessionStorage<Message[]>(
-    DEFAULT_MSG,
-    "chatHistory"
-  )
+  // custom hook to manage chat history
+  const { chatHistory, addMessageToChatHistory, clearChatHistory } =
+    useChatHistory()
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
@@ -37,12 +33,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     if (!message) return
 
     if (message.trim() !== "") {
-      const newMessage = {
-        message,
-        sender: "user",
-      }
-
-      setChatHistory((chatHistory) => [...chatHistory, newMessage])
+      addMessageToChatHistory(message, "user")
       setMessage("")
     }
 
@@ -54,8 +45,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         command: message,
       })
 
-      // TODO: Vu - Please handle the response answer from the LLM and return it to the UI
+      // Handle the response from the server and update chat history
       console.log("response", response)
+      addMessageToChatHistory(response.output, "bot")
     } catch (error) {
       console.error("Error sending message:", error)
     }
@@ -78,7 +70,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       return
     }
 
-    setChatHistory(DEFAULT_MSG)
+    clearChatHistory()
     close()
   }
 
