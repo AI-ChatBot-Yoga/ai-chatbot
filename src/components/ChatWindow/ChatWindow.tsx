@@ -56,6 +56,14 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       // TODO: Vu - Please handle the response answer from the LLM and return it to the UI
       console.log("response", response)
+      // setMessageBot(response.output)
+
+      const newMessage = {
+        message: response.output,
+        sender: "bot",
+      }
+
+      setChatHistory((chatHistory) => [...chatHistory, newMessage])
     } catch (error) {
       console.error("Error sending message:", error)
     }
