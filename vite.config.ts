@@ -2,9 +2,11 @@ import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import path from "path"
 import svgr from "vite-plugin-svgr"
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  // cssInjectedByJsPlugin helps to combine CSS to only 1 JS file when bundling
+  plugins: [react(), svgr(), cssInjectedByJsPlugin()],
   server: {
     port: 3000,
   },
