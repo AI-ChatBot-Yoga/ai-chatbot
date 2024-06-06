@@ -39,10 +39,20 @@ const resolver: CSSVariablesResolver = (theme) => ({
   dark: {},
 })
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-      <App />
-    </MantineProvider>
-  </React.StrictMode>
-)
+/* From Vu:
+- Customer's HTML site might not have #root like usual React project so I create 'div' as a container for project. 
+- The DOMContentLoaded event listener ensures that your script only runs after the HTML document has been fully loaded and parsed. It Appends div element with the ID chat-widget-container to body of document
+*/
+document.addEventListener("DOMContentLoaded", () => {
+  const widgetDiv = document.createElement("div")
+  widgetDiv.id = "chat-widget-container"
+  document.body.appendChild(widgetDiv)
+
+  ReactDOM.createRoot(widgetDiv).render(
+    <React.StrictMode>
+      <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+        <App />
+      </MantineProvider>
+    </React.StrictMode>
+  )
+})
