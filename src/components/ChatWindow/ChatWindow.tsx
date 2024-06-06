@@ -122,7 +122,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
         <IconSend2
           stroke={1.5}
-          size={35}
           onClick={handleSendClick}
           className={styles.sendBtn}
         />

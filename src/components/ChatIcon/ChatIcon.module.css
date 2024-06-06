@@ -4,19 +4,19 @@
   background: none;
 
   position: fixed;
-  bottom: 40px;
-  right: 30px;
+  bottom: rem(40px);
+  right: rem(30px);
 
   background-color: var(--mantine-blue-medium);
   width: rem(60px);
   height: rem(60px);
   border-radius: 50%;
-  padding-top: 8px;
-  box-shadow: 0 0 10px 2px var(--mantine-yellow-vivid);
+  padding-top: rem(8px);
+  box-shadow: 0 0 rem(10px) rem(2px) var(--mantine-yellow-vivid);
 }
 
 .chatIcon:hover {
-  box-shadow: 0 0 20px 2px var(--mantine-yellow-vivid);
+  box-shadow: 0 0 rem(20px) rem(2px) var(--mantine-yellow-vivid);
 }
 
 .chatIcon svg {
