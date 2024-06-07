@@ -70,6 +70,10 @@
   background-color: var(--mantine-yellow-soft);
 }
 
+.loader {
+  width: 100%;
+}
+
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
 
 .textInputContainer {
