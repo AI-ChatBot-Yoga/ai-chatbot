@@ -29,7 +29,11 @@ type Props = {
   onChatActivation: () => void
 }
 
-const BOT_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
+const scriptTag = document.currentScript as HTMLScriptElement
+const botId = scriptTag?.getAttribute("botId")
+console.log("Script tag is:", scriptTag)
+console.log("botId is: ", botId)
+
 const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
