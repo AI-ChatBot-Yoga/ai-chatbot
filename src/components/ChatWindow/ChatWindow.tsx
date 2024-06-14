@@ -55,6 +55,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     // Send the message to the server
     try {
       setIsLoading(true)
+      setIsLoading(true)
       const response = await ChatAPI.send({
         botId,
         chatSessionId: CHAT_SESSION_ID,
