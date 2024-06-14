@@ -1,7 +1,15 @@
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
 import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
-import { Box, Paper, TextInput, Text, ScrollArea } from "@mantine/core"
+import {
+  Box,
+  Paper,
+  TextInput,
+  Text,
+  ScrollArea,
+  Loader,
+  Alert,
+} from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
@@ -20,7 +28,9 @@ console.log("botId is: ", botId)
 const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [message, setMessage] = useState<string>("")
+  const [isError, setIsError] = useState<boolean>(false)
 
   // this hook is used for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
@@ -33,6 +43,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const viewport = useAutoScrollToBottom(chatHistory)
 
   const handleSendClick = async () => {
+    setIsError(false)
     // prevent function from running when there is no chat
     if (!message) return
 
@@ -43,6 +54,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
     // Send the message to the server
     try {
+      setIsLoading(true)
+      setIsLoading(true)
       const response = await ChatAPI.send({
         botId,
         chatSessionId: CHAT_SESSION_ID,
@@ -50,10 +63,12 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       })
 
       // Handle the response from the server and update chat history
-      console.log("response", response)
       addMessageToChatHistory(response.output, "bot")
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Error sending message:", error)
+      setIsError(true)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -113,6 +128,12 @@ const ChatWindow = ({ onChatActivation }: Props) => {
             {msg.message}
           </Text>
         ))}
+        {isLoading && <Loader type="dots" className={styles.loader} />}
+        {isError && (
+          <Alert className={styles.alert}>
+            Something went wrong. Please try again.
+          </Alert>
+        )}
       </ScrollArea>
 
       <div className={styles.textInputContainer}>
