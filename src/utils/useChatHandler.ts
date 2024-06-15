@@ -5,13 +5,12 @@ import { ChatAPI } from "@/apis/chat"
 export const useChatHandler = (botId: string, CHAT_SESSION_ID: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
+
   // custom hook to manage chat history
   const { chatHistory, addMessageToChatHistory, clearChatHistory } =
     useChatHistory()
 
-  const handleSendMessageToServerAndDisplayResponseMessage = async (
-    messageFrom: string
-  ) => {
+  const sendMessageToServerAndDisplay = async (messageFrom: string) => {
     addMessageToChatHistory(messageFrom, "user")
 
     // Send the message to the server
@@ -39,6 +38,6 @@ export const useChatHandler = (botId: string, CHAT_SESSION_ID: string) => {
     setIsError,
     chatHistory,
     clearChatHistory,
-    handleSendMessageToServerAndDisplayResponseMessage,
+    sendMessageToServerAndDisplay,
   }
 }

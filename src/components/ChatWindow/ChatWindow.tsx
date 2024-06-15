@@ -39,7 +39,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     setIsError,
     chatHistory,
     clearChatHistory,
-    handleSendMessageToServerAndDisplayResponseMessage,
+    sendMessageToServerAndDisplay,
   } = useChatHandler(botId, CHAT_SESSION_ID)
 
   // Auto scroll to bottom when there is new message
@@ -50,12 +50,12 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     // prevent function from running when input is an empty or whitespace-only input
     if (!messageInput.trim()) return
 
-    handleSendMessageToServerAndDisplayResponseMessage(messageInput)
+    sendMessageToServerAndDisplay(messageInput)
     setMessageInput("")
   }
 
   const handleOptionClick = (optionValue: string) => {
-    handleSendMessageToServerAndDisplayResponseMessage(optionValue)
+    sendMessageToServerAndDisplay(optionValue)
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
