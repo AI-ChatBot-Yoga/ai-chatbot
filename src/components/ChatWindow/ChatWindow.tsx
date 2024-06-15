@@ -14,8 +14,7 @@ import {
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
-import { ChatAPI } from "@/apis/chat"
-import { useChatHistory } from "@/utils/useChatHistory"
+import { useChatHandler } from "@/utils/useChatHandler"
 
 type Props = {
   onChatActivation: () => void
@@ -29,43 +28,22 @@ console.log("botId is: ", botId)
 const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [messageInput, setMessageInput] = useState<string>("")
-  const [isError, setIsError] = useState<boolean>(false)
 
   // this hook is used for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
 
-  // custom hook to manage chat history
-  const { chatHistory, addMessageToChatHistory, clearChatHistory } =
-    useChatHistory()
+  const {
+    isLoading,
+    isError,
+    setIsError,
+    chatHistory,
+    clearChatHistory,
+    handleSendMessageToServerAndDisplayResponseMessage,
+  } = useChatHandler(botId, CHAT_SESSION_ID)
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
-
-  const handleSendMessageToServerAndDisplayResponseMessage = async (
-    messageFrom: string
-  ) => {
-    addMessageToChatHistory(messageFrom, "user")
-
-    // Send the message to the server
-    try {
-      setIsLoading(true)
-      const response = await ChatAPI.send({
-        botId,
-        chatSessionId: CHAT_SESSION_ID,
-        command: messageFrom,
-      })
-
-      // Handle the response from the server and update chat history
-      addMessageToChatHistory(response.output, "bot")
-    } catch (error: unknown) {
-      console.error("Error sending message:", error)
-      setIsError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const handleSendClick = () => {
     setIsError(false)
