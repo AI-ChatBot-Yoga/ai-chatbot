@@ -21,7 +21,7 @@ type Props = {
 }
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") || ""
+const botId = scriptTag?.getAttribute("botId") || "" // TODO: remove fallback case when use in production
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
 
