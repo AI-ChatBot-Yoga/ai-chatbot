@@ -81,16 +81,16 @@
 }
 
 .alert {
-  background-color: inherit;
-  padding: 0;
+  background-color: var(--mantine-color-red-2);
+  padding: rem(10px);
   width: 100%;
   text-align: center;
   position: absolute;
-  bottom: 0;
+  top: 0;
 }
 
 .alert :global(.m-7fa78076) {
-  color: var(--mantine-color-gray-6);
+  color: var(--mantine-color-gray-7);
 }
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */

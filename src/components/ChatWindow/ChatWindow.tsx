@@ -75,6 +75,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       return
     }
 
+    setIsError(false)
     clearChatHistory()
     close()
   }
