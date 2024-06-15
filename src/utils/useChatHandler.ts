@@ -19,6 +19,7 @@ Vu: in the old commit, I use useChatHistory directly in ChatWindow.
 
   // Vu: This function display new message (from message input and clickable options) to UI, also send data to server and display answer in UI
   const sendMessageToServerAndDisplay = async (messageFrom: string) => {
+    setIsError(false)
     addMessageToChatHistory(messageFrom, "user")
 
     // Send the message to the server

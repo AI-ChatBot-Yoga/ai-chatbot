@@ -46,7 +46,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const viewport = useAutoScrollToBottom(chatHistory)
 
   const handleSendClick = () => {
-    setIsError(false)
     // prevent function from running when input is an empty or whitespace-only input
     if (!messageInput.trim()) return
 
