@@ -43,23 +43,16 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
 
-  const handleSendClick = async () => {
-    setIsError(false)
-    // prevent function from running when there is no chat
-    if (!message) return
-
-    if (message.trim() !== "") {
-      addMessageToChatHistory(message, "user")
-      setMessage("")
-    }
-
+  const handleSendMessageToServerAndDisplayResponseMessage = async (
+    messageFrom: string
+  ) => {
     // Send the message to the server
     try {
       setIsLoading(true)
       const response = await ChatAPI.send({
         botId,
         chatSessionId: CHAT_SESSION_ID,
-        command: message,
+        command: messageFrom,
       })
 
       // Handle the response from the server and update chat history
@@ -72,27 +65,23 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     }
   }
 
+  const handleSendClick = () => {
+    setIsError(false)
+    // prevent function from running when there is no chat
+    if (!message) return
+
+    if (message.trim() !== "") {
+      addMessageToChatHistory(message, "user")
+      setMessage("")
+    }
+
+    handleSendMessageToServerAndDisplayResponseMessage(message)
+  }
+
   const handleOptionClick = async (optionValue: string) => {
     addMessageToChatHistory(optionValue, "user")
 
-    // Send the message to the server
-    try {
-      setIsLoading(true)
-      setIsLoading(true)
-      const response = await ChatAPI.send({
-        botId,
-        chatSessionId: CHAT_SESSION_ID,
-        command: optionValue,
-      })
-
-      // Handle the response from the server and update chat history
-      addMessageToChatHistory(response.output, "bot")
-    } catch (error: unknown) {
-      console.error("Error sending message:", error)
-      setIsError(true)
-    } finally {
-      setIsLoading(false)
-    }
+    handleSendMessageToServerAndDisplayResponseMessage(optionValue)
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
