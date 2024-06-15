@@ -30,7 +30,7 @@ const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for 
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [message, setMessage] = useState<string>("")
+  const [messageInput, setMessageInput] = useState<string>("")
   const [isError, setIsError] = useState<boolean>(false)
 
   // this hook is used for Modal component (ConfirmationModal)
@@ -46,6 +46,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const handleSendMessageToServerAndDisplayResponseMessage = async (
     messageFrom: string
   ) => {
+    addMessageToChatHistory(messageFrom, "user")
+
     // Send the message to the server
     try {
       setIsLoading(true)
@@ -67,25 +69,19 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
   const handleSendClick = () => {
     setIsError(false)
-    // prevent function from running when there is no chat
-    if (!message) return
+    // prevent function from running when input is an empty or whitespace-only input
+    if (!messageInput.trim()) return
 
-    if (message.trim() !== "") {
-      addMessageToChatHistory(message, "user")
-      setMessage("")
-    }
-
-    handleSendMessageToServerAndDisplayResponseMessage(message)
+    handleSendMessageToServerAndDisplayResponseMessage(messageInput)
+    setMessageInput("")
   }
 
-  const handleOptionClick = async (optionValue: string) => {
-    addMessageToChatHistory(optionValue, "user")
-
+  const handleOptionClick = (optionValue: string) => {
     handleSendMessageToServerAndDisplayResponseMessage(optionValue)
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value)
+    setMessageInput(event.target.value)
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -168,7 +164,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       <div className={styles.textInputContainer}>
         <TextInput
           placeholder="Type a message..."
-          value={message}
+          value={messageInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           className={styles.textInput}
