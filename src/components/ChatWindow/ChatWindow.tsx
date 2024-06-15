@@ -9,6 +9,7 @@ import {
   ScrollArea,
   Loader,
   Alert,
+  Button,
 } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
@@ -21,7 +22,7 @@ type Props = {
 }
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId")
+const botId = scriptTag?.getAttribute("botId") || ""
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
 
@@ -60,6 +61,29 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         botId,
         chatSessionId: CHAT_SESSION_ID,
         command: message,
+      })
+
+      // Handle the response from the server and update chat history
+      addMessageToChatHistory(response.output, "bot")
+    } catch (error: unknown) {
+      console.error("Error sending message:", error)
+      setIsError(true)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleOptionClick = async (optionValue: string) => {
+    addMessageToChatHistory(optionValue, "user")
+
+    // Send the message to the server
+    try {
+      setIsLoading(true)
+      setIsLoading(true)
+      const response = await ChatAPI.send({
+        botId,
+        chatSessionId: CHAT_SESSION_ID,
+        command: optionValue,
       })
 
       // Handle the response from the server and update chat history
@@ -123,9 +147,26 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         {chatHistory.map((msg, index) => (
           <Text
             key={index}
-            className={`${styles.msgBubble} ${msg.sender === "user" ? styles.rightSide : ""}`}
+            component="div" // Change component to avoid nesting <p> tags error
+            className={`${styles.msgBubble} ${
+              msg.sender === "user" ? styles.rightSide : ""
+            }`}
           >
             {msg.message}
+            {msg.options && (
+              <Button.Group orientation="vertical">
+                {msg.options.map((option, index) => (
+                  <Button
+                    key={index}
+                    variant="transparent"
+                    className={styles.optionText}
+                    onClick={() => handleOptionClick(option.value)}
+                  >
+                    {option.text}
+                  </Button>
+                ))}
+              </Button.Group>
+            )}
           </Text>
         ))}
         {isLoading && <Loader type="dots" className={styles.loader} />}
