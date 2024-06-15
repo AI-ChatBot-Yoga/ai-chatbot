@@ -4,7 +4,7 @@ export const DEFAULT_MSG = [
     sender: "bot",
   },
   {
-    message: `Please select a service:`,
+    message: "",
     sender: "bot",
     options: [
       {

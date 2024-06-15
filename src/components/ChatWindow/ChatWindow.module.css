@@ -70,6 +70,10 @@
   background-color: var(--mantine-yellow-soft);
 }
 
+.optionText:hover {
+  text-decoration: underline;
+}
+
 .loader {
   width: 100%;
   position: absolute;
