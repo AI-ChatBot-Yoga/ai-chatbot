@@ -4,13 +4,29 @@ export const DEFAULT_MSG = [
     sender: "bot",
   },
   {
-    message: `- Wash & Fold
-- Dry Cleaning
-- Stain Removal
-- Special Care Fabric Cleaning
-- Sewing & Alternations
-- Others
-Learn more about us 💛`,
+    message: "",
     sender: "bot",
+    options: [
+      {
+        text: " Wash & Fold",
+        value: "Does your service provide wash and fold?",
+      },
+      {
+        text: " Dry Cleaning",
+        value: "Does your service provide dry cleaning?",
+      },
+      {
+        text: " Stain Removal",
+        value: "Does your service provide stain removal?",
+      },
+      {
+        text: " Special Care Fabric Cleaning",
+        value: "Does your service provide special care fabric cleaning?",
+      },
+      {
+        text: " Sewing & Alternations",
+        value: "Does your service provide sewing and alternations?",
+      },
+    ],
   },
 ]

@@ -9,71 +9,56 @@ import {
   ScrollArea,
   Loader,
   Alert,
+  Button,
 } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
-import { ChatAPI } from "@/apis/chat"
-import { useChatHistory } from "@/utils/useChatHistory"
+import { useChatHandler } from "@/utils/useChatHandler"
 
 type Props = {
   onChatActivation: () => void
 }
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId")
+const botId = scriptTag?.getAttribute("botId") || "" // TODO: remove fallback case when use in production
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
 
 const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [message, setMessage] = useState<string>("")
-  const [isError, setIsError] = useState<boolean>(false)
+  const [messageInput, setMessageInput] = useState<string>("")
 
   // this hook is used for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
 
-  // custom hook to manage chat history
-  const { chatHistory, addMessageToChatHistory, clearChatHistory } =
-    useChatHistory()
+  const {
+    isLoading,
+    isError,
+    setIsError,
+    chatHistory,
+    clearChatHistory,
+    sendMessageToServerAndDisplay,
+  } = useChatHandler(botId, CHAT_SESSION_ID)
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
 
-  const handleSendClick = async () => {
-    setIsError(false)
-    // prevent function from running when there is no chat
-    if (!message) return
+  const handleSendClick = () => {
+    // prevent function from running when input is an empty or whitespace-only input
+    if (!messageInput.trim()) return
 
-    if (message.trim() !== "") {
-      addMessageToChatHistory(message, "user")
-      setMessage("")
-    }
+    sendMessageToServerAndDisplay(messageInput)
+    setMessageInput("")
+  }
 
-    // Send the message to the server
-    try {
-      setIsLoading(true)
-      setIsLoading(true)
-      const response = await ChatAPI.send({
-        botId,
-        chatSessionId: CHAT_SESSION_ID,
-        command: message,
-      })
-
-      // Handle the response from the server and update chat history
-      addMessageToChatHistory(response.output, "bot")
-    } catch (error: unknown) {
-      console.error("Error sending message:", error)
-      setIsError(true)
-    } finally {
-      setIsLoading(false)
-    }
+  const handleOptionClick = (optionValue: string) => {
+    sendMessageToServerAndDisplay(optionValue)
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value)
+    setMessageInput(event.target.value)
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -89,6 +74,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       return
     }
 
+    setIsError(false)
     clearChatHistory()
     close()
   }
@@ -123,9 +109,26 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         {chatHistory.map((msg, index) => (
           <Text
             key={index}
-            className={`${styles.msgBubble} ${msg.sender === "user" ? styles.rightSide : ""}`}
+            component="div" // Change component to avoid nesting <p> tags error
+            className={`${styles.msgBubble} ${
+              msg.sender === "user" ? styles.rightSide : ""
+            }`}
           >
             {msg.message}
+            {msg.options && (
+              <Button.Group orientation="vertical">
+                {msg.options.map((option, index) => (
+                  <Button
+                    key={index}
+                    variant="transparent"
+                    className={styles.optionText}
+                    onClick={() => handleOptionClick(option.value)}
+                  >
+                    {option.text}
+                  </Button>
+                ))}
+              </Button.Group>
+            )}
           </Text>
         ))}
         {isLoading && <Loader type="dots" className={styles.loader} />}
@@ -139,7 +142,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       <div className={styles.textInputContainer}>
         <TextInput
           placeholder="Type a message..."
-          value={message}
+          value={messageInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           className={styles.textInput}
