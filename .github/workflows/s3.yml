@@ -34,10 +34,15 @@ jobs:
 
       - name: Verify build output
         run: |
+          echo "Verifying build output..."
           if [ ! -f dist/index.html ]; then
             echo "index.html not found in dist directory"
             exit 1
           fi
+          echo "index.html found in dist directory"
+
+      - name: List build directory contents
+        run: ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -54,6 +59,9 @@ jobs:
         with:
           name: build-artifact
           path: dist
+
+      - name: List downloaded artifact contents
+        run: ls -la dist
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
