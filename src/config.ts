@@ -1,3 +1,3 @@
 export const CORE_API_BASE_URL =
-  "https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com"
+  "https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api"
 export const API_VERSION = "v2"

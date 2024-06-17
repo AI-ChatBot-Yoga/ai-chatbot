@@ -13,7 +13,7 @@
 #   "question" : "How much does it cost for cleaning a pair of shoes?"
 
 ### Get answer from dev machine
-POST http://vlno1.asuscomm.com:8000/api/v1/completions
+POST http://vlno1.asuscomm.com:8000/api/v2/completions
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Get completions from aws gateway
-POST https://rs7rkk8uw8.execute-api.us-east-2.amazonaws.com/v1/completions
+POST https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions
 Content-Type: application/json
 
 {
@@ -31,3 +31,19 @@ Content-Type: application/json
   "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
   "command": "Do you work on Saturday?"
 }
+
+### health check
+GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2
+
+### completions
+POST https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Hi"
+}
+
+### get chathistory
+GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions/chat-history/71c0c33f-5952-43b1-8608-70bfe362f537
