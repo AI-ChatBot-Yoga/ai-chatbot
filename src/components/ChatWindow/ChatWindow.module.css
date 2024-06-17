@@ -70,6 +70,10 @@
   background-color: var(--mantine-yellow-soft);
 }
 
+.optionText {
+  color: var(--mantine-blue-vivid);
+}
+
 .optionText:hover {
   text-decoration: underline;
 }
