@@ -89,7 +89,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <h4>Conversation with AI Chatbot</h4>
+        <h4>Laundry Services Chatbot</h4>
 
         <div className={styles.buttons}>
           <IconReload
