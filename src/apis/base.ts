@@ -8,7 +8,7 @@ import { Dict } from "@/types"
 import axios from "axios"
 
 const axiosInstance = axios.create({
-  baseURL: `${CORE_API_BASE_URL}/${API_VERSION}`,
+  baseURL: `${Configs.CORE_API_BASE_URL}/${Configs.API_VERSION}`,
   headers: {
     "Content-Type": "application/json",
     "X-API-KEY": X_API_KEY,

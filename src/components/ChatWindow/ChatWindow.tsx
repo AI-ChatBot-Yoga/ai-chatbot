@@ -30,11 +30,9 @@ type Props = {
 }
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") || "" // TODO: remove fallback case when use in production
+const botId = scriptTag?.getAttribute("botId") || Configs.DEV_BOT_ID // TODO: remove fallback case when use in production
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
-
-const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
