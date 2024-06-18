@@ -26,6 +26,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      rollup-plugin-ignore:
+        specifier: ^1.0.10
+        version: 1.0.10
       vite-plugin-svgr:
         specifier: ^2.4.0
         version: 2.4.0(rollup@4.13.0)(vite@5.2.10(@types/node@20.12.7)(sugarss@4.0.1(postcss@8.4.38)))
@@ -1325,6 +1328,9 @@ packages:
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
+
+  rollup-plugin-ignore@1.0.10:
+    resolution: {integrity: sha512-VsbnfwwaTv2Dxl2onubetX/3RnSnplNnjdix0hvF8y2YpqdzlZrjIq6zkcuVJ08XysS8zqW3gt3ORBndFDgsrg==}
 
   rollup@4.13.0:
     resolution: {integrity: sha512-3YegKemjoQnYKmsBlOHfMLVPPA5xLkQ8MHLLSw/fBrFaVkEayL51DilPpNNLq1exr98F2B1TzrV0FUlN3gWRPg==}
@@ -2769,6 +2775,8 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
+
+  rollup-plugin-ignore@1.0.10: {}
 
   rollup@4.13.0:
     dependencies:

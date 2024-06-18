@@ -111,7 +111,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
             key={index}
             component="div" // Change component to avoid nesting <p> tags error
             className={`${styles.msgBubble} ${
-              msg.sender === "user" ? styles.rightSide : ""
+              msg.sender === ROLES.User ? styles.rightSide : ""
             }`}
           >
             {msg.message}
