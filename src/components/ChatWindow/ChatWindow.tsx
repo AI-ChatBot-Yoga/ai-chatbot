@@ -15,17 +15,17 @@ import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/utils/useChatHandler"
+import Configs from "@/configs"
+import { ROLES } from "@/constant/roles"
 
 type Props = {
   onChatActivation: () => void
 }
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") || "" // TODO: remove fallback case when use in production
+const botId = scriptTag?.getAttribute("botId") || Configs.DEV_BOT_ID // TODO: remove fallback case when use in production
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
-
-const CHAT_SESSION_ID = "71c0c33f-5952-43b1-8608-70bfe362f537" // Hard code for now, make it dynamic later
 
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
@@ -40,7 +40,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     chatHistory,
     clearChatHistory,
     sendMessageToServerAndDisplay,
-  } = useChatHandler(botId, CHAT_SESSION_ID)
+  } = useChatHandler(botId, Configs.DEV_CHAT_SESSION_ID) // Hard code for now, make it dynamic later
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
@@ -69,7 +69,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
   const handleClearChat = () => {
     // prevent function from running when there is no chat
-    if (!chatHistory.find((chat) => chat.sender === "user")) {
+    if (!chatHistory.find((chat) => chat.sender === ROLES.User)) {
       close()
       return
     }
