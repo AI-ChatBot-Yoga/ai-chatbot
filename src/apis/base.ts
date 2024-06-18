@@ -1,14 +1,13 @@
 import { Dict } from "@/types"
 import axios from "axios"
-import { CORE_API_BASE_URL, API_VERSION } from "../config"
+import { config } from "@/configs"
 
 const axiosInstance = axios.create({
-  baseURL: `${CORE_API_BASE_URL}/${API_VERSION}`,
+  baseURL: `${config.CORE_API_BASE_URL}/${config.API_VERSION}`,
   headers: {
     "Content-Type": "application/json",
-    "X-API-KEY": "MTvYtwPRaI8kBfbnJZ7sg1nooqMpqteg5S2Xcic6",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "X-API-KEY": config.X_API_KEY,
+    Authorization: config.AUTHORIZATION_KEY,
   },
 })
 

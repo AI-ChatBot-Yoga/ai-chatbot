@@ -12,7 +12,7 @@ Please have [NodeJS](https://nodejs.org/en/download), [Git](https://git-scm.com/
 
 2. Follow the <b><u>Environment Setup</u></b> section below
 
-3. Follßow the [Git workflow documentation](https://career-bliss-academy.notion.site/Git-Workflow-AI-Chatbot-a041689cb9414781a358c7ef7182bc00)
+3. Follow the [Git workflow documentation](https://career-bliss-academy.notion.site/Git-Workflow-AI-Chatbot-a041689cb9414781a358c7ef7182bc00)
 
 ## \* Environment Setup
 
@@ -149,4 +149,3 @@ Example: `feat: Install and setup new library`
 - `perf`: a code change that improves performance
 - `format`: formatting code, adding missing semi-colons, etc; no production code change
 - `chore`: for everything else (writing documentation, formatting, adding tests, cleaning useless code etc.) no production code change
-
