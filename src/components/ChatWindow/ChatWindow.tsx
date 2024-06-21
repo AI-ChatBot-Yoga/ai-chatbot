@@ -54,6 +54,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   }
 
   const handleOptionClick = (optionValue: string) => {
+    if (isLoading) return
     sendMessageToServerAndDisplay(optionValue)
   }
 
@@ -119,9 +120,10 @@ const ChatWindow = ({ onChatActivation }: Props) => {
               <Button.Group orientation="vertical">
                 {msg.options.map((option, index) => (
                   <Button
+                    disabled={isLoading}
                     key={index}
                     variant="transparent"
-                    className={styles.optionText}
+                    className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
                     onClick={() => handleOptionClick(option.value)}
                   >
                     {option.text}

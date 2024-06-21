@@ -72,6 +72,8 @@
 
 .optionText {
   color: var(--mantine-blue-vivid);
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.48);
 }
 
 .optionText:hover {
@@ -95,6 +97,12 @@
 
 .alert :global(.m-7fa78076) {
   color: var(--mantine-color-gray-7);
+}
+
+.disabledOptions {
+  cursor: not-allowed;
+  background-color: var(--mantine-color-gray-8);
+  margin-bottom: 20px;
 }
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
