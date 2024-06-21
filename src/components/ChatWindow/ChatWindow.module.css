@@ -141,3 +141,14 @@
 .sendBtn:active {
   transform: scale(0.9);
 }
+
+.disabled {
+  cursor: not-allowed;
+  background-color: var(--mantine-color-gray-1);
+}
+
+.disabled .sendBtn {
+  stroke: var(--mantine-blue-active);
+  fill: transparent;
+  transform: none;
+}

@@ -139,8 +139,11 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         )}
       </ScrollArea>
 
-      <div className={styles.textInputContainer}>
+      <div
+        className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
+      >
         <TextInput
+          disabled={isLoading}
           placeholder="Type a message..."
           value={messageInput}
           onChange={handleInputChange}
@@ -151,7 +154,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         <IconSend2
           stroke={1.5}
           onClick={handleSendClick}
-          className={styles.sendBtn}
+          className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
         />
       </div>
     </Paper>
