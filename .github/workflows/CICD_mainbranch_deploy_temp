@@ -45,7 +45,7 @@ jobs:
 
 
 
-    # Configure if you need CloudFront invalidation
+    # Configure if you need CloudFront invalidation....
     # - name: Invalidate CloudFront cache
     #   run: |
     #     aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*"
