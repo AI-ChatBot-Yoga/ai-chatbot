@@ -117,7 +117,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           >
             {msg.message}
             {msg.options && (
-              <Button.Group orientation="vertical">
+              <Button.Group className={styles.optionsContainer}>
                 {msg.options.map((option, index) => (
                   <Button
                     disabled={isLoading}
@@ -131,7 +131,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
                 ))}
               </Button.Group>
             )}
-          </Text>
+          </>
         ))}
         {isLoading && <Loader type="dots" className={styles.loader} />}
         {isError && (
