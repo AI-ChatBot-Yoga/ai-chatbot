@@ -108,14 +108,19 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         {chatHistory.map((msg, index) => (
-          <Text
-            key={index}
-            component="div" // Change component to avoid nesting <p> tags error
-            className={`${styles.msgBubble} ${
-              msg.sender === "user" ? styles.rightSide : ""
-            }`}
-          >
-            {msg.message}
+          <>
+            {msg.message && (
+              <Text
+                key={index}
+                component="div" // Change component to avoid nesting <p> tags error
+                className={`${styles.msgBubble} ${
+                  msg.sender === "user" ? styles.rightSide : ""
+                }`}
+              >
+                {msg.message}
+              </Text>
+            )}
+
             {msg.options && (
               <Button.Group className={styles.optionsContainer}>
                 {msg.options.map((option, index) => (
