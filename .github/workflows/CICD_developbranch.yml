@@ -41,7 +41,7 @@ jobs:
 
       - name: Sync files to S3
         run: |
-          aws s3 sync dist s3://main-branch --acl public-read --delete
+          aws s3 sync dist s3://develop-ai-branch --acl public-read --delete
 
 
 
