@@ -59,6 +59,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
   const handleOptionClick = useCallback(
     (optionValue: string) => {
+      if (isLoading) return
+
       sendMessageToServerAndDisplay(optionValue)
     },
     [sendMessageToServerAndDisplay]
