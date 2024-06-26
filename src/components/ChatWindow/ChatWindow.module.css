@@ -70,12 +70,23 @@
   background-color: var(--mantine-yellow-soft);
 }
 
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem(15px);
+  gap: rem(15px 10px);
+}
+
 .optionText {
   color: var(--mantine-blue-vivid);
+  background-color: rgba(255, 255, 255, 0.48);
+  border: 1px solid var(--mantine-blue-vivid);
+  border-radius: rem(20px) !important;
 }
 
 .optionText:hover {
   text-decoration: underline;
+  background-color: var(--mantine-blue-soft);
 }
 
 .loader {
@@ -95,6 +106,17 @@
 
 .alert :global(.m-7fa78076) {
   color: var(--mantine-color-gray-7);
+}
+
+.disabledOptions {
+  cursor: not-allowed;
+  background-color: transparent;
+  color: var(--mantine-color-gray-5);
+
+  &.optionText {
+    background-color: var(--mantine-color-gray-1);
+    text-decoration: none;
+  }
 }
 
 /* ====== CHAT FOOTER (TEXT INPUT) ======= */
@@ -140,4 +162,15 @@
 
 .sendBtn:active {
   transform: scale(0.9);
+}
+
+.disabled {
+  cursor: not-allowed;
+  background-color: var(--mantine-color-gray-1);
+
+  &.sendBtn {
+    stroke: var(--mantine-blue-active);
+    fill: transparent;
+    transform: none;
+  }
 }

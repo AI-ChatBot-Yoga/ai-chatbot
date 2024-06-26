@@ -54,6 +54,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   }
 
   const handleOptionClick = (optionValue: string) => {
+    if (isLoading) return
     sendMessageToServerAndDisplay(optionValue)
   }
 
@@ -107,21 +108,27 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         {chatHistory.map((msg, index) => (
-          <Text
-            key={index}
-            component="div" // Change component to avoid nesting <p> tags error
-            className={`${styles.msgBubble} ${
-              msg.sender === "user" ? styles.rightSide : ""
-            }`}
-          >
-            {msg.message}
+          <>
+            {msg.message && (
+              <Text
+                key={index}
+                component="div" // Change component to avoid nesting <p> tags error
+                className={`${styles.msgBubble} ${
+                  msg.sender === "user" ? styles.rightSide : ""
+                }`}
+              >
+                {msg.message}
+              </Text>
+            )}
+
             {msg.options && (
-              <Button.Group orientation="vertical">
+              <Button.Group className={styles.optionsContainer}>
                 {msg.options.map((option, index) => (
                   <Button
+                    disabled={isLoading}
                     key={index}
                     variant="transparent"
-                    className={styles.optionText}
+                    className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
                     onClick={() => handleOptionClick(option.value)}
                   >
                     {option.text}
@@ -129,7 +136,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
                 ))}
               </Button.Group>
             )}
-          </Text>
+          </>
         ))}
         {isLoading && <Loader type="dots" className={styles.loader} />}
         {isError && (
@@ -139,8 +146,11 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         )}
       </ScrollArea>
 
-      <div className={styles.textInputContainer}>
+      <div
+        className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
+      >
         <TextInput
+          disabled={isLoading}
           placeholder="Type a message..."
           value={messageInput}
           onChange={handleInputChange}
@@ -151,7 +161,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         <IconSend2
           stroke={1.5}
           onClick={handleSendClick}
-          className={styles.sendBtn}
+          className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
         />
       </div>
     </Paper>
