@@ -1,6 +1,6 @@
 import { Message } from "@/types/message"
 import { DEFAULT_MSG } from "@/constant/message"
-import { useSessionStorage } from "@/utils/useSessionStorage"
+import { useSessionStorage } from "@/hooks/useSessionStorage"
 
 export const useChatHistory = () => {
   // custom hook useSessionStorage is used to set initial value for previous chat, if there is no chat, it uses default DEFAULT_MSG as initial value. Then whenever there is new chatHistory, it is stored in sessionStorage
