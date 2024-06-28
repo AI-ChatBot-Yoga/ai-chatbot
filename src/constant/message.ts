@@ -27,6 +27,10 @@ export const DEFAULT_MSG = [
         text: " Special Care Fabric Cleaning",
         value: "Does your service provide special care fabric cleaning?",
       },
+      {
+        text: " Others",
+        value: "What other options do you have?",
+      },
     ],
   },
 ]
