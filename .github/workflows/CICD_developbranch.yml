@@ -1,9 +1,9 @@
-name: Deploy develop branch to AWS S3
+name: Deploy cloudfront branch to AWS S3
 
 on:
   push:
     branches:
-      - develop
+      - cloudfront
 
 jobs:
   build:
