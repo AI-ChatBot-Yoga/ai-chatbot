@@ -46,6 +46,9 @@ jobs:
         run: |
           aws s3 sync dist s3://develop-ai-branch --delete
 
+      - name: Debug CloudFront Distribution ID
+        run: echo "CloudFront Distribution ID is set to ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
