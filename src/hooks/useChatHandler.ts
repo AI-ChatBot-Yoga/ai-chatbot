@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useChatHistory } from "./useChatHistory"
 import { ChatAPI } from "@/apis/chat"
+import { ROLES } from "@/constant/roles"
 
 export const useChatHandler = (botId: string, CHAT_SESSION_ID: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -35,7 +36,7 @@ Vu: in the old commit, I use useChatHistory directly in ChatWindow.
       if (!response.output) throw Error
 
       // Handle the response from the server and update chat history
-      addMessageToChatHistory(response.output, "bot")
+      addMessageToChatHistory(response.output, ROLES.Bot)
     } catch (error: unknown) {
       console.error("Error sending message:", error)
       setIsError(true)

@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
@@ -43,9 +43,7 @@ jobs:
         run: |
           aws s3 sync dist s3://develop-ai-branch --acl public-read --delete
 
-
-
-    # Configure if you need CloudFront 
+    # Configure if you need CloudFront
     # - name: Invalidate CloudFront cache
     #   run: |
     #     aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*"

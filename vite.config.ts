@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react"
 import path from "path"
 import svgr from "vite-plugin-svgr"
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
+import ignore from "rollup-plugin-ignore"
 
 export default defineConfig({
   // cssInjectedByJsPlugin helps to combine CSS to only 1 JS file when bundling
@@ -40,6 +41,14 @@ export default defineConfig({
       // This ensure that React and ReactDOM are bundled with the widget
       external: [],
       output: {},
+      plugins: [
+        ignore({
+          files: [
+            "src/tests/open-api/endpoint.http",
+            "src/tests/open-api/http-client.env.json",
+          ],
+        }),
+      ],
     },
   },
 })
