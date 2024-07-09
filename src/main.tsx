@@ -6,6 +6,7 @@ import {
   MantineProvider,
   createTheme,
   CSSVariablesResolver,
+  rem,
 } from "@mantine/core"
 
 /* 
@@ -14,6 +15,15 @@ theme.colors object is required to have 10 shades. So I use Mantine's CSS variab
 const theme = createTheme({
   /** Your theme override here */
   fontFamily: "Open Sans, sans-serif",
+  headings: {
+    fontFamily: "Intel, sans-serif",
+    sizes: {
+      h4: {
+        fontWeight: "400",
+        fontSize: rem(20),
+      },
+    },
+  },
   other: {
     blueVivid: "rgba(7, 151, 255, 1)",
     blueLight: " rgba(102, 191, 255, 0.51)",
