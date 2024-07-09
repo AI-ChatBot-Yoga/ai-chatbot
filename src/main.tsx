@@ -22,6 +22,8 @@ const theme = createTheme({
     blueActive: "rgba(75, 180, 255, 1)",
     yellowSoft: "rgba(246, 218, 94, 0.51)",
     yellowVivid: "rgba(246, 218, 94, 1)",
+    lightGray: "rgba(225, 233, 239, 1)",
+    darkGray: "rgba(189, 200, 207, 1)",
   },
 })
 
@@ -34,6 +36,8 @@ const resolver: CSSVariablesResolver = (theme) => ({
     "--mantine-blue-active": theme.other.blueActive,
     "--mantine-yellow-soft": theme.other.yellowSoft,
     "--mantine-yellow-vivid": theme.other.yellowVivid,
+    "--mantine-light-gray": theme.other.lightGray,
+    "--mantine-dark-gray": theme.other.darkGray,
   },
   light: {},
   dark: {},
