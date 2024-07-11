@@ -11,28 +11,33 @@ import {
   Alert,
   Button,
 } from "@mantine/core"
-import { ChangeEvent, useState, KeyboardEvent } from "react"
-import { useAutoScrollToBottom } from "@/utils/useAutoScrollToBottom"
+import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react"
+import { useAutoScrollToBottom } from "@/hooks/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
-import { useChatHandler } from "@/utils/useChatHandler"
-import Configs from "@/configs"
+import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
+import useUuid from "@/hooks/useUuid"
+
+// Move outside of the component
+const scriptTag = document.currentScript as HTMLScriptElement
+const botId = scriptTag?.getAttribute("botId") ?? ""
+
+console.log("Script tag is:", scriptTag)
+console.log("botId is: ", botId)
 
 type Props = {
   onChatActivation: () => void
 }
 
-const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") || Configs.DEV_BOT_ID // TODO: remove fallback case when use in production
-console.log("Script tag is:", scriptTag)
-console.log("botId is: ", botId)
-
 const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
+  const { uuid, generateUuid, clearUuid } = useUuid()
+  const chatSessionId = uuid
 
-  // this hook is used for Modal component (ConfirmationModal)
+  // Hook for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
 
+  // Hook for handling chat messages
   const {
     isLoading,
     isError,
@@ -40,35 +45,44 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     chatHistory,
     clearChatHistory,
     sendMessageToServerAndDisplay,
-  } = useChatHandler(botId, Configs.DEV_CHAT_SESSION_ID) // Hard code for now, make it dynamic later
+  } = useChatHandler(botId, chatSessionId)
 
   // Auto scroll to bottom when there is new message
   const viewport = useAutoScrollToBottom(chatHistory)
 
-  const handleSendClick = () => {
-    // prevent function from running when input is an empty or whitespace-only input
+  // Memoized event handlers
+  const handleSendClick = useCallback(() => {
     if (!messageInput.trim()) return
-
     sendMessageToServerAndDisplay(messageInput)
     setMessageInput("")
-  }
+  }, [messageInput, sendMessageToServerAndDisplay])
 
-  const handleOptionClick = (optionValue: string) => {
-    sendMessageToServerAndDisplay(optionValue)
-  }
+  const handleOptionClick = useCallback(
+    (optionValue: string) => {
+      if (isLoading) return
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessageInput(event.target.value)
-  }
+      sendMessageToServerAndDisplay(optionValue)
+    },
+    [isLoading, sendMessageToServerAndDisplay]
+  )
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      handleSendClick()
-    }
-  }
+  const handleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setMessageInput(event.target.value)
+    },
+    []
+  )
 
-  const handleClearChat = () => {
-    // prevent function from running when there is no chat
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        handleSendClick()
+      }
+    },
+    [handleSendClick]
+  )
+
+  const handleClearChat = useCallback(() => {
     if (!chatHistory.find((chat) => chat.sender === ROLES.User)) {
       close()
       return
@@ -77,7 +91,16 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     setIsError(false)
     clearChatHistory()
     close()
-  }
+    clearUuid()
+    generateUuid()
+  }, [
+    chatHistory,
+    clearChatHistory,
+    close,
+    setIsError,
+    clearUuid,
+    generateUuid,
+  ])
 
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
@@ -90,7 +113,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       <Box className={styles.chatWindowHeader}>
         <h4>Laundry Services Chatbot</h4>
-
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
@@ -106,22 +128,27 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
-        {chatHistory.map((msg, index) => (
-          <Text
-            key={index}
-            component="div" // Change component to avoid nesting <p> tags error
-            className={`${styles.msgBubble} ${
-              msg.sender === ROLES.User ? styles.rightSide : ""
-            }`}
-          >
-            {msg.message}
+        {chatHistory?.map((msg, index) => (
+          <div key={index}>
+            {msg.message && (
+              <Text
+                key={index}
+                component="div" // Change component to avoid nesting <p> tags error
+                className={`${styles.msgBubble} ${
+                  msg.sender === ROLES.User ? styles.rightSide : ""
+                }`}
+              >
+                {msg.message}
+              </Text>
+            )}
             {msg.options && (
-              <Button.Group orientation="vertical">
-                {msg.options.map((option, index) => (
+              <Button.Group className={styles.optionsContainer}>
+                {msg.options.map((option, idx) => (
                   <Button
-                    key={index}
+                    key={idx}
+                    disabled={isLoading}
                     variant="transparent"
-                    className={styles.optionText}
+                    className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
                     onClick={() => handleOptionClick(option.value)}
                   >
                     {option.text}
@@ -129,7 +156,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
                 ))}
               </Button.Group>
             )}
-          </Text>
+          </div>
         ))}
         {isLoading && <Loader type="dots" className={styles.loader} />}
         {isError && (
@@ -139,7 +166,9 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         )}
       </ScrollArea>
 
-      <div className={styles.textInputContainer}>
+      <div
+        className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
+      >
         <TextInput
           placeholder="Type a message..."
           value={messageInput}
@@ -151,7 +180,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         <IconSend2
           stroke={1.5}
           onClick={handleSendClick}
-          className={styles.sendBtn}
+          className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
         />
       </div>
     </Paper>

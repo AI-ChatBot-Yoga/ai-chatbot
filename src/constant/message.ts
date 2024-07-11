@@ -16,6 +16,10 @@ export const DEFAULT_MSG = [
         value: "Does your service provide dry cleaning?",
       },
       {
+        text: " Sewing & Alternations",
+        value: "Does your service provide sewing and alternations?",
+      },
+      {
         text: " Stain Removal",
         value: "Does your service provide stain removal?",
       },
@@ -24,8 +28,8 @@ export const DEFAULT_MSG = [
         value: "Does your service provide special care fabric cleaning?",
       },
       {
-        text: " Sewing & Alternations",
-        value: "Does your service provide sewing and alternations?",
+        text: " Others",
+        value: "What other options do you have?",
       },
     ],
   },

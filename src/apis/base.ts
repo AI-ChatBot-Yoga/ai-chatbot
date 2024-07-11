@@ -1,13 +1,18 @@
+import {
+  API_VERSION,
+  AUTHORIZATION_KEY,
+  CORE_API_BASE_URL,
+  X_API_KEY,
+} from "@/config"
 import { Dict } from "@/types"
 import axios from "axios"
-import Configs from "@/configs"
 
 const axiosInstance = axios.create({
-  baseURL: `${Configs.CORE_API_BASE_URL}/${Configs.API_VERSION}`,
+  baseURL: `${CORE_API_BASE_URL}/${API_VERSION}`,
   headers: {
     "Content-Type": "application/json",
-    "X-API-KEY": Configs.X_API_KEY,
-    Authorization: Configs.AUTHORIZATION_KEY,
+    "X-API-KEY": X_API_KEY,
+    Authorization: AUTHORIZATION_KEY,
   },
 })
 
