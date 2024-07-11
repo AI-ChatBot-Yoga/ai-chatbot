@@ -17,12 +17,27 @@ dependencies:
   axios:
     specifier: ^1.6.8
     version: 1.6.8
+  '@tabler/icons-react':
+    specifier: ^3.1.0
+    version: 3.1.0(react@18.2.0)
+  axios:
+    specifier: ^1.6.8
+    version: 1.6.8
   react:
     specifier: ^18.2.0
     version: 18.2.0
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  rollup-plugin-ignore:
+    specifier: ^1.0.10
+    version: 1.0.10
+  uuid:
+    specifier: ^10.0.0
+    version: 10.0.0
+  vite-plugin-svgr:
+    specifier: ^2.4.0
+    version: 2.4.0(vite@5.2.10)
   rollup-plugin-ignore:
     specifier: ^1.0.10
     version: 1.0.10
@@ -40,12 +55,21 @@ devDependencies:
   '@types/node':
     specifier: ^20.12.7
     version: 20.12.7
+  '@types/axios':
+    specifier: ^0.14.0
+    version: 0.14.0
+  '@types/node':
+    specifier: ^20.12.7
+    version: 20.12.7
   '@types/react':
     specifier: ^18.2.66
     version: 18.2.72
   '@types/react-dom':
     specifier: ^18.2.22
     version: 18.2.22
+  '@types/uuid':
+    specifier: ^10.0.0
+    version: 10.0.0
   '@types/uuid':
     specifier: ^10.0.0
     version: 10.0.0
@@ -57,6 +81,7 @@ devDependencies:
     version: 7.4.0(eslint@8.57.0)(typescript@5.4.3)
   '@vitejs/plugin-react':
     specifier: ^4.2.1
+    version: 4.2.1(vite@5.2.10)
     version: 4.2.1(vite@5.2.10)
   eslint:
     specifier: ^8.57.0
@@ -83,6 +108,11 @@ devDependencies:
     specifier: ^5.2.2
     version: 5.4.3
   vite:
+    specifier: ^5.2.8
+    version: 5.2.10(@types/node@20.12.7)
+  vite-plugin-css-injected-by-js:
+    specifier: ^3.5.1
+    version: 3.5.1(vite@5.2.10)
     specifier: ^5.2.8
     version: 5.2.10(@types/node@20.12.7)
   vite-plugin-css-injected-by-js:
@@ -828,6 +858,153 @@ packages:
       - debug
     dev: true
 
+  /@svgr/babel-plugin-add-jsx-attribute@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-9PYGcXrAxitycIjRmZB+Q0JaN07GZIWaTBIGQzfaZv+qr1n8X1XUEJ5rZ/vx6OVD9RRYlrNnXWExQXcmZeD/BQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-remove-jsx-attribute@8.0.0(@babel/core@7.24.3):
+    resolution: {integrity: sha512-BcCkm/STipKvbCl6b7QFrMh/vx00vIP63k2eM66MfHJzPr6O2U0jYEViXkHJWqXqQYjdeA9cuCl5KWmlwjDvbA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-remove-jsx-empty-expression@8.0.0(@babel/core@7.24.3):
+    resolution: {integrity: sha512-5BcGCBfBxB5+XSDSWnhTThfI9jcO5f0Ai2V24gZpG+wXF14BzwxxdDb4g6trdOux0rhibGs385BeFMSmxtS3uA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-replace-jsx-attribute-value@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-8DPaVVE3fd5JKuIC29dqyMB54sA6mfgki2H2+swh+zNJoynC8pMPzOkidqHOSc6Wj032fhl8Z0TVn1GiPpAiJg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-svg-dynamic-title@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-FwOEi0Il72iAzlkaHrlemVurgSQRDFbk0OC8dSvD5fSBPHltNh7JtLsxmZUhjYBZo2PpcU/RJvvi6Q0l7O7ogw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-svg-em-dimensions@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-gWGsiwjb4tw+ITOJ86ndY/DZZ6cuXMNE/SjcDRg+HLuCmwpcjOktwRF9WgAiycTqJD/QXqL2f8IzE2Rzh7aVXA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-transform-react-native-svg@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-2jT3nTayyYP7kI6aGutkyfJ7UMGtuguD72OjeGLwVNyfPRBD8zQthlvL+fAbAKk5n9ZNcvFkp/b1lZ7VsYqVJg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-plugin-transform-svg-component@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-a1p6LF5Jt33O3rZoVRBqdxL350oge54iZWHNI6LJB5tQ7EelvD/Mb1mfBiZNAan0dt4i3VArkFRjA4iObuNykQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+    dev: false
+
+  /@svgr/babel-preset@6.5.1(@babel/core@7.24.3):
+    resolution: {integrity: sha512-6127fvO/FF2oi5EzSQOAjo1LE3OtNVh11R+/8FXa+mHx1ptAaS4cknIjnUA7e6j6fwGGJ17NzaTJFUwOV2zwCw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.3
+      '@svgr/babel-plugin-add-jsx-attribute': 6.5.1(@babel/core@7.24.3)
+      '@svgr/babel-plugin-remove-jsx-attribute': 8.0.0(@babel/core@7.24.3)
+      '@svgr/babel-plugin-remove-jsx-empty-expression': 8.0.0(@babel/core@7.24.3)
+      '@svgr/babel-plugin-replace-jsx-attribute-value': 6.5.1(@babel/core@7.24.3)
+      '@svgr/babel-plugin-svg-dynamic-title': 6.5.1(@babel/core@7.24.3)
+      '@svgr/babel-plugin-svg-em-dimensions': 6.5.1(@babel/core@7.24.3)
+      '@svgr/babel-plugin-transform-react-native-svg': 6.5.1(@babel/core@7.24.3)
+      '@svgr/babel-plugin-transform-svg-component': 6.5.1(@babel/core@7.24.3)
+    dev: false
+
+  /@svgr/core@6.5.1:
+    resolution: {integrity: sha512-/xdLSWxK5QkqG524ONSjvg3V/FkNyCv538OIBdQqPNaAta3AsXj/Bd2FbvR87yMbXO2hFSWiAe/Q6IkVPDw+mw==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@babel/core': 7.24.3
+      '@svgr/babel-preset': 6.5.1(@babel/core@7.24.3)
+      '@svgr/plugin-jsx': 6.5.1(@svgr/core@6.5.1)
+      camelcase: 6.3.0
+      cosmiconfig: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@svgr/hast-util-to-babel-ast@6.5.1:
+    resolution: {integrity: sha512-1hnUxxjd83EAxbL4a0JDJoD3Dao3hmjvyvyEV8PzWmLK3B9m9NPlW7GKjFyoWE8nM7HnXzPcmmSyOW8yOddSXw==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@babel/types': 7.24.0
+      entities: 4.5.0
+    dev: false
+
+  /@svgr/plugin-jsx@6.5.1(@svgr/core@6.5.1):
+    resolution: {integrity: sha512-+UdQxI3jgtSjCykNSlEMuy1jSRQlGC7pqBCPvkG/2dATdWo082zHTTK3uhnAju2/6XpE6B5mZ3z4Z8Ns01S8Gw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@svgr/core': ^6.0.0
+    dependencies:
+      '@babel/core': 7.24.3
+      '@svgr/babel-preset': 6.5.1(@babel/core@7.24.3)
+      '@svgr/core': 6.5.1
+      '@svgr/hast-util-to-babel-ast': 6.5.1
+      svg-parser: 2.0.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@tabler/icons-react@3.1.0(react@18.2.0):
+    resolution: {integrity: sha512-k/WTlax2vbj/LpxvaJ+BmaLAAhVUgyLj4Ftgaczz66tUSNzqrAZXCFdOU7cRMYPNVBqyqE2IdQd2rzzhDEJvkw==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      '@tabler/icons': 3.1.0
+      react: 18.2.0
+    dev: false
+
+  /@tabler/icons@3.1.0:
+    resolution: {integrity: sha512-CpZGyS1IVJKFcv88yZ2sYZIpWWhQ6oy76BQKQ5SF0fGgOqgyqKdBGG/YGyyMW632on37MX7VqQIMTzN/uQqmFg==}
+    dev: false
+
+  /@types/axios@0.14.0:
+    resolution: {integrity: sha512-KqQnQbdYE54D7oa/UmYVMZKq7CO4l8DEENzOKc4aBRwxCXSlJXGz83flFx5L7AWrOQnmuN3kVsRdt+GZPPjiVQ==}
+    deprecated: This is a stub types definition for axios (https://github.com/mzabriskie/axios). axios provides its own type definitions, so you don't need @types/axios installed!
+    dependencies:
+      axios: 1.6.8
+    transitivePeerDependencies:
+      - debug
+    dev: true
+
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
@@ -864,6 +1041,15 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+
+  /@types/node@20.12.7:
+    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+    dependencies:
+      undici-types: 5.26.5
+
+  /@types/parse-json@4.0.2:
+    resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
+    dev: false
 
   /@types/node@20.12.7:
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
@@ -2415,6 +2601,7 @@ snapshots:
   '@ungap/structured-clone@1.2.0': {}
 
   /@vitejs/plugin-react@4.2.1(vite@5.2.10):
+  /@vitejs/plugin-react@4.2.1(vite@5.2.10):
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -2425,6 +2612,7 @@ snapshots:
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.3)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
+      vite: 5.2.10(@types/node@20.12.7)
       vite: 5.2.10(@types/node@20.12.7)
     transitivePeerDependencies:
       - supports-color
@@ -2593,6 +2781,10 @@ snapshots:
       ms: 2.1.2
 
   deep-is@0.1.4: {}
+
+  /delayed-stream@1.0.0:
+    resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
+    engines: {node: '>=0.4.0'}
 
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
@@ -3415,6 +3607,7 @@ snapshots:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.12.7
       '@types/node': 20.12.7
       esbuild: 0.20.2
       postcss: 8.4.38
