@@ -174,13 +174,14 @@
 }
 
 .sendBtn:hover {
-  fill: var(--mantine-blue-active);
+  fill: var(--mantine-blue-medium);
   stroke: white;
   transform: scale(1.2);
 }
 
 .sendBtn:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
+  fill: var(--mantine-blue-vivid);
 }
 
 .disabled {
