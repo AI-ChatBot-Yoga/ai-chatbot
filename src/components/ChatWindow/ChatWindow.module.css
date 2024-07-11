@@ -147,6 +147,10 @@
   flex-grow: 1;
 }
 
+.textInput :global(.m-8fb7ebe7) {
+  font-size: rem(15px);
+}
+
 .textInput input::placeholder {
   font-size: rem(15px);
   color: #3b3b3b;

@@ -14,7 +14,8 @@ theme.colors object is required to have 10 shades. So I use Mantine's CSS variab
 */
 const theme = createTheme({
   /** Your theme override here */
-  fontFamily: "Open Sans, sans-serif",
+  fontFamily: "Intel, sans-serif",
+  fontSizes: { md: rem(15) },
   headings: {
     fontFamily: "Intel, sans-serif",
     sizes: {
