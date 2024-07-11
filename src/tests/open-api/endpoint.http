@@ -1,0 +1,49 @@
+@AuthHeader=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+@X-API-KEY=MTvYtwPRaI8kBfbnJZ7sg1nooqMpqteg5S2Xcic6
+
+
+# This is a sample request
+# GET https://jndqonikai7v45mkeohsogcvqe0tzdue.lambda-url.ap-southeast-2.on.aws
+# Authorization: {{AuthHeader}}
+# Content-Type: application/json
+
+# {
+#   "botId" : "1",
+#   "sessionId": "1",
+#   "question" : "How much does it cost for cleaning a pair of shoes?"
+
+### Get answer from dev machine
+POST http://vlno1.asuscomm.com:8000/api/v2/completions
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Do you work on Saturday?"
+}
+
+### Get completions from aws gateway
+POST https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Do you work on Saturday?"
+}
+
+### health check
+GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2
+
+### completions
+POST https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions
+Content-Type: application/json
+
+{
+  "botId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "chatSessionId": "71c0c33f-5952-43b1-8608-70bfe362f537",
+  "command": "Hi"
+}
+
+### get chathistory
+GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions/chat-history/71c0c33f-5952-43b1-8608-70bfe362f537

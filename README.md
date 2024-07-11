@@ -12,7 +12,7 @@ Please have [NodeJS](https://nodejs.org/en/download), [Git](https://git-scm.com/
 
 2. Follow the <b><u>Environment Setup</u></b> section below
 
-3. Follßow the [Git workflow documentation](https://career-bliss-academy.notion.site/Git-Workflow-AI-Chatbot-a041689cb9414781a358c7ef7182bc00)
+3. Follow the [Git workflow documentation](https://career-bliss-academy.notion.site/Git-Workflow-AI-Chatbot-a041689cb9414781a358c7ef7182bc00)
 
 ## \* Environment Setup
 
@@ -71,6 +71,11 @@ pnpm test
 ```
 pnpm build
 ```
+
+### Run open API
+
+In VSCode, install extension named "REST Client Huachao Mao"
+Then you can run the open API in the file `api.http`
 
 ## \* Branch Name Convention
 

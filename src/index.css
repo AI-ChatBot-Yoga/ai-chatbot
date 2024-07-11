@@ -1,3 +1,7 @@
+body {
+  background-color: transparent; /* Without declaring this, customer's website will be override by white backgroundColor */
+}
+
 .breakpoints {
   @media (max-width: $mantine-breakpoint-xs) {
     background-color: red;
