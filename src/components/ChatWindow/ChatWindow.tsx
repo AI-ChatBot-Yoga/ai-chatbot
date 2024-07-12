@@ -171,6 +171,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
       >
         <TextInput
+          disabled={isLoading}
           placeholder="Type a message..."
           value={messageInput}
           onChange={handleInputChange}
