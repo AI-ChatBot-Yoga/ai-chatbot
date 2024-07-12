@@ -5,17 +5,17 @@
   bottom: rem(115px);
   right: rem(30px);
   border: unset;
-  outline: 2px solid var(--mantine-blue-vivid);
+  outline: 1px solid var(--mantine-blue-vivid);
   border-radius: rem(5px);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* ====== CHAT HEADER ======= */
 
 .chatWindowHeader {
-  background-color: var(--mantine-blue-soft);
   text-align: left;
   padding: rem(10px);
-  border-bottom: 2px solid var(--mantine-blue-vivid);
+  border-bottom: 2px solid var(--mantine-blue-light);
   height: rem(50px);
 
   display: flex;
@@ -35,23 +35,38 @@
 
 .reloadBtn,
 .closeBtn {
-  width: rem(20px);
-  height: rem(20px);
+  width: rem(25px);
+  height: rem(25px);
 }
 
 .reloadBtn:hover,
 .closeBtn:hover {
+  background: var(--mantine-light-gray);
   cursor: pointer;
-  transform: scale(90%);
+
   filter: drop-shadow(
     0px 4px 4px rgba(0, 0, 0, 0.5)
   ); /* can't use box-shadow because it is applied to square box around svg */
 }
 
+.reloadBtn:hover {
+  border-radius: rem(5px);
+}
+
+.closeBtn:hover {
+  border-radius: 50%;
+}
+
+.reloadBtn:active,
+.closeBtn:active {
+  background-color: var(--mantine-dark-gray);
+  transform: scale(90%);
+}
+
 /* ====== CHAT BODY ======= */
 
 .scrollArea {
-  height: rem(540px);
+  height: rem(550px);
 }
 
 .msgBubble {
@@ -132,6 +147,10 @@
   flex-grow: 1;
 }
 
+.textInput :global(.m-8fb7ebe7) {
+  font-size: rem(15px);
+}
+
 .textInput input::placeholder {
   font-size: rem(15px);
   color: #3b3b3b;
@@ -155,13 +174,14 @@
 }
 
 .sendBtn:hover {
-  fill: var(--mantine-blue-active);
+  fill: var(--mantine-blue-medium);
   stroke: white;
   transform: scale(1.2);
 }
 
 .sendBtn:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
+  fill: var(--mantine-blue-vivid);
 }
 
 .disabled {
