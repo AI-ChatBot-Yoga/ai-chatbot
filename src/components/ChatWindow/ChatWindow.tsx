@@ -10,6 +10,7 @@ import {
   Loader,
   Alert,
   Button,
+  Title,
 } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react"
 import { useAutoScrollToBottom } from "@/hooks/useAutoScrollToBottom"
@@ -112,7 +113,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <h4>Laundry Services Chatbot</h4>
+        <Title order={4}>AI Assistant</Title>
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
@@ -170,6 +171,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
       >
         <TextInput
+          disabled={isLoading}
           placeholder="Type a message..."
           value={messageInput}
           onChange={handleInputChange}
