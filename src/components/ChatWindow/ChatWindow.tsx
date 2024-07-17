@@ -1,6 +1,6 @@
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
-import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
+import { IconReload, IconX } from "@tabler/icons-react"
 import {
   Box,
   Paper,
@@ -18,6 +18,7 @@ import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
+import SendBtn from "../SendBtn/SendBtn"
 
 // Move outside of the component
 const scriptTag = document.currentScript as HTMLScriptElement
@@ -179,11 +180,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           className={styles.textInput}
         />
 
-        <IconSend2
-          stroke={1.5}
-          onClick={handleSendClick}
-          className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
-        />
+        <SendBtn handleSendClick={handleSendClick} isLoading={isLoading} />
       </div>
     </Paper>
   )
