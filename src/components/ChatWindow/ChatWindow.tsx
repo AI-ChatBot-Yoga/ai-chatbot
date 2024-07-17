@@ -18,7 +18,7 @@ import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
-import SendBtn from "../SendBtn/SendBtn"
+import SendBtn from "../SendBtn"
 
 // Move outside of the component
 const scriptTag = document.currentScript as HTMLScriptElement
