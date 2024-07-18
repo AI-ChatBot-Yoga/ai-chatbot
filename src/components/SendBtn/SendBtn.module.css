@@ -1,0 +1,17 @@
+.sendBtnContainer {
+  display: flex;
+  cursor: pointer;
+  border: none;
+  background-color: unset;
+}
+
+.sendBtnHover {
+  fill: var(--mantine-blue-medium);
+}
+
+.sendBtnHover:active {
+  fill: var(--mantine-blue-vivid);
+
+  transition: transform 0.1s ease;
+  transform: scale(0.85);
+}
