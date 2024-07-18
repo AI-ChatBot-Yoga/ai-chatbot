@@ -5,7 +5,7 @@
   bottom: rem(115px);
   right: rem(30px);
   border: unset;
-  outline: 1px solid var(--mantine-blue-vivid);
+  outline: 1px solid var(--mantine-blue-medium);
   border-radius: rem(5px);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -43,10 +43,6 @@
 .closeBtn:hover {
   background: var(--mantine-light-gray);
   cursor: pointer;
-
-  filter: drop-shadow(
-    0px 4px 4px rgba(0, 0, 0, 0.5)
-  ); /* can't use box-shadow because it is applied to square box around svg */
 }
 
 .reloadBtn:hover {
@@ -164,33 +160,7 @@
   --input-bd-focus: unset;
 }
 
-.sendBtn {
-  width: rem(35px);
-  height: rem(35px);
-  margin-right: rem(5px);
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  stroke: var(--mantine-blue-active);
-}
-
-.sendBtn:hover {
-  fill: var(--mantine-blue-medium);
-  stroke: white;
-  transform: scale(1.2);
-}
-
-.sendBtn:active {
-  transform: scale(0.95);
-  fill: var(--mantine-blue-vivid);
-}
-
 .disabled {
   cursor: not-allowed;
   background-color: var(--mantine-color-gray-1);
-
-  &.sendBtn {
-    stroke: var(--mantine-blue-active);
-    fill: transparent;
-    transform: none;
-  }
 }
