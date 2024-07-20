@@ -154,6 +154,7 @@
 
 .textInput :global(.m-8fb7ebe7) {
   font-size: rem(15px);
+  border: none;
 }
 
 .textInput input::placeholder {
