@@ -145,19 +145,12 @@
 
 .textInput :global(.m-8fb7ebe7) {
   font-size: rem(15px);
+  border: none;
 }
 
 .textInput input::placeholder {
   font-size: rem(15px);
   color: #3b3b3b;
-}
-
-/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
-:global(
-    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
-  ) {
-  --input-bd: unset;
-  --input-bd-focus: unset;
 }
 
 .disabled {
