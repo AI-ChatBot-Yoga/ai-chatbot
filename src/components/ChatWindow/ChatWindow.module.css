@@ -1,9 +1,9 @@
 .chatWindow {
-  width: rem(360px); /* Adjust height in .scrollArea */
-
+  max-width: rem(360px); /* Adjust height in .scrollArea */
   position: fixed;
   bottom: rem(115px);
-  right: rem(30px);
+  margin: 0 rem(30px);
+  right: 0;
   border: unset;
   outline: 1px solid var(--mantine-blue-medium);
   border-radius: rem(5px);
@@ -63,6 +63,12 @@
 
 .scrollArea {
   height: rem(550px);
+}
+
+@media screen and (max-height: 770px) {
+  .scrollArea {
+    max-height: 65vh;
+  }
 }
 
 .msgBubble {
