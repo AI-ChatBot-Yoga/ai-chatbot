@@ -121,7 +121,7 @@
   top: 0;
 }
 
-.alert :global(.m-7fa78076) {
+.alert :global(.m_7fa78076) {
   color: var(--mantine-color-gray-7);
 }
 
@@ -149,7 +149,7 @@
   flex-grow: 1;
 }
 
-.textInput :global(.m-8fb7ebe7) {
+.textInput :global(.m_8fb7ebe7) {
   font-size: rem(15px);
   border: none;
 }
