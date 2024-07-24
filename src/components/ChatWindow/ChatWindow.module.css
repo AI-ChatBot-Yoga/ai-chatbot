@@ -65,9 +65,9 @@
   height: rem(550px);
 }
 
-@media screen and (max-height: 770px) {
+@media screen and (max-height: 750px) {
   .scrollArea {
-    max-height: 65vh;
+    max-height: 62vh;
   }
 }
 
