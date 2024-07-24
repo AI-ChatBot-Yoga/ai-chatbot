@@ -11,8 +11,11 @@
   width: rem(60px);
   height: rem(60px);
   border-radius: 50%;
-  padding-top: rem(8px);
   box-shadow: 0 0 rem(10px) rem(5px) var(--mantine-yellow-vivid);
+
+  /* make svg center of button  */
+  display: grid;
+  place-content: center;
 }
 
 .chatIcon svg {
