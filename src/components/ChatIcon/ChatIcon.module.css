@@ -8,6 +8,7 @@
   right: rem(30px);
 
   background-color: var(--mantine-color-white);
+
   width: rem(60px);
   height: rem(60px);
   border-radius: 50%;
@@ -33,17 +34,20 @@
 }
 
 /* HOVER STATE */
-.chatIcon:hover {
-  background-color: var(--mantine-blue-soft);
-}
+/* use @media (hover: hover) because on mobile like iOS, the chatIcon remains hover's color after user click on it*/
+@media (hover: hover) {
+  .chatIcon:hover {
+    background-color: var(--mantine-blue-soft);
+  }
 
-.chatIcon:hover svg :global(.chat-icon-bg) {
-  fill-rule: nonzero;
-  fill: var(--mantine-color-white);
-}
+  .chatIcon:hover svg :global(.chat-icon-bg) {
+    fill-rule: nonzero;
+    fill: var(--mantine-color-white);
+  }
 
-.chatIcon:hover svg :global(.dot) {
-  fill: var(--mantine-blue-soft);
+  .chatIcon:hover svg :global(.dot) {
+    fill: var(--mantine-blue-soft);
+  }
 }
 
 /* ACTIVE STATE */
