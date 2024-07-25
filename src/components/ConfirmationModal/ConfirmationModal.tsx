@@ -18,7 +18,11 @@ const ConfirmationModal = ({
     <Modal
       opened={openedModal}
       onClose={close}
-      className={styles.modalContainer}
+      classNames={{
+        overlay: styles.modalOverlay,
+        inner: styles.modalInner,
+        content: styles.modalContent,
+      }}
       withinPortal={false}
     >
       <p>{modalMessage}</p>
