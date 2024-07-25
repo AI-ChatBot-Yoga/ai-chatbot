@@ -177,7 +177,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           value={messageInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className={styles.textInput}
+          classNames={{ root: styles.textInputRoot, input: styles.textInput }}
         />
 
         <SendBtn handleSendClick={handleSendClick} isLoading={isLoading} />
