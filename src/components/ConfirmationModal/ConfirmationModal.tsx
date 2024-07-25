@@ -18,7 +18,6 @@ const ConfirmationModal = ({
     <Modal
       opened={openedModal}
       onClose={close}
-      size="sm"
       classNames={{
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
