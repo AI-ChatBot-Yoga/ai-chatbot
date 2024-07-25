@@ -145,18 +145,18 @@
   height: rem(50px);
 }
 
-.textInput {
+.textInputRoot {
   flex-grow: 1;
 }
 
-.textInput :global(.m_8fb7ebe7) {
+.textInput {
   font-size: rem(15px);
   border: none;
 }
 
-.textInput input::placeholder {
+.textInput::placeholder {
   font-size: rem(15px);
-  color: #3b3b3b;
+  color: #3b3b3b !important;
 }
 
 .disabled {

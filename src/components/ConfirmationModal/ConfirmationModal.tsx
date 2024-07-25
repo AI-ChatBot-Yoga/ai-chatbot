@@ -23,10 +23,16 @@ const ConfirmationModal = ({
     >
       <p>{modalMessage}</p>
       <div className={styles.modalButtons}>
-        <Button color="red" onClick={close}>
+        <Button
+          color="red"
+          onClick={close}
+          classNames={{ label: styles.btnLabel }}
+        >
           No
         </Button>
-        <Button onClick={onClearChat}>Yes</Button>
+        <Button onClick={onClearChat} classNames={{ label: styles.btnLabel }}>
+          Yes
+        </Button>
       </div>
     </Modal>
   )
