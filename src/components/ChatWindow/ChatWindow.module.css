@@ -154,9 +154,9 @@
   border: none;
 }
 
-.textInput::placeholder {
+.textInput input::placeholder {
   font-size: rem(15px);
-  color: #3b3b3b !important;
+  color: #3b3b3b;
 }
 
 .disabled {
