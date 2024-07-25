@@ -2,11 +2,15 @@
 
 .modalOverlay {
   position: absolute;
-  padding-inline: 0;
+}
+
+.modalContent {
+  max-width: fit-content;
 }
 
 .modalInner {
   position: absolute;
+  padding-inline: 0 !important;
 }
 
 .modalButtons {
