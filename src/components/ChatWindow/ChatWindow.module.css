@@ -145,16 +145,7 @@
   height: rem(50px);
 }
 
-/* ====== CHAT FOOTER (TEXT INPUT) ======= */
-
-.textInputContainer {
-  display: flex;
-  align-items: center;
-  border-top: 2px solid var(--mantine-blue-light);
-  height: rem(50px);
-}
-
-.textInput {
+.textInputRoot {
   flex-grow: 1;
 }
 
@@ -166,62 +157,6 @@
 .textInput input::placeholder {
   font-size: rem(15px);
   color: #3b3b3b;
-}
-
-/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
-:global(
-    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
-  ) {
-  --input-bd: unset;
-  --input-bd-focus: unset;
-}
-
-.sendBtn {
-  width: rem(35px);
-  height: rem(35px);
-  margin-right: rem(5px);
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  stroke: var(--mantine-blue-active);
-}
-
-.sendBtn:hover {
-  fill: var(--mantine-blue-medium);
-  stroke: white;
-  transform: scale(1.2);
-}
-
-.textInput input::placeholder {
-  font-size: rem(15px);
-  color: #3b3b3b;
-}
-
-/* Under Mantine's TextInput component, two properties --input-bd and --input-bd-focus control the border/outline of text input */
-:global(
-    [data-mantine-color-scheme="light"] .m-6c018570[data-variant="default"]
-  ) {
-  --input-bd: unset;
-  --input-bd-focus: unset;
-}
-
-.sendBtn {
-  width: rem(35px);
-  height: rem(35px);
-  margin-right: rem(5px);
-  cursor: pointer;
-  transition: transform 0.1s ease;
-  stroke: var(--mantine-blue-active);
-}
-
-.sendBtn:hover {
-  fill: var(--mantine-blue-active);
-  stroke: white;
-  transform: scale(1.2);
-}
-
-.sendBtn:active {
-  transform: scale(0.95);
-  fill: var(--mantine-blue-vivid);
 }
 
 .disabled {
