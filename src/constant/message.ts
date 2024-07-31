@@ -19,7 +19,6 @@ export const DEFAULT_MSG = [
         text: " Sewing & Alterations",
         value: "Does your service provide sewing and alternations?",
       },
-
       {
         text: " Stain Removal",
         value: "Does your service provide stain removal?",
