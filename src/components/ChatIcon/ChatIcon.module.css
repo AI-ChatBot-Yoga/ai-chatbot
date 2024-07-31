@@ -7,16 +7,16 @@
   bottom: rem(40px);
   right: rem(30px);
 
-  background-color: var(--mantine-blue-medium);
+  background-color: var(--mantine-color-white);
+
   width: rem(60px);
   height: rem(60px);
   border-radius: 50%;
-  padding-top: rem(8px);
-  box-shadow: 0 0 rem(10px) rem(2px) var(--mantine-yellow-vivid);
-}
+  box-shadow: 0 0 rem(10px) rem(5px) var(--mantine-yellow-vivid);
 
-.chatIcon:hover {
-  box-shadow: 0 0 rem(20px) rem(2px) var(--mantine-yellow-vivid);
+  /* make svg center of button  */
+  display: grid;
+  place-content: center;
 }
 
 .chatIcon svg {
@@ -26,17 +26,35 @@
 
 .chatIcon svg :global(.chat-icon-bg) {
   fill-rule: evenodd;
-  fill: var(--mantine-color-white);
+  fill: var(--mantine-blue-active);
 }
 
 .chatIcon svg :global(.dot) {
-  fill: var(--mantine-color-white);
+  fill: var(--mantine-blue-active);
 }
 
-.chatIcon:hover svg :global(.chat-icon-bg) {
-  fill-rule: nonzero;
+/* HOVER STATE */
+/* use @media (hover: hover) because on mobile like iOS, the chatIcon remains hover's color after user click on it*/
+@media (hover: hover) {
+  .chatIcon:hover {
+    background-color: var(--mantine-blue-soft);
+  }
+
+  .chatIcon:hover svg :global(.chat-icon-bg) {
+    fill-rule: nonzero;
+    fill: var(--mantine-color-white);
+  }
+
+  .chatIcon:hover svg :global(.dot) {
+    fill: var(--mantine-blue-soft);
+  }
 }
 
-.chatIcon:hover svg :global(.dot) {
+/* ACTIVE STATE */
+.chatIcon:active {
+  background-color: var(--mantine-blue-medium);
+}
+
+.chatIcon:active svg :global(.dot) {
   fill: var(--mantine-blue-medium);
 }

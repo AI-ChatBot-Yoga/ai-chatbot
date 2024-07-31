@@ -1,6 +1,6 @@
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
-import { IconSend2, IconReload, IconX } from "@tabler/icons-react"
+import { IconReload, IconX } from "@tabler/icons-react"
 import {
   Box,
   Paper,
@@ -10,6 +10,7 @@ import {
   Loader,
   Alert,
   Button,
+  Title,
 } from "@mantine/core"
 import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react"
 import { useAutoScrollToBottom } from "@/hooks/useAutoScrollToBottom"
@@ -17,6 +18,7 @@ import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
+import SendBtn from "../SendBtn"
 
 // Move outside of the component
 const scriptTag = document.currentScript as HTMLScriptElement
@@ -112,7 +114,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <h4>Laundry Services Chatbot</h4>
+        <Title order={4}>AI Assistant</Title>
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
@@ -170,18 +172,15 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         className={`${styles.textInputContainer} ${isLoading && styles.disabled}`}
       >
         <TextInput
+          disabled={isLoading}
           placeholder="Type a message..."
           value={messageInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className={styles.textInput}
+          classNames={{ root: styles.textInputRoot, input: styles.textInput }}
         />
 
-        <IconSend2
-          stroke={1.5}
-          onClick={handleSendClick}
-          className={`${styles.sendBtn} ${isLoading && styles.disabled}`}
-        />
+        <SendBtn handleSendClick={handleSendClick} isLoading={isLoading} />
       </div>
     </Paper>
   )

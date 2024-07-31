@@ -16,7 +16,7 @@ export const DEFAULT_MSG = [
         value: "Does your service provide dry cleaning?",
       },
       {
-        text: " Sewing & Alternations",
+        text: " Sewing & Alterations",
         value: "Does your service provide sewing and alternations?",
       },
       {
