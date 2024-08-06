@@ -1,4 +1,4 @@
-import { Modal, Button } from "@mantine/core"
+import { Modal, Button, Title } from "@mantine/core"
 import styles from "./ConfirmationModal.module.css"
 import { IconX } from "@tabler/icons-react"
 
@@ -17,9 +17,10 @@ const ConfirmationModal = ({
 }: ConfirmationModalProps) => {
   return (
     <Modal
-      title="Restart Chat"
+      title={<Title order={4}>Restart Chat</Title>}
       opened={openedModal}
       onClose={close}
+      size="16rem"
       classNames={{
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
@@ -34,13 +35,17 @@ const ConfirmationModal = ({
       <p>{modalMessage}</p>
       <div className={styles.modalButtons}>
         <Button
-          color="red"
+          color="var(--mantine-yellow-soft)"
           onClick={close}
-          classNames={{ label: styles.btnLabel }}
+          classNames={{ label: styles.btnLabel, root: styles.btnNo }}
         >
           No
         </Button>
-        <Button onClick={onClearChat} classNames={{ label: styles.btnLabel }}>
+        <Button
+          color="var(--mantine-blue-soft)"
+          onClick={onClearChat}
+          classNames={{ label: styles.btnLabel, root: styles.btnYes }}
+        >
           Yes
         </Button>
       </div>
