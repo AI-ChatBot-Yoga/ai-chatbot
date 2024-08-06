@@ -1,5 +1,6 @@
 import { Modal, Button } from "@mantine/core"
 import styles from "./ConfirmationModal.module.css"
+import { IconX } from "@tabler/icons-react"
 
 interface ConfirmationModalProps {
   openedModal: boolean
@@ -16,14 +17,19 @@ const ConfirmationModal = ({
 }: ConfirmationModalProps) => {
   return (
     <Modal
+      title="Restart Chat"
       opened={openedModal}
       onClose={close}
       classNames={{
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
         content: styles.modalContent,
+        close: styles.closeBtn,
       }}
       withinPortal={false}
+      closeButtonProps={{
+        icon: <IconX aria-label="Close button" />,
+      }}
     >
       <p>{modalMessage}</p>
       <div className={styles.modalButtons}>
