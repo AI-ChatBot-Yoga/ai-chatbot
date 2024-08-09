@@ -110,7 +110,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
         openedModal={openedModal}
         close={close}
         onClearChat={handleClearChat}
-        modalMessage="Do you want to clear the previous chat?"
+        modalMessage="Do you want to restart the chat?"
       />
 
       <Box className={styles.chatWindowHeader}>

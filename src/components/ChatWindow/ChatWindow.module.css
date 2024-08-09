@@ -33,30 +33,28 @@
   gap: rem(3px);
 }
 
-.reloadBtn,
-.closeBtn {
+.reloadBtn {
   width: rem(25px);
   height: rem(25px);
 }
 
+.closeBtn {
+  width: rem(30px);
+  height: rem(30px);
+}
+
 .reloadBtn:hover,
 .closeBtn:hover {
-  background: var(--mantine-light-gray);
   cursor: pointer;
-}
-
-.reloadBtn:hover {
-  border-radius: rem(5px);
-}
-
-.closeBtn:hover {
-  border-radius: 50%;
+  filter: drop-shadow(
+    0px 4px 2px rgba(0, 0, 0, 0.25)
+  ); /* can't use box-shadow because it will apply a white square box around svg */
 }
 
 .reloadBtn:active,
 .closeBtn:active {
-  background-color: var(--mantine-dark-gray);
-  transform: scale(90%);
+  transform: translateY(2px) scale(0.95); /* Move down and slightly scale down */
+  filter: none;
 }
 
 /* ====== CHAT BODY ======= */
