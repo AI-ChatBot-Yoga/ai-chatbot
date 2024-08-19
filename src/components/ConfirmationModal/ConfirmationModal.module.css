@@ -8,6 +8,14 @@
   max-width: fit-content;
 }
 
+.modalContent p {
+  font-size: rem(18px);
+  margin-top: 0;
+  margin-right: rem(20px);
+  margin-bottom: rem(20px);
+  font-weight: 300;
+}
+
 .modalInner {
   position: absolute;
   padding-inline: 0 !important;
@@ -16,9 +24,38 @@
 .modalButtons {
   display: flex;
   justify-content: center;
-  gap: 1em;
+  gap: 2em;
 }
 
 .btnLabel {
   overflow: visible;
+  color: black;
+  font-weight: 300;
+  font-size: rem(18px);
+}
+
+.btnYes:hover {
+  background-color: var(--mantine-blue-vivid);
+}
+
+.btnNo:hover {
+  background-color: var(--mantine-yellow-vivid);
+}
+
+.closeBtn svg {
+  width: rem(30px);
+  height: rem(30px);
+  color: black;
+}
+
+.closeBtn:hover {
+  background-color: transparent;
+  filter: drop-shadow(
+    0px 4px 2px rgba(0, 0, 0, 0.25)
+  ); /* can't use box-shadow because it will apply a white square box around svg */
+}
+
+.closeBtn:active {
+  transform: translateY(1px) scale(0.95); /* Move down and slightly scale down */
+  filter: none;
 }
