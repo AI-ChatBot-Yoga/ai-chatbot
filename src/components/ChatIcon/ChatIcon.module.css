@@ -9,8 +9,8 @@
 
   background-color: var(--mantine-color-white);
 
-  width: rem(60px);
-  height: rem(60px);
+  width: rem(55px);
+  height: rem(55px);
   border-radius: 50%;
   box-shadow: 0 0 rem(10px) rem(5px) var(--mantine-yellow-vivid);
 
