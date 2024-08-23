@@ -1,7 +1,6 @@
 import { Modal, Button, Title } from "@mantine/core"
 import styles from "./ConfirmationModal.module.css"
 import { IconX } from "@tabler/icons-react"
-
 interface ConfirmationModalProps {
   openedModal: boolean
   close: () => void
