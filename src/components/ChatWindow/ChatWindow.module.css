@@ -157,12 +157,11 @@
 }
 
 .textInput {
-  font-size: em(15px);
+  font-size: em(15);
   border: none;
 }
 
 .textInput input::placeholder {
-  font-size: em(15px);
   color: #3b3b3b;
 }
 
