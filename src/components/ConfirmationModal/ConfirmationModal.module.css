@@ -9,10 +9,10 @@
 }
 
 .modalContent p {
-  font-size: rem(18px);
+  font-size: em(18px);
   margin-top: 0;
-  margin-right: rem(20px);
-  margin-bottom: rem(20px);
+  margin-right: em(20px);
+  margin-bottom: em(20px);
   font-weight: 300;
 }
 
@@ -31,7 +31,7 @@
   overflow: visible;
   color: black;
   font-weight: 300;
-  font-size: rem(18px);
+  font-size: em(18px);
 }
 
 .btnYes:hover {
@@ -43,8 +43,8 @@
 }
 
 .closeBtn svg {
-  width: rem(30px);
-  height: rem(30px);
+  width: em(30px);
+  height: em(30px);
   color: black;
 }
 
