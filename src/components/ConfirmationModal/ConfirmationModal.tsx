@@ -24,6 +24,8 @@ const ConfirmationModal = ({
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
         content: styles.modalContent,
+        header: styles.modalHeader,
+        body: styles.modalBody,
         close: styles.closeBtn,
       }}
       withinPortal={false}
