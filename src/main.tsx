@@ -6,7 +6,7 @@ import {
   MantineProvider,
   createTheme,
   CSSVariablesResolver,
-  rem,
+  em,
 } from "@mantine/core"
 
 /* 
@@ -15,13 +15,13 @@ theme.colors object is required to have 10 shades. So I use Mantine's CSS variab
 const theme = createTheme({
   /** Your theme override here */
   fontFamily: "Roboto, sans-serif",
-  fontSizes: { md: rem(15) },
+  fontSizes: { md: em(15) },
   headings: {
     fontFamily: "Roboto, sans-serif",
     sizes: {
       h4: {
         fontWeight: "400",
-        fontSize: rem(20),
+        fontSize: em(20),
       },
     },
   },

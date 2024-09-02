@@ -1,12 +1,18 @@
 .chatWindow {
-  max-width: rem(360px); /* Adjust height in .scrollArea */
+  all: initial; /*This resets all properties*/
+  font-family: "Roboto", sans-serif;
+  font-size: 16px; /* Base font size */
+  color: #000; /* Base text color */
+  background-color: #fff;
+
+  max-width: em(360px); /* Adjust height in .scrollArea */
   position: fixed;
-  bottom: rem(115px);
-  margin: 0 rem(30px);
+  bottom: em(115px);
+  margin: 0 em(30px);
   right: 0;
   border: unset;
   outline: 1px solid var(--mantine-blue-medium);
-  border-radius: rem(5px);
+  border-radius: em(5px);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -14,9 +20,9 @@
 
 .chatWindowHeader {
   text-align: left;
-  padding: rem(10px);
+  padding: em(10px);
   border-bottom: 2px solid var(--mantine-blue-light);
-  height: rem(50px);
+  height: em(50px);
 
   display: flex;
   justify-content: space-between;
@@ -30,17 +36,17 @@
 .buttons {
   display: flex;
   align-items: center;
-  gap: rem(3px);
+  gap: em(3px);
 }
 
 .reloadBtn {
-  width: rem(25px);
-  height: rem(25px);
+  width: em(25px);
+  height: em(25px);
 }
 
 .closeBtn {
-  width: rem(30px);
-  height: rem(30px);
+  width: em(30px);
+  height: em(30px);
 }
 
 .reloadBtn:hover,
@@ -60,7 +66,7 @@
 /* ====== CHAT BODY ======= */
 
 .scrollArea {
-  height: rem(550px);
+  height: em(550px);
 }
 
 @media screen and (max-height: 750px) {
@@ -70,9 +76,9 @@
 }
 
 .msgBubble {
-  padding: rem(10px);
-  margin: rem(15px);
-  border-radius: rem(5px);
+  padding: em(10px);
+  margin: em(15px);
+  border-radius: em(5px);
   background-color: var(--mantine-blue-soft);
   width: fit-content;
   max-width: 85%;
@@ -88,15 +94,18 @@
 .optionsContainer {
   display: flex;
   flex-wrap: wrap;
-  margin: rem(15px);
-  gap: rem(15px 10px);
+  margin: em(15px);
+  gap: em(15px 10px);
 }
 
 .optionText {
+  height: em(36);
+  padding: 0 em(18);
+  font-size: em(14);
   color: var(--mantine-blue-vivid);
   background-color: rgba(255, 255, 255, 0.48);
   border: 1px solid var(--mantine-blue-vivid);
-  border-radius: rem(20px) !important;
+  border-radius: em(20px) !important;
 }
 
 .optionText:hover {
@@ -112,7 +121,7 @@
 
 .alert {
   background-color: var(--mantine-color-red-2);
-  padding: rem(10px);
+  padding: em(10px);
   width: 100%;
   text-align: center;
   position: absolute;
@@ -120,6 +129,7 @@
 }
 
 .alert :global(.m_7fa78076) {
+  font-size: 14px;
   color: var(--mantine-color-gray-7);
 }
 
@@ -140,7 +150,7 @@
   display: flex;
   align-items: center;
   border-top: 2px solid var(--mantine-blue-light);
-  height: rem(50px);
+  height: em(50px);
 }
 
 .textInputRoot {
@@ -148,12 +158,11 @@
 }
 
 .textInput {
-  font-size: rem(15px);
+  font-size: em(15);
   border: none;
 }
 
 .textInput input::placeholder {
-  font-size: rem(15px);
   color: #3b3b3b;
 }
 

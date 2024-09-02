@@ -1,18 +1,19 @@
 .chatIcon {
+  font-size: 16px; /* Base font size */
   cursor: pointer;
   border: unset;
   background: none;
 
   position: fixed;
-  bottom: rem(40px);
-  right: rem(30px);
+  bottom: em(40px);
+  right: em(30px);
 
   background-color: var(--mantine-color-white);
 
-  width: rem(55px);
-  height: rem(55px);
+  width: em(55px);
+  height: em(55px);
   border-radius: 50%;
-  box-shadow: 0 0 rem(10px) rem(5px) var(--mantine-yellow-vivid);
+  box-shadow: 0 0 em(10px) em(5px) var(--mantine-yellow-vivid);
 
   /* make svg center of button  */
   display: grid;
@@ -20,8 +21,8 @@
 }
 
 .chatIcon svg {
-  width: rem(35px);
-  height: rem(35px);
+  width: em(35px);
+  height: em(35px);
 }
 
 .chatIcon svg :global(.chat-icon-bg) {

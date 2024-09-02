@@ -19,11 +19,13 @@ const ConfirmationModal = ({
       title={<Title order={4}>Restart Chat</Title>}
       opened={openedModal}
       onClose={close}
-      size="16rem"
+      size="16em"
       classNames={{
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
         content: styles.modalContent,
+        header: styles.modalHeader,
+        body: styles.modalBody,
         close: styles.closeBtn,
       }}
       withinPortal={false}
