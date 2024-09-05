@@ -64,12 +64,12 @@
   .chatIcon {
     bottom: em(20px);
     right: em(20px);
-    width: em(40px);
-    height: em(40px);
+    width: em(50px);
+    height: em(50px);
   }
 
   .chatIcon svg {
-    width: em(25px);
-    height: em(25px);
+    width: em(30px);
+    height: em(30px);
   }
 }

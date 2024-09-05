@@ -20,7 +20,7 @@
 
 @media screen and (max-width: 480px) {
   .chatWindow {
-    font-size: 14px;
+    font-size: 15px;
     bottom: em(90px);
   }
 }
@@ -169,6 +169,7 @@
 .textInput {
   font-size: em(15);
   border: none;
+  -webkit-text-size-adjust: 100%; /* prevent zoom when touch on text input on ios*/
 }
 
 .textInput input::placeholder {
