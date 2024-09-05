@@ -2,7 +2,9 @@
   display: flex;
   cursor: pointer;
   border: none;
-  background-color: unset;
+  background-color: transparent;
+  padding: 0 em(5px); /* fix bug on ios, if don't declare, the button will be pushed to the right a little bit */
+  -webkit-tap-highlight-color: transparent; /* bug on ios: remove gray rectangle around the send icon on iOS  */
 }
 
 .sendBtnHover {
@@ -11,7 +13,6 @@
 
 .sendBtnHover:active {
   fill: var(--mantine-blue-vivid);
-
   transition: transform 0.1s ease;
   transform: scale(0.85);
 }
