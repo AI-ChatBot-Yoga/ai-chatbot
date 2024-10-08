@@ -1,6 +1,6 @@
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
-import { IconReload, IconX } from "@tabler/icons-react"
+import { IconReload, IconMinus } from "@tabler/icons-react"
 import {
   Box,
   Paper,
@@ -121,7 +121,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
             onClick={open}
             className={styles.reloadBtn}
           />
-          <IconX
+          <IconMinus
             aria-label="Close button"
             onClick={onChatActivation}
             className={styles.closeBtn}
