@@ -23,8 +23,16 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
+
+      # Load environment secrets and create .env file with VITE_ prefix
+      - name: Set environment variables
+        run: |
+          echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
+          echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
+
       - name: Build project
         run: pnpm build
+
       - name: List dist contents
         run: ls -R dist
       - name: Configure AWS credentials

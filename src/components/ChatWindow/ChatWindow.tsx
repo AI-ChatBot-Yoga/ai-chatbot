@@ -12,15 +12,21 @@ import {
   Button,
   Title,
 } from "@mantine/core"
-import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react"
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+} from "react"
 import { useAutoScrollToBottom } from "@/hooks/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
+import { ChatAPI } from "@/apis/chat"
 
-// Move outside of the component
 const scriptTag = document.currentScript as HTMLScriptElement
 const botId = scriptTag?.getAttribute("botId") ?? ""
 
