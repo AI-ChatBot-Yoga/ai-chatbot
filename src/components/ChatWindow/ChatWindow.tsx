@@ -28,8 +28,7 @@ import SendBtn from "../SendBtn"
 import { ChatAPI } from "@/apis/chat"
 
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId =
-  scriptTag?.getAttribute("botId") ?? "d9513917-44de-4e18-bac7-bca86e9180dc"
+const botId = scriptTag?.getAttribute("botId") ?? ""
 
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
@@ -42,12 +41,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
   const { uuid, generateUuid, clearUuid } = useUuid()
   const chatSessionId = uuid
-
-  useEffect(() => {
-    ChatAPI.getConfigs(botId).then((response) => {
-      console.log("Bot configs:", response)
-    })
-  }, [botId])
 
   // Hook for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
