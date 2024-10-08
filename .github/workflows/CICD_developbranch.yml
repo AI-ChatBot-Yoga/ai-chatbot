@@ -27,7 +27,14 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run:
+          pnpm install
+
+          # Load environment secrets and create .env file
+      - name: Set environment variables
+        run: |
+          echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
+          echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
 
       - name: Build project
         run: pnpm build

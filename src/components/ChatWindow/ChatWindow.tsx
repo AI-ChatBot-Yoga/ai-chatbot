@@ -12,17 +12,24 @@ import {
   Button,
   Title,
 } from "@mantine/core"
-import { ChangeEvent, useState, KeyboardEvent, useCallback } from "react"
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+} from "react"
 import { useAutoScrollToBottom } from "@/hooks/useAutoScrollToBottom"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
+import { ChatAPI } from "@/apis/chat"
 
-// Move outside of the component
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") ?? ""
+const botId =
+  scriptTag?.getAttribute("botId") ?? "d9513917-44de-4e18-bac7-bca86e9180dc"
 
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
@@ -35,6 +42,12 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   const [messageInput, setMessageInput] = useState<string>("")
   const { uuid, generateUuid, clearUuid } = useUuid()
   const chatSessionId = uuid
+
+  useEffect(() => {
+    ChatAPI.getConfigs(botId).then((response) => {
+      console.log("Bot configs:", response)
+    })
+  }, [botId])
 
   // Hook for Modal component (ConfirmationModal)
   const [openedModal, { open, close }] = useDisclosure(false)
