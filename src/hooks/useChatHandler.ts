@@ -16,7 +16,7 @@ Vu: in the old commit, I use useChatHistory directly in ChatWindow.
 - That's why we include useChatHistory inside this hook, and return all useChatHistory's values so that they can be used in ChatWindow.
   */
   const { chatHistory, addMessageToChatHistory, clearChatHistory } =
-    useChatHistory()
+    useChatHistory(botId)
 
   // Vu: This function display new message (from message input and clickable options) to UI, also send data to server and display answer in UI
   const sendMessageToServerAndDisplay = async (messageFrom: string) => {

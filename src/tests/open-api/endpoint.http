@@ -47,3 +47,6 @@ Content-Type: application/json
 
 ### get chathistory
 GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v2/completions/chat-history/71c0c33f-5952-43b1-8608-70bfe362f537
+
+### get initial chat (get configs)
+GET https://rqd5aq2ulj.execute-api.us-east-2.amazonaws.com/api/v3/configs/baaf8a16-7ad9-492a-bba8-c4d6b82888ee
