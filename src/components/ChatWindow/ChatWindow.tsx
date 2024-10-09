@@ -23,9 +23,6 @@ import SendBtn from "../SendBtn"
 const scriptTag = document.currentScript as HTMLScriptElement
 const botId = scriptTag?.getAttribute("botId") ?? import.meta.env.VITE_BOT_ID // If botId is not provided as attribute in script tag, use the botId from environment variables
 
-console.log("Script tag is:", scriptTag)
-console.log("botId is: ", botId)
-
 type Props = {
   onChatActivation: () => void
 }
