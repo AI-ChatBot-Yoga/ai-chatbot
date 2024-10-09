@@ -20,8 +20,9 @@ import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
 
+const BOT_ID = import.meta.env.VITE_BOT_ID
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") ?? ""
+const botId = scriptTag?.getAttribute("botId") ?? BOT_ID
 
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
