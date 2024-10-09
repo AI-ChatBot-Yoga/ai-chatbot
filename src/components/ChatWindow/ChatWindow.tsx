@@ -20,9 +20,8 @@ import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
 
-const BOT_ID = import.meta.env.VITE_BOT_ID
 const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") ?? BOT_ID
+const botId = scriptTag?.getAttribute("botId") ?? import.meta.env.VITE_BOT_ID // If botId is not provided as attribute in script tag, use the botId from environment variables
 
 console.log("Script tag is:", scriptTag)
 console.log("botId is: ", botId)
@@ -130,36 +129,37 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
-        {chatHistory?.map((msg, index) => (
-          <div key={index}>
-            {msg.message && (
-              <Text
-                key={index}
-                component="div" // Change component to avoid nesting <p> tags error
-                className={`${styles.msgBubble} ${
-                  msg.sender === ROLES.User ? styles.rightSide : ""
-                }`}
-              >
-                {msg.message}
-              </Text>
-            )}
-            {msg.options && (
-              <Button.Group className={styles.optionsContainer}>
-                {msg.options.map((option, idx) => (
-                  <Button
-                    key={idx}
-                    disabled={isLoading}
-                    variant="transparent"
-                    className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
-                    onClick={() => handleOptionClick(option.value)}
-                  >
-                    {option.text}
-                  </Button>
-                ))}
-              </Button.Group>
-            )}
-          </div>
-        ))}
+        {chatHistory.length === 0 ? (
+          <Loader type="dots" className={styles.loader} />
+        ) : (
+          chatHistory.map((msg, index) => (
+            <div key={index}>
+              {msg.message && (
+                <Text
+                  component="div"
+                  className={`${styles.msgBubble} ${msg.sender === ROLES.User ? styles.rightSide : ""}`}
+                >
+                  {msg.message}
+                </Text>
+              )}
+              {msg.options && (
+                <Button.Group className={styles.optionsContainer}>
+                  {msg.options.map((option, idx) => (
+                    <Button
+                      key={idx}
+                      disabled={isLoading}
+                      variant="transparent"
+                      className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
+                      onClick={() => handleOptionClick(option.value)}
+                    >
+                      {option.text}
+                    </Button>
+                  ))}
+                </Button.Group>
+              )}
+            </div>
+          ))
+        )}
         {isLoading && <Loader type="dots" className={styles.loader} />}
         {isError && (
           <Alert className={styles.alert}>
@@ -179,7 +179,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           onKeyDown={handleKeyDown}
           classNames={{ root: styles.textInputRoot, input: styles.textInput }}
         />
-
         <SendBtn handleSendClick={handleSendClick} isLoading={isLoading} />
       </div>
     </Paper>
