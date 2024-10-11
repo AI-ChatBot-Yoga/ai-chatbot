@@ -1,5 +1,4 @@
 name: Deploy cloudfront branch to AWS S3
-
 on:
   push:
     branches:
@@ -12,43 +11,36 @@ jobs:
       matrix:
         node-version: [20]
     steps:
-      # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Install pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
 
-      # Setup Node.js
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      # Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Create and load environment variables into .env file
+      # Create and setup .env file
       - name: Create .env file
         run: |
+          touch .env
           echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
           echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
-          cp .env /Users/yotlaireguillou/Desktop/ALl\ project/ai_chatbot/ai-chatbot/.env
 
-      # Build the project
       - name: Build project
         run: pnpm build
 
-      # List contents of the build directory for debugging
       - name: List dist contents
         run: ls -R dist
 
-      # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -56,16 +48,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
-      # Sync the build output to S3
       - name: Sync files to S3
         run: |
           aws s3 sync dist s3://develop-ai-branch --delete
 
-      # Debug CloudFront Distribution ID
       - name: Debug CloudFront Distribution ID
         run: echo "CloudFront Distribution ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
 
-      # Verify if the CloudFront Distribution ID is set
       - name: Verify CloudFront Distribution ID
         run: |
           if [ -z "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" ]; then
@@ -75,7 +64,6 @@ jobs:
             echo "CLOUDFRONT_DISTRIBUTION_ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
           fi
 
-      # Invalidate CloudFront cache
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
