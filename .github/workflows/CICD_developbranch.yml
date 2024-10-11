@@ -1,5 +1,4 @@
 name: Deploy cloudfront branch to AWS S3
-
 on:
   push:
     branches:
@@ -27,19 +26,26 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run:
-          pnpm install
+        run: pnpm install
 
-          # Load environment secrets and create .env file
+      # Copy .env file with correct path
+      - name: Copy .env file
+        working-directory: /Users/yotlaireguillou/Desktop/ALl project/ai_chatbot
+        run: cp .env ../ai-chatbot/.env
+
+      # Set additional environment variables if needed
       - name: Set environment variables
+        working-directory: /Users/yotlaireguillou/Desktop/ALl project/ai_chatbot/ai-chatbot
         run: |
           echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
           echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
 
       - name: Build project
+        working-directory: /Users/yotlaireguillou/Desktop/ALl project/ai_chatbot/ai-chatbot
         run: pnpm build
 
       - name: List dist contents
+        working-directory: /Users/yotlaireguillou/Desktop/ALl project/ai_chatbot/ai-chatbot
         run: ls -R dist
 
       - name: Configure AWS credentials
@@ -50,6 +56,7 @@ jobs:
           aws-region: us-east-2
 
       - name: Sync files to S3
+        working-directory: /Users/yotlaireguillou/Desktop/ALl project/ai_chatbot/ai-chatbot
         run: |
           aws s3 sync dist s3://develop-ai-branch --delete
 
