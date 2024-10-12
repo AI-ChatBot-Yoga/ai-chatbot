@@ -1,5 +1,4 @@
 name: Deploy cloudfront branch to AWS S3
-
 on:
   push:
     branches:
@@ -27,12 +26,12 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run:
-          pnpm install
+        run: pnpm install
 
-          # Load environment secrets and create .env file
-      - name: Set environment variables
+      # Create and setup .env file
+      - name: Create .env file
         run: |
+          touch .env
           echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
           echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
 
