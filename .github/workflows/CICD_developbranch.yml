@@ -2,7 +2,7 @@ name: Deploy cloudfront branch to AWS S3
 on:
   push:
     branches:
-      - fix_env
+      - develop
 
 jobs:
   build:
