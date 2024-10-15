@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      # Print the current directory for debugging
+      # Debug: Print current directory structure
       - name: Debug - Print directory structure
         run: |
           echo "Current directory:"
@@ -42,16 +42,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Copy the .env file to the working directory
-      - name: Copy .env file
+      # Create the .env file using secret content
+      - name: Create .env file
         run: |
-          if [ -f ".env" ]; then
-            echo "Copying .env to ai-chatbot directory..."
-            cp .env ./ai-chatbot/.env
-          else
-            echo ".env file not found!"
-            exit 1
-          fi
+          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./ai-chatbot/.env
 
       # Verify the contents of the .env file
       - name: Verify .env file contents
@@ -59,7 +53,7 @@ jobs:
           echo "Contents of .env file:"
           cat ./ai-chatbot/.env
 
-      # Ensure the .env file is present after copying
+      # Ensure the .env file is present
       - name: Ensure .env is still present
         run: |
           if [ -f "./ai-chatbot/.env" ]; then
