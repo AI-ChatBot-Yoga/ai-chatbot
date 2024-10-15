@@ -3,7 +3,7 @@ name: Deploy cloudfront branch to AWS S3
 on:
   push:
     branches:
-      - yotlaire-new-branch 
+      - yotlaire-new-branch
 
 jobs:
   build:
@@ -11,79 +11,65 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
+
     steps:
+      # Checkout the code
       - name: Checkout
         uses: actions/checkout@v3
 
+      # Install pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
 
+      # Setup Node.js
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Debug - Print current directory structure
+      # Print the current directory for debugging
+      - name: Debug - Print directory structure
         run: |
           echo "Current directory:"
           pwd
-          echo "Directory structure before install:"
+          echo "Directory structure:"
           ls -R
 
+      # Install dependencies
       - name: Install dependencies
         run: pnpm install
 
       # Ensure ai-chatbot directory exists
-      - name: Create ai-chatbot directory if not exists
+      - name: Create ai-chatbot directory
         run: mkdir -p ai-chatbot
 
-      # Create and setup .env file
+      # Create and persist the .env file
       - name: Create .env file
         run: |
-          if [ -f ".env" ]; then
-            cp .env ./ai-chatbot/.env
-          else
-            echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
-            echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
-          fi
+          echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
+          echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
 
-      # Debug: Print directory structure and .env contents
-      - name: Print debug information
+      # Ensure the .env file is copied and visible in the expected directory
+      - name: Verify .env file
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Directory structure after .env setup:"
-          ls -R
-          echo "Contents of ai-chatbot/.env:"
+          echo "Contents of .env file:"
           cat ./ai-chatbot/.env
 
+      # Build the project with environment variables
       - name: Build project
         run: pnpm build
         env:
           VITE_CORE_API_BASE_URL: ${{ secrets.VITE_CORE_API_BASE_URL }}
           VITE_API_VERSION: ${{ secrets.VITE_API_VERSION }}
 
-      - name: Debug - Print directory structure after build
-        run: |
-          echo "Current directory after build:"
-          pwd
-          echo "Directory structure after build:"
-          ls -R
+      # List the directory structure post-build
+      - name: List directory structure after build
+        run: ls -R
 
-      - name: List dist contents
-        run: |
-          if [ -d "dist" ]; then
-            ls -R dist
-          elif [ -d "ai-chatbot/dist" ]; then
-            ls -R ai-chatbot/dist
-          else
-            echo "dist directory not found in expected locations"
-            exit 1
-          fi
-
+      # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -91,6 +77,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
+      # Sync files to S3
       - name: Sync files to S3
         run: |
           if [ -d "dist" ]; then
@@ -102,21 +89,17 @@ jobs:
             exit 1
           fi
 
-      - name: Debug CloudFront Distribution ID
-        run: echo "CloudFront Distribution ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
-
+      # Verify CloudFront Distribution ID
       - name: Verify CloudFront Distribution ID
         run: |
           if [ -z "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" ]; then
             echo "CLOUDFRONT_DISTRIBUTION_ID is not set"
             exit 1
           else
-            echo "CLOUDFRONT_DISTRIBUTION_ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
+            echo "CloudFront Distribution ID is '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
           fi
 
+      # Invalidate CloudFront cache
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
