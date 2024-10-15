@@ -1,8 +1,10 @@
 name: Deploy cloudfront branch to AWS S3
+
 on:
   push:
     branches:
-      - yotlaire-new-branch
+      - develop
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -27,6 +29,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Ensure ai-chatbot directory exists
+      - name: Create ai-chatbot directory if not exists
+        run: mkdir -p ai-chatbot
+
       # Create and setup .env file
       - name: Create .env file
         run: |
@@ -36,6 +42,16 @@ jobs:
             echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
             echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
           fi
+
+      # Debug: Print directory structure and .env contents
+      - name: Print debug information
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory structure:"
+          ls -R
+          echo "Contents of ai-chatbot/.env:"
+          cat ./ai-chatbot/.env
 
       - name: Build project
         working-directory: ./ai-chatbot
