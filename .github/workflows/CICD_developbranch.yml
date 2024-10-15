@@ -1,9 +1,9 @@
-name: Deploy cloudfront branch to AWS S3
+name: Deploy cloudfront branch to AWS S3..
 
 on:
   push:
     branches:
-      - develop
+      - yotlaire-new-branch
 
 jobs:
   build:
