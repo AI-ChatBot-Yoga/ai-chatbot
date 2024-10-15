@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      # Debug: Print current directory structure
+      # Print the current directory for debugging
       - name: Debug - Print directory structure
         run: |
           echo "Current directory:"
@@ -42,35 +42,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Debug: Check if secrets are available
-      - name: Debug Secrets Availability
+      # Copy the .env file to the working directory
+      - name: Copy .env file
         run: |
-          echo "Checking secrets availability..."
-          echo "VITE_CORE_API_BASE_URL='${{ secrets.VITE_CORE_API_BASE_URL }}'"
-          echo "VITE_API_VERSION='${{ secrets.VITE_API_VERSION }}'"
-
-      # Ensure ai-chatbot directory exists
-      - name: Create ai-chatbot directory if not exists
-        run: mkdir -p ai-chatbot
-
-      # Create the .env file
-      - name: Create .env file
-        run: |
-          if [ -n "${{ secrets.VITE_CORE_API_BASE_URL }}" ] && [ -n "${{ secrets.VITE_API_VERSION }}" ]; then
-            echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
-            echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
+          if [ -f ".env" ]; then
+            echo "Copying .env to ai-chatbot directory..."
+            cp .env ./ai-chatbot/.env
           else
-            echo "Error: Required secrets are missing."
+            echo ".env file not found!"
             exit 1
           fi
 
-      # Verify .env file contents
+      # Verify the contents of the .env file
       - name: Verify .env file contents
         run: |
           echo "Contents of .env file:"
           cat ./ai-chatbot/.env
 
-      # Ensure the .env file persists throughout the workflow
+      # Ensure the .env file is present after copying
       - name: Ensure .env is still present
         run: |
           if [ -f "./ai-chatbot/.env" ]; then
@@ -80,14 +69,11 @@ jobs:
             exit 1
           fi
 
-      # Build the project with environment variables
+      # Build the project
       - name: Build project
         run: pnpm build
-        env:
-          VITE_CORE_API_BASE_URL: ${{ secrets.VITE_CORE_API_BASE_URL }}
-          VITE_API_VERSION: ${{ secrets.VITE_API_VERSION }}
 
-      # List the directory structure post-build
+      # List the directory structure after the build
       - name: List directory structure after build
         run: ls -R
 
