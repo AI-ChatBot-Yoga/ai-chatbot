@@ -38,14 +38,19 @@ jobs:
           echo "Directory structure:"
           ls -R
 
-      # Install dependencies
-      - name: Install dependencies
-        run: pnpm install
+      # Ensure the ai-chatbot directory exists
+      - name: Create ai-chatbot directory
+        run: |
+          mkdir -p ./ai-chatbot
+          echo "Directory structure after mkdir:"
+          ls -R
 
       # Create the .env file using secret content
       - name: Create .env file
         run: |
+          echo "Creating .env file..."
           echo "${{ secrets.ENV_FILE_CONTENT }}" > ./ai-chatbot/.env
+          echo ".env file created successfully."
 
       # Verify the contents of the .env file
       - name: Verify .env file contents
@@ -62,6 +67,10 @@ jobs:
             echo ".env file is missing"
             exit 1
           fi
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install
 
       # Build the project
       - name: Build project
