@@ -78,7 +78,7 @@ jobs:
 
       # List the directory structure after the build
       - name: List directory structure after build
-        run: ls -R
+        run: ls -ahl
 
       # Configure AWS credentials
       - name: Configure AWS credentials
