@@ -13,7 +13,7 @@ jobs:
         node-version: [20]
 
     steps:
-      # Checkout the code
+      # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -23,7 +23,7 @@ jobs:
         with:
           version: 9
 
-      # Setup Node.js
+      # Set up Node.js
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -42,21 +42,49 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Debug secrets availability
+      - name: Debug Secrets
+        run: |
+          if [ -z "${{ secrets.VITE_CORE_API_BASE_URL }}" ]; then
+            echo "VITE_CORE_API_BASE_URL is not set or is empty"
+          else
+            echo "VITE_CORE_API_BASE_URL is available"
+          fi
+          if [ -z "${{ secrets.VITE_API_VERSION }}" ]; then
+            echo "VITE_API_VERSION is not set or is empty"
+          else
+            echo "VITE_API_VERSION is available"
+          fi
+
       # Ensure ai-chatbot directory exists
-      - name: Create ai-chatbot directory
+      - name: Create ai-chatbot directory if not exists
         run: mkdir -p ai-chatbot
 
-      # Create and persist the .env file
+      # Create the .env file
       - name: Create .env file
         run: |
+          if [ -z "${{ secrets.VITE_CORE_API_BASE_URL }}" ] || [ -z "${{ secrets.VITE_API_VERSION }}" ]; then
+            echo "Error: Required secrets are missing."
+            exit 1
+          fi
           echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
           echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
 
-      # Ensure the .env file is copied and visible in the expected directory
-      - name: Verify .env file
+      # Verify .env file contents
+      - name: Verify .env file contents
         run: |
           echo "Contents of .env file:"
           cat ./ai-chatbot/.env
+
+      # Ensure the .env file is present after build
+      - name: Ensure .env is still present
+        run: |
+          if [ -f "./ai-chatbot/.env" ]; then
+            echo ".env file exists"
+          else
+            echo ".env file is missing"
+            exit 1
+          fi
 
       # Build the project with environment variables
       - name: Build project
