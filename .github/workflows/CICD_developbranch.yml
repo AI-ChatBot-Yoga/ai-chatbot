@@ -2,8 +2,7 @@ name: Deploy cloudfront branch to AWS S3
 on:
   push:
     branches:
-      - develop
-
+      - yotlaire-new-branch
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -31,14 +30,22 @@ jobs:
       # Create and setup .env file
       - name: Create .env file
         run: |
-          touch .env
-          echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" >> .env
-          echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> .env
+          if [ -f ".env" ]; then
+            cp .env ./ai-chatbot/.env
+          else
+            echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
+            echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
+          fi
 
       - name: Build project
+        working-directory: ./ai-chatbot
         run: pnpm build
+        env:
+          VITE_CORE_API_BASE_URL: ${{ secrets.VITE_CORE_API_BASE_URL }}
+          VITE_API_VERSION: ${{ secrets.VITE_API_VERSION }}
 
       - name: List dist contents
+        working-directory: ./ai-chatbot
         run: ls -R dist
 
       - name: Configure AWS credentials
@@ -49,6 +56,7 @@ jobs:
           aws-region: us-east-2
 
       - name: Sync files to S3
+        working-directory: ./ai-chatbot
         run: |
           aws s3 sync dist s3://develop-ai-branch --delete
 
