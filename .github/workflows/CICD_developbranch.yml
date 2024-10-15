@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      # Print the current directory for debugging
+      # Debug: Print current directory structure
       - name: Debug - Print directory structure
         run: |
           echo "Current directory:"
@@ -42,19 +42,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Debug secrets availability
-      - name: Debug Secrets
+      # Debug: Check if secrets are available
+      - name: Debug Secrets Availability
         run: |
-          if [ -z "${{ secrets.VITE_CORE_API_BASE_URL }}" ]; then
-            echo "VITE_CORE_API_BASE_URL is not set or is empty"
-          else
-            echo "VITE_CORE_API_BASE_URL is available"
-          fi
-          if [ -z "${{ secrets.VITE_API_VERSION }}" ]; then
-            echo "VITE_API_VERSION is not set or is empty"
-          else
-            echo "VITE_API_VERSION is available"
-          fi
+          echo "Checking secrets availability..."
+          echo "VITE_CORE_API_BASE_URL='${{ secrets.VITE_CORE_API_BASE_URL }}'"
+          echo "VITE_API_VERSION='${{ secrets.VITE_API_VERSION }}'"
 
       # Ensure ai-chatbot directory exists
       - name: Create ai-chatbot directory if not exists
@@ -63,12 +56,13 @@ jobs:
       # Create the .env file
       - name: Create .env file
         run: |
-          if [ -z "${{ secrets.VITE_CORE_API_BASE_URL }}" ] || [ -z "${{ secrets.VITE_API_VERSION }}" ]; then
+          if [ -n "${{ secrets.VITE_CORE_API_BASE_URL }}" ] && [ -n "${{ secrets.VITE_API_VERSION }}" ]; then
+            echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
+            echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
+          else
             echo "Error: Required secrets are missing."
             exit 1
           fi
-          echo "VITE_CORE_API_BASE_URL=${{ secrets.VITE_CORE_API_BASE_URL }}" > ./ai-chatbot/.env
-          echo "VITE_API_VERSION=${{ secrets.VITE_API_VERSION }}" >> ./ai-chatbot/.env
 
       # Verify .env file contents
       - name: Verify .env file contents
@@ -76,7 +70,7 @@ jobs:
           echo "Contents of .env file:"
           cat ./ai-chatbot/.env
 
-      # Ensure the .env file is present after build
+      # Ensure the .env file persists throughout the workflow
       - name: Ensure .env is still present
         run: |
           if [ -f "./ai-chatbot/.env" ]; then
