@@ -38,25 +38,30 @@ jobs:
           echo "Directory structure:"
           ls -R
 
-      # Ensure ai-chatbot directory exists (if it is required for later steps)
+      # Ensure the ai-chatbot directory exists
       - name: Create ai-chatbot directory
-        run: mkdir -p ./ai-chatbot
+        run: |
+          mkdir -p ./ai-chatbot
+          echo "Directory structure after mkdir:"
+          ls -R
 
-      # Copy the .env file to the required directory
-      - name: Copy .env file
-        working-directory: /home/runner/work/ai-chatbot/ai-chatbot
-        run: cp .env ../ai-chatbot/.env
+      # Create the .env file using secret content
+      - name: Create .env file
+        run: |
+          echo "Creating .env file..."
+          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./.env
+          echo ".env file created successfully."
 
-      # Verify the contents of the .env file in the destination directory
+      # Verify the contents of the .env file
       - name: Verify .env file contents
         run: |
           echo "Contents of .env file:"
-          cat ./ai-chatbot/.env
+          cat ./.env
 
       # Ensure the .env file is present
       - name: Ensure .env is still present
         run: |
-          if [ -f "./ai-chatbot/.env" ]; then
+          if [ -f "./.env" ]; then
             echo ".env file exists"
           else
             echo ".env file is missing"
@@ -67,13 +72,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Build the project
+      # Build the project using .env variables
       - name: Build project
-        run: pnpm build
+        run: |
+          export $(cat .env | xargs) && pnpm build
 
       # List the directory structure after the build
       - name: List directory structure after build
-        run: ls -R
+        run: ls -ahl
 
       # Configure AWS credentials
       - name: Configure AWS credentials
@@ -102,4 +108,10 @@ jobs:
             echo "CLOUDFRONT_DISTRIBUTION_ID is not set"
             exit 1
           else
-           
+            echo "CloudFront Distribution ID is '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
+          fi
+
+      # Invalidate CloudFront cache
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
