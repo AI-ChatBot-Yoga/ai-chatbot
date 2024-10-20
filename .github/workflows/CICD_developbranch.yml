@@ -3,7 +3,7 @@ name: Deploy cloudfront branch to AWS S3
 on:
   push:
     branches:
-      - develop
+      - yotlaire-branch 
 
 jobs:
   build:
@@ -38,21 +38,16 @@ jobs:
           echo "Directory structure:"
           ls -R
 
-      # Ensure the ai-chatbot directory exists
+      # Ensure ai-chatbot directory exists (if it is required for later steps)
       - name: Create ai-chatbot directory
-        run: |
-          mkdir -p ./ai-chatbot
-          echo "Directory structure after mkdir:"
-          ls -R
+        run: mkdir -p ./ai-chatbot
 
-      # Create the .env file using secret content
-      - name: Create .env file
-        run: |
-          echo "Creating .env file..."
-          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./ai-chatbot/.env
-          echo ".env file created successfully."
+      # Copy the .env file to the required directory
+      - name: Copy .env file
+        working-directory: /home/runner/work/ai-chatbot/ai-chatbot
+        run: cp .env ./ai-chatbot/.env
 
-      # Verify the contents of the .env file
+      # Verify the contents of the .env file in the destination directory
       - name: Verify .env file contents
         run: |
           echo "Contents of .env file:"
@@ -78,7 +73,7 @@ jobs:
 
       # List the directory structure after the build
       - name: List directory structure after build
-        run: ls -ahl
+        run: ls -R
 
       # Configure AWS credentials
       - name: Configure AWS credentials
@@ -107,10 +102,4 @@ jobs:
             echo "CLOUDFRONT_DISTRIBUTION_ID is not set"
             exit 1
           else
-            echo "CloudFront Distribution ID is '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
-          fi
-
-      # Invalidate CloudFront cache
-      - name: Invalidate CloudFront cache
-        run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+           
