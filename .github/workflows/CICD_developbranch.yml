@@ -3,7 +3,7 @@ name: Deploy cloudfront branch to AWS S3
 on:
   push:
     branches:
-      - yotlaire-branch
+      - develop
 
 jobs:
   build:
@@ -72,10 +72,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Build the project using dotenv
+      # Build the project using .env variables via dotenv
       - name: Build project
-        run: |
-          pnpm build
+        run: pnpm build
 
       # List the directory structure after the build
       - name: List directory structure after build
@@ -86,4 +85,32 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-ke
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      # Sync files to S3
+      - name: Sync files to S3
+        run: |
+          if [ -d "dist" ]; then
+            aws s3 sync dist s3://develop-ai-branch --delete
+          elif [ -d "ai-chatbot/dist" ]; then
+            aws s3 sync ai-chatbot/dist s3://develop-ai-branch --delete
+          else
+            echo "dist directory not found, cannot sync to S3"
+            exit 1
+          fi
+
+      # Verify CloudFront Distribution ID
+      - name: Verify CloudFront Distribution ID
+        run: |
+          if [ -z "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" ]; then
+            echo "CLOUDFRONT_DISTRIBUTION_ID is not set"
+            exit 1
+          else
+            echo "CloudFront Distribution ID is '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
+          fi
+
+      # Invalidate CloudFront cache
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
