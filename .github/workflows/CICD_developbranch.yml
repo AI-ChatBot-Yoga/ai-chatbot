@@ -75,7 +75,10 @@ jobs:
       # Build the project using .env variables
       - name: Build project
         run: |
-          export $(cat .env | xargs) && pnpm build
+          set -o allexport
+          source .env
+          set +o allexport
+          pnpm build
 
       # List the directory structure after the build
       - name: List directory structure after build
