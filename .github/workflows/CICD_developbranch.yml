@@ -45,7 +45,7 @@ jobs:
       # Copy the .env file to the required directory
       - name: Copy .env file
         working-directory: /home/runner/work/ai-chatbot/ai-chatbot
-        run: cp .env ./ai-chatbot/.env
+        run: cp .env ../ai-chatbot/.env
 
       # Verify the contents of the .env file in the destination directory
       - name: Verify .env file contents
