@@ -4,6 +4,10 @@ import path from "path"
 import svgr from "vite-plugin-svgr"
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 import ignore from "rollup-plugin-ignore"
+import dotenv from "dotenv"
+
+// Load environment variables from the .env file
+dotenv.config()
 
 export default defineConfig({
   // cssInjectedByJsPlugin helps to combine CSS to only 1 JS file when bundling
@@ -28,6 +32,7 @@ export default defineConfig({
     "process.env.NODE_ENV": JSON.stringify(
       process.env.NODE_ENV || "development"
     ),
+    "process.env": process.env, // Load all environment variables from the .env file
   },
   build: {
     lib: {
@@ -38,7 +43,7 @@ export default defineConfig({
       formats: ["iife"], // Output format is an Immediately Invoked Function Expression (IIFE), which is suitable for embedding in a script tag.
     },
     rollupOptions: {
-      // This ensure that React and ReactDOM are bundled with the widget
+      // This ensures that React and ReactDOM are bundled with the widget
       external: [],
       output: {},
       plugins: [

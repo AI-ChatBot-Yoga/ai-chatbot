@@ -49,19 +49,19 @@ jobs:
       - name: Create .env file
         run: |
           echo "Creating .env file..."
-          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./ai-chatbot/.env
+          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./.env
           echo ".env file created successfully."
 
       # Verify the contents of the .env file
       - name: Verify .env file contents
         run: |
           echo "Contents of .env file:"
-          cat ./ai-chatbot/.env
+          cat ./.env
 
       # Ensure the .env file is present
       - name: Ensure .env is still present
         run: |
-          if [ -f "./ai-chatbot/.env" ]; then
+          if [ -f "./.env" ]; then
             echo ".env file exists"
           else
             echo ".env file is missing"
@@ -72,7 +72,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Build the project
+      # Build the project using .env variables via dotenv
       - name: Build project
         run: pnpm build
 
