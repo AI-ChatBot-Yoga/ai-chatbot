@@ -19,6 +19,7 @@ import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
+import HelperText from "../HelperText"
 
 const scriptTag = document.currentScript as HTMLScriptElement
 const botId = scriptTag?.getAttribute("botId") ?? import.meta.env.VITE_BOT_ID // If botId is not provided as attribute in script tag, use the botId from environment variables
@@ -130,18 +131,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
-        <Alert
-          classNames={{
-            root: styles.helperTextRoot,
-            message: styles.helperTextMessage,
-          }}
-        >
-          I’m still in training. If you have any concerns about my responses,
-          please email{" "}
-          <a href="mailto:chitananda@careerbliss.academy">
-            chitananda@careerbliss.academy
-          </a>
-        </Alert>
+        <HelperText />
+
         {chatHistory.length === 0 ? (
           <Loader type="dots" className={styles.loader} />
         ) : (

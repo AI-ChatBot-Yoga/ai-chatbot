@@ -74,20 +74,6 @@
 
 /* ====== CHAT BODY ======= */
 
-.helperTextRoot {
-  position: absolute;
-  background-color: #fff;
-  z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
-  padding: em(10px);
-}
-
-.helperTextMessage {
-  color: var(--mantine-text-color);
-  font-size: em(12px);
-  text-align: center;
-}
-
 .scrollArea {
   height: em(550px);
 }
