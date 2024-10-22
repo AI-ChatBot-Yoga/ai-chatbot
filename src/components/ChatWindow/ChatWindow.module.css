@@ -2,7 +2,7 @@
   all: initial; /*This resets all properties*/
   font-family: "Roboto", sans-serif;
   font-size: 16px; /* Base font size */
-  color: #3b3b3b;
+  color: var(--mantine-text-color);
   background-color: #fff;
 
   max-width: em(360px); /* Adjust height in .scrollArea */
@@ -73,6 +73,20 @@
 }
 
 /* ====== CHAT BODY ======= */
+
+.helperTextRoot {
+  position: absolute;
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
+  padding: em(10px);
+}
+
+.helperTextMessage {
+  color: var(--mantine-text-color);
+  font-size: em(12px);
+  text-align: center;
+}
 
 .scrollArea {
   height: em(550px);
@@ -167,7 +181,7 @@
 }
 
 .textInput {
-  color: inherit;
+  color: var(--mantine-text-color);
   font-size: em(15);
   border: none;
   -webkit-text-size-adjust: 100%; /* prevent zoom when touch on text input on ios*/

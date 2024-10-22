@@ -130,6 +130,18 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
+        <Alert
+          classNames={{
+            root: styles.helperTextRoot,
+            message: styles.helperTextMessage,
+          }}
+        >
+          I’m still in training. If you have any concerns about my responses,
+          please email{" "}
+          <a href="mailto:chitananda@careerbliss.academy">
+            chitananda@careerbliss.academy
+          </a>
+        </Alert>
         {chatHistory.length === 0 ? (
           <Loader type="dots" className={styles.loader} />
         ) : (
