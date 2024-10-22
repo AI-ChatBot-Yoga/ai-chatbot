@@ -32,6 +32,7 @@ export const useChatHistory = (botId: string) => {
         if (response.success) {
           const newDefaultMsg = {
             businessName: response.business_name,
+            helperText: response.helper_text,
             options: response.options.map(
               (option: { text: string; value: string }) => ({
                 text: option.text,
