@@ -9,7 +9,7 @@ const botId = getBotIdFromScripTag()
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isPopupVisible, setIsPopupVisible] = useState(true)
+  const [isPopupVisible, setIsPopupVisible] = useState(true) // this useState ensure that the popup message will only show once. After ChatWindow is open, the popup message will not show again until user refresh the page.
 
   function handleChatActivation() {
     setIsOpen((is) => !is)
