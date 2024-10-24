@@ -132,7 +132,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
         <HelperText />
-
         {chatHistory.length === 0 ? (
           <Loader type="dots" className={styles.loader} />
         ) : (
