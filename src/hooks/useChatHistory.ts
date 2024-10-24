@@ -28,7 +28,6 @@ export const useChatHistory = (botId: string) => {
       // Fetch default message from API if not found in session storage
       const fetchDefaultMsg = async () => {
         const response = await ChatAPI.getConfigs(botId)
-
         if (response.success) {
           const newDefaultMsg = {
             businessName: response.business_name,
