@@ -2,7 +2,7 @@
   all: initial; /*This resets all properties*/
   font-family: "Roboto", sans-serif;
   font-size: 16px; /* Base font size */
-  color: #000; /* Base text color */
+  color: var(--mantine-text-color);
   background-color: #fff;
 
   max-width: em(360px); /* Adjust height in .scrollArea */
@@ -167,6 +167,7 @@
 }
 
 .textInput {
+  color: var(--mantine-text-color);
   font-size: em(15);
   border: none;
   -webkit-text-size-adjust: 100%; /* prevent zoom when touch on text input on ios*/

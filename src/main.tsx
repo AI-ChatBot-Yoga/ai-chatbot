@@ -35,6 +35,7 @@ const theme = createTheme({
     yellowVivid: "rgba(246, 218, 94, 1)",
     lightGray: "rgba(225, 233, 239, 1)",
     darkGray: "rgba(189, 200, 207, 1)",
+    textColor: "rgba(59, 59, 59, 1)",
   },
 })
 
@@ -49,6 +50,7 @@ const resolver: CSSVariablesResolver = (theme) => ({
     "--mantine-yellow-vivid": theme.other.yellowVivid,
     "--mantine-light-gray": theme.other.lightGray,
     "--mantine-dark-gray": theme.other.darkGray,
+    "--mantine-text-color": theme.other.textColor,
   },
   light: {},
   dark: {},

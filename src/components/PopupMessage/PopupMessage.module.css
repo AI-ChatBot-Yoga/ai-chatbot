@@ -1,0 +1,21 @@
+.popupMessageRoot {
+  position: fixed;
+  bottom: em(120px);
+  right: em(30px);
+
+  max-width: 20%;
+  padding: em(12px);
+  background-color: var(--mantine-yellow-soft);
+}
+
+@media screen and (max-height: 750px) {
+  .popupMessageRoot {
+    bottom: em(100px);
+    right: em(20px);
+    max-width: 50%;
+  }
+}
+
+.popupMessageMessage {
+  color: var(--mantine-text-color);
+}
