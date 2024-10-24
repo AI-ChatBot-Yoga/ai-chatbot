@@ -15,6 +15,7 @@ const HelperText = () => {
         message: styles.helperTextMessage,
       }}
     >
+      {/* use dangerouslySetInnerHTML to render HTML content from sessionStorage (string) */}
       <span dangerouslySetInnerHTML={{ __html: helperText }} />
     </Alert>
   )
