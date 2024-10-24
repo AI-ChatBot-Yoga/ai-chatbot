@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react"
 import styles from "./HelperText.module.css"
 import { Alert } from "@mantine/core"
 
 const HelperText = () => {
-  const [helperText, setHelperText] = useState("")
-
-  useEffect(() => {
-    const storedValue = sessionStorage.getItem("defaultMsg")
-    if (storedValue) {
-      setHelperText(JSON.parse(storedValue).helperText)
-    }
-  }, [])
+  const helperText = sessionStorage.getItem("defaultMsg")
+    ? JSON.parse(sessionStorage.getItem("defaultMsg")!).helperText
+    : ""
 
   if (!helperText) return
 
