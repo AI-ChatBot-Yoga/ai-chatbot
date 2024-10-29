@@ -30,6 +30,7 @@ export const useChatHistory = (botId: string) => {
         const response = await ChatAPI.getConfigs(botId)
         if (response.success) {
           const newDefaultMsg = {
+            botName: response.bot_name,
             businessName: response.business_name,
             helperText: response.helper_text,
             options: response.options.map(

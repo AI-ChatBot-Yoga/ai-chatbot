@@ -1,6 +1,6 @@
+import { useState } from "react"
 import ChatWindow from "../ChatWindow"
 import ChatIcon from "../ChatIcon"
-import { useState } from "react"
 import { useChatHistory } from "@/hooks/useChatHistory"
 import PopupMessage from "../PopupMessage"
 import getBotIdFromScripTag from "@/utils/getBotIdFromScripTag"
