@@ -102,11 +102,11 @@ const ChatWindow = ({ onChatActivation }: Props) => {
   ])
 
   // Get botName from sessionStorage
-  const botName = sessionStorage.getItem("defaultMsg")
-    ? JSON.parse(sessionStorage.getItem("defaultMsg")!).botName
-    : "AI Assistant"
-
-  console.log(botName)
+  const botName = (() => {
+    const storedData = sessionStorage.getItem("defaultMsg")
+    const parsedData = storedData ? JSON.parse(storedData) : null
+    return parsedData?.botName || "AI Assistant" // Fallback to "AI Assistant" if botName is undefined
+  })()
 
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
