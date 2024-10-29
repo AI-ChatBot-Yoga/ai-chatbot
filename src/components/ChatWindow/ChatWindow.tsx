@@ -101,6 +101,13 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     generateUuid,
   ])
 
+  // Get botName from sessionStorage
+  const botName = (() => {
+    const storedData = sessionStorage.getItem("defaultMsg")
+    const parsedData = storedData ? JSON.parse(storedData) : null
+    return parsedData?.botName || "AI Assistant" // Fallback to "AI Assistant" if botName is undefined
+  })()
+
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <ConfirmationModal
@@ -111,7 +118,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <Title order={4}>AI Assistant</Title>
+        <Title order={4}>{botName}</Title>
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
