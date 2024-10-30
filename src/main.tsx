@@ -15,7 +15,7 @@ theme.colors object is required to have 10 shades. So I use Mantine's CSS variab
 const theme = createTheme({
   /** Your theme override here */
   fontFamily: "Roboto, sans-serif",
-  fontSizes: { md: em(15) },
+  fontSizes: { md: "15px", base: "16px" },
   headings: {
     fontFamily: "Roboto, sans-serif",
     sizes: {
@@ -51,6 +51,7 @@ const resolver: CSSVariablesResolver = (theme) => ({
     "--mantine-light-gray": theme.other.lightGray,
     "--mantine-dark-gray": theme.other.darkGray,
     "--mantine-text-color": theme.other.textColor,
+    "--mantine-base-font-size": theme.fontSizes.base,
   },
   light: {},
   dark: {},
