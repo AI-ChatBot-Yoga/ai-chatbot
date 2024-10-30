@@ -1,5 +1,5 @@
 .chatIcon {
-  font-size: 16px; /* Base font size */
+  font-size: var(--mantine-base-font-size);
   cursor: pointer;
   border: unset;
   background: none;

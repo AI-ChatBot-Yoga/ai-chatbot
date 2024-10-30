@@ -1,4 +1,5 @@
 .popupMessageRoot {
+  font-size: var(--mantine-base-font-size);
   position: fixed;
   bottom: em(120px);
   right: em(30px);
@@ -17,5 +18,6 @@
 }
 
 .popupMessageMessage {
+  font-size: em(14px);
   color: var(--mantine-text-color);
 }

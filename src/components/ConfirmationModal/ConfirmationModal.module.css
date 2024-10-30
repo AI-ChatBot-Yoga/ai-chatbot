@@ -46,7 +46,7 @@
 }
 .btnYes,
 .btnNo {
-  font-size: 16px;
+  font-size: var(--mantine-base-font-size);
   padding: em(18);
 }
 
