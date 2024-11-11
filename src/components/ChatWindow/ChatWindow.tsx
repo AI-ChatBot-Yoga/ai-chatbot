@@ -1,6 +1,6 @@
 import styles from "./ChatWindow.module.css"
 import { useDisclosure } from "@mantine/hooks"
-import { IconReload, IconX } from "@tabler/icons-react"
+import { IconReload, IconMinus } from "@tabler/icons-react"
 import {
   Box,
   Paper,
@@ -19,13 +19,10 @@ import { useChatHandler } from "@/hooks/useChatHandler"
 import { ROLES } from "@/constant/roles"
 import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
+import HelperText from "../HelperText"
+import getBotIdFromScripTag from "@/utils/getBotIdFromScripTag"
 
-// Move outside of the component
-const scriptTag = document.currentScript as HTMLScriptElement
-const botId = scriptTag?.getAttribute("botId") ?? ""
-
-console.log("Script tag is:", scriptTag)
-console.log("botId is: ", botId)
+const botId = getBotIdFromScripTag()
 
 type Props = {
   onChatActivation: () => void
@@ -104,6 +101,13 @@ const ChatWindow = ({ onChatActivation }: Props) => {
     generateUuid,
   ])
 
+  // Get botName from sessionStorage
+  const botName = (() => {
+    const storedData = sessionStorage.getItem("defaultMsg")
+    const parsedData = storedData ? JSON.parse(storedData) : null
+    return parsedData?.botName || "AI Assistant" // Fallback to "AI Assistant" if botName is undefined
+  })()
+
   return (
     <Paper shadow="sm" withBorder className={styles.chatWindow}>
       <ConfirmationModal
@@ -114,14 +118,14 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       />
 
       <Box className={styles.chatWindowHeader}>
-        <Title order={4}>AI Assistant</Title>
+        <Title order={4}>{botName}</Title>
         <div className={styles.buttons}>
           <IconReload
             aria-label="Reload button"
             onClick={open}
             className={styles.reloadBtn}
           />
-          <IconX
+          <IconMinus
             aria-label="Close button"
             onClick={onChatActivation}
             className={styles.closeBtn}
@@ -130,36 +134,39 @@ const ChatWindow = ({ onChatActivation }: Props) => {
       </Box>
 
       <ScrollArea className={styles.scrollArea} viewportRef={viewport}>
-        {chatHistory?.map((msg, index) => (
-          <div key={index}>
-            {msg.message && (
-              <Text
-                key={index}
-                component="div" // Change component to avoid nesting <p> tags error
-                className={`${styles.msgBubble} ${
-                  msg.sender === ROLES.User ? styles.rightSide : ""
-                }`}
-              >
-                {msg.message}
-              </Text>
-            )}
-            {msg.options && (
-              <Button.Group className={styles.optionsContainer}>
-                {msg.options.map((option, idx) => (
-                  <Button
-                    key={idx}
-                    disabled={isLoading}
-                    variant="transparent"
-                    className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
-                    onClick={() => handleOptionClick(option.value)}
-                  >
-                    {option.text}
-                  </Button>
-                ))}
-              </Button.Group>
-            )}
-          </div>
-        ))}
+        <HelperText />
+
+        {chatHistory.length === 0 ? (
+          <Loader type="dots" className={styles.loader} />
+        ) : (
+          chatHistory.map((msg, index) => (
+            <div key={index}>
+              {msg.message && (
+                <Text
+                  component="div"
+                  className={`${styles.msgBubble} ${msg.sender === ROLES.User ? styles.rightSide : ""}`}
+                >
+                  {msg.message}
+                </Text>
+              )}
+              {msg.options && (
+                <Button.Group className={styles.optionsContainer}>
+                  {msg.options.map((option, idx) => (
+                    <Button
+                      key={idx}
+                      disabled={isLoading}
+                      variant="transparent"
+                      className={`${styles.optionText} ${isLoading && styles.disabledOptions}`}
+                      onClick={() => handleOptionClick(option.value)}
+                    >
+                      {option.text}
+                    </Button>
+                  ))}
+                </Button.Group>
+              )}
+            </div>
+          ))
+        )}
         {isLoading && <Loader type="dots" className={styles.loader} />}
         {isError && (
           <Alert className={styles.alert}>
@@ -179,7 +186,6 @@ const ChatWindow = ({ onChatActivation }: Props) => {
           onKeyDown={handleKeyDown}
           classNames={{ root: styles.textInputRoot, input: styles.textInput }}
         />
-
         <SendBtn handleSendClick={handleSendClick} isLoading={isLoading} />
       </div>
     </Paper>

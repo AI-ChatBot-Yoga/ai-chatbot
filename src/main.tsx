@@ -6,7 +6,7 @@ import {
   MantineProvider,
   createTheme,
   CSSVariablesResolver,
-  rem,
+  em,
 } from "@mantine/core"
 
 /* 
@@ -15,13 +15,13 @@ theme.colors object is required to have 10 shades. So I use Mantine's CSS variab
 const theme = createTheme({
   /** Your theme override here */
   fontFamily: "Roboto, sans-serif",
-  fontSizes: { md: rem(15) },
+  fontSizes: { md: "15px", base: "16px" },
   headings: {
     fontFamily: "Roboto, sans-serif",
     sizes: {
       h4: {
         fontWeight: "400",
-        fontSize: rem(20),
+        fontSize: em(20),
       },
     },
   },
@@ -35,6 +35,7 @@ const theme = createTheme({
     yellowVivid: "rgba(246, 218, 94, 1)",
     lightGray: "rgba(225, 233, 239, 1)",
     darkGray: "rgba(189, 200, 207, 1)",
+    textColor: "rgba(59, 59, 59, 1)",
   },
 })
 
@@ -49,6 +50,8 @@ const resolver: CSSVariablesResolver = (theme) => ({
     "--mantine-yellow-vivid": theme.other.yellowVivid,
     "--mantine-light-gray": theme.other.lightGray,
     "--mantine-dark-gray": theme.other.darkGray,
+    "--mantine-text-color": theme.other.textColor,
+    "--mantine-base-font-size": theme.fontSizes.base,
   },
   light: {},
   dark: {},

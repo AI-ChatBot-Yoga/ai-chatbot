@@ -1,4 +1,4 @@
-import { Modal, Button, Title } from "@mantine/core"
+import { Modal, Button } from "@mantine/core"
 import styles from "./ConfirmationModal.module.css"
 import { IconX } from "@tabler/icons-react"
 interface ConfirmationModalProps {
@@ -16,14 +16,17 @@ const ConfirmationModal = ({
 }: ConfirmationModalProps) => {
   return (
     <Modal
-      title={<Title order={4}>Restart Chat</Title>}
+      title="Restart Chat"
       opened={openedModal}
       onClose={close}
-      size="16rem"
+      size="16em"
       classNames={{
         overlay: styles.modalOverlay,
         inner: styles.modalInner,
         content: styles.modalContent,
+        header: styles.modalHeader,
+        title: styles.modalTitle,
+        body: styles.modalBody,
         close: styles.closeBtn,
       }}
       withinPortal={false}

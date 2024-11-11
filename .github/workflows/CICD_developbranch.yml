@@ -11,30 +11,76 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
+
     steps:
+      # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v3
 
+      # Install pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
 
+      # Set up Node.js
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
+      # Debug: Print current directory structure
+      - name: Debug - Print directory structure
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory structure:"
+          ls -R
+
+      # Ensure the ai-chatbot directory exists
+      - name: Create ai-chatbot directory
+        run: |
+          mkdir -p ./ai-chatbot
+          echo "Directory structure after mkdir:"
+          ls -R
+
+      # Create the .env file using secret content
+      - name: Create .env file
+        run: |
+          echo "Creating .env file..."
+          echo "${{ secrets.ENV_FILE_CONTENT }}" > ./.env
+          echo ".env file created successfully."
+
+      # Verify the contents of the .env file
+      - name: Verify .env file contents
+        run: |
+          echo "Contents of .env file:"
+          cat ./.env
+
+      # Ensure the .env file is present
+      - name: Ensure .env is still present
+        run: |
+          if [ -f "./.env" ]; then
+            echo ".env file exists"
+          else
+            echo ".env file is missing"
+            exit 1
+          fi
+
+      # Install dependencies
       - name: Install dependencies
         run: pnpm install
 
+      # Build the project using .env variables via dotenv
       - name: Build project
         run: pnpm build
 
-      - name: List dist contents
-        run: ls -R dist
+      # List the directory structure after the build
+      - name: List directory structure after build
+        run: ls -ahl
 
+      # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
@@ -42,25 +88,29 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
+      # Sync files to S3
       - name: Sync files to S3
         run: |
-          aws s3 sync dist s3://develop-ai-branch --delete
+          if [ -d "dist" ]; then
+            aws s3 sync dist s3://develop-ai-branch --delete
+          elif [ -d "ai-chatbot/dist" ]; then
+            aws s3 sync ai-chatbot/dist s3://develop-ai-branch --delete
+          else
+            echo "dist directory not found, cannot sync to S3"
+            exit 1
+          fi
 
-      - name: Debug CloudFront Distribution ID
-        run: echo "CloudFront Distribution ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
-
+      # Verify CloudFront Distribution ID
       - name: Verify CloudFront Distribution ID
         run: |
           if [ -z "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" ]; then
             echo "CLOUDFRONT_DISTRIBUTION_ID is not set"
             exit 1
           else
-            echo "CLOUDFRONT_DISTRIBUTION_ID is set to '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
+            echo "CloudFront Distribution ID is '${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}'"
           fi
 
+      # Invalidate CloudFront cache
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
