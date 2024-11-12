@@ -95,6 +95,10 @@
   white-space: pre-wrap;
 }
 
+.msgBubble p {
+  margin: 0; /* declare this to avoid Markdown from "react-markdown" to add margin to <p>. This Markdown help convert [join-us page](https://careerbliss.academy/join-us) to link */
+}
+
 .rightSide {
   margin-left: auto;
   background-color: var(--mantine-yellow-soft);
