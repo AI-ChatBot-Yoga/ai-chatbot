@@ -22,7 +22,15 @@
   .popupMessageRoot {
     bottom: em(110px);
     right: em(25px);
-    max-width: 50%;
+    max-width: 45%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .popupMessageRoot {
+    bottom: em(90px);
+    right: em(20px);
+    max-width: 55%;
   }
 }
 
