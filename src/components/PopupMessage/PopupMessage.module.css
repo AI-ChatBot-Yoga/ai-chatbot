@@ -9,10 +9,18 @@
   background-color: var(--mantine-yellow-soft);
 }
 
-@media screen and (max-height: 750px) {
+@media screen and (max-width: 992px) {
   .popupMessageRoot {
-    bottom: em(100px);
-    right: em(20px);
+    bottom: em(110px);
+    right: em(25px);
+    max-width: 30%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .popupMessageRoot {
+    bottom: em(110px);
+    right: em(25px);
     max-width: 50%;
   }
 }
