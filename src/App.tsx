@@ -1,4 +1,3 @@
-import "./App.css"
 import "@mantine/core/styles.css"
 import ChatBot from "./components/ChatBot"
 

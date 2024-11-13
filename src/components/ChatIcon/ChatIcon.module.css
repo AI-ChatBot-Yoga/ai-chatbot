@@ -3,6 +3,7 @@
   cursor: pointer;
   border: unset;
   background: none;
+  z-index: 9999;
 
   position: fixed;
   bottom: em(40px);

@@ -12,3 +12,9 @@
   font-size: em(12px);
   text-align: center;
 }
+
+/* On some website, if they style <a>, it will also affects this <a> in HelperText */
+.helperTextMessage a {
+  color: -webkit-link;
+  text-decoration: underline;
+}

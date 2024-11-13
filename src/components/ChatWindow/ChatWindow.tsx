@@ -21,6 +21,7 @@ import useUuid from "@/hooks/useUuid"
 import SendBtn from "../SendBtn"
 import HelperText from "../HelperText"
 import getBotIdFromScripTag from "@/utils/getBotIdFromScripTag"
+import Markdown from "react-markdown"
 
 const botId = getBotIdFromScripTag()
 
@@ -146,7 +147,7 @@ const ChatWindow = ({ onChatActivation }: Props) => {
                   component="div"
                   className={`${styles.msgBubble} ${msg.sender === ROLES.User ? styles.rightSide : ""}`}
                 >
-                  {msg.message}
+                  <Markdown>{msg.message}</Markdown>
                 </Text>
               )}
               {msg.options && (

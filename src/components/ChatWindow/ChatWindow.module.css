@@ -8,6 +8,7 @@
   max-width: em(360px); /* Adjust height in .scrollArea */
   width: 90vw;
 
+  z-index: 9999;
   position: fixed;
   bottom: em(115px);
   margin: 0 em(30px);
@@ -93,6 +94,10 @@
   max-width: 85%;
   text-align: left;
   white-space: pre-wrap;
+}
+
+.msgBubble p {
+  margin: 0; /* declare this to avoid Markdown from "react-markdown" to add margin to <p>. This Markdown help convert [join-us page](https://careerbliss.academy/join-us) to link */
 }
 
 .rightSide {
