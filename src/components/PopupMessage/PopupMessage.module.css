@@ -3,17 +3,34 @@
   position: fixed;
   bottom: em(120px);
   right: em(30px);
+  z-index: 9999;
 
   max-width: 20%;
   padding: em(12px);
   background-color: var(--mantine-yellow-soft);
 }
 
-@media screen and (max-height: 750px) {
+@media screen and (max-width: 992px) {
   .popupMessageRoot {
-    bottom: em(100px);
+    bottom: em(110px);
+    right: em(25px);
+    max-width: 30%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .popupMessageRoot {
+    bottom: em(110px);
+    right: em(25px);
+    max-width: 45%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .popupMessageRoot {
+    bottom: em(90px);
     right: em(20px);
-    max-width: 50%;
+    max-width: 55%;
   }
 }
 

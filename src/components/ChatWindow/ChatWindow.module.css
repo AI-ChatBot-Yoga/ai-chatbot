@@ -8,6 +8,7 @@
   max-width: em(360px); /* Adjust height in .scrollArea */
   width: 90vw;
 
+  z-index: 9999;
   position: fixed;
   bottom: em(115px);
   margin: 0 em(30px);
