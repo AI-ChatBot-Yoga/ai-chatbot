@@ -100,6 +100,12 @@
   margin: 0; /* declare this to avoid Markdown from "react-markdown" to add margin to <p>. This Markdown help convert [join-us page](https://careerbliss.academy/join-us) to link */
 }
 
+/* On some website, if they style <a>, it will also affects this <a> */
+.msgBubble a {
+  color: -webkit-link;
+  text-decoration: underline;
+}
+
 .rightSide {
   margin-left: auto;
   background-color: var(--mantine-yellow-soft);

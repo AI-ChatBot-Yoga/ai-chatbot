@@ -22,7 +22,7 @@ import SendBtn from "../SendBtn"
 import HelperText from "../HelperText"
 import getBotIdFromScripTag from "@/utils/getBotIdFromScripTag"
 import Markdown from "react-markdown"
-
+import rehypeRaw from "rehype-raw"
 const botId = getBotIdFromScripTag()
 
 type Props = {
@@ -147,7 +147,8 @@ const ChatWindow = ({ onChatActivation }: Props) => {
                   component="div"
                   className={`${styles.msgBubble} ${msg.sender === ROLES.User ? styles.rightSide : ""}`}
                 >
-                  <Markdown>{msg.message}</Markdown>
+                  {/* Use Markdown to format markdown to link. Plugin rehypeRaw to format html tag */}
+                  <Markdown rehypePlugins={[rehypeRaw]}>{msg.message}</Markdown>
                 </Text>
               )}
               {msg.options && (
